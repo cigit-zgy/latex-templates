@@ -1,0 +1,29 @@
+\chapter{Methodology}
+\label{chap:methodology}
+
+This chapter provides compact examples for figures, tables, and code.
+
+\section{Model Implementation}
+
+Table~\ref{tab:methodology:configuration} shows a minimal configuration table.
+
+\begin{table}[tb]
+  \centering
+  \caption{Example model configuration.}
+  \label{tab:methodology:configuration}
+  \begin{tabular}{lll}
+    \toprule
+    Component & Choice & Purpose \\
+    \midrule
+    Solver & ODE & Dynamic integration \\
+    Backend & PyTorch & Differentiable computation \\
+    Device & MPS & Apple Silicon acceleration \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{lstlisting}[language=Python,caption={Minimal model-rate function.},label={lst:methodology:rate}]
+def rate(x, theta):
+    """Return process rates for the current model state."""
+    return theta[0] * x / (theta[1] + x)
+\end{lstlisting}

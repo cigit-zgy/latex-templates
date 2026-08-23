@@ -1,0 +1,42 @@
+% XeLaTeX typography contract.
+% Latin Modern is loaded by TeX-distribution file names for portability across
+% TeX Live / MacTeX installations, without relying on OS font registration.
+
+\defaultfontfeatures{Ligatures=TeX, Scale=MatchLowercase}
+
+\setmainfont{lmroman10-regular.otf}[
+  BoldFont=lmroman10-bold.otf,
+  ItalicFont=lmroman10-italic.otf,
+  BoldItalicFont=lmroman10-bolditalic.otf
+]
+
+\setsansfont{lmsans10-regular.otf}[
+  BoldFont=lmsans10-bold.otf,
+  ItalicFont=lmsans10-oblique.otf
+]
+
+\setmathfont{latinmodern-math.otf}
+
+\IfFontExistsTF{Maple Mono}{
+  \setmonofont{Maple Mono}[Scale=MatchLowercase]
+}{
+  \setmonofont{lmmono10-regular.otf}[
+    ItalicFont=lmmono10-italic.otf,
+    Scale=MatchLowercase
+  ]
+}
+
+\newfontfamily\ThesisHeadingFont{lmsans10-regular.otf}[
+  BoldFont=lmsans10-bold.otf,
+  ItalicFont=lmsans10-oblique.otf,
+  LetterSpace=7,
+  Scale=MatchLowercase
+]
+
+\newfontfamily\ThesisSmallCapsFont{lmroman10-regular.otf}[
+  BoldFont=lmroman10-bold.otf,
+  ItalicFont=lmroman10-italic.otf,
+  Letters=SmallCaps,
+  LetterSpace=5,
+  Scale=MatchLowercase
+]
