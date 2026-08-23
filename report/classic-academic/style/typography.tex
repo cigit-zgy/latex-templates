@@ -3,10 +3,10 @@
 
 \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
 
-\IfFontExistsTF{Latin Modern Roman}{}{
+\IfFileExists{lmroman10-regular.otf}{}{
   \PackageError{classic-academic}{Missing Latin Modern Roman}{Install a TeX distribution containing Latin Modern before compiling. Font fallback is disabled.}
 }
-\IfFontExistsTF{Latin Modern Sans}{}{
+\IfFileExists{lmsans10-regular.otf}{}{
   \PackageError{classic-academic}{Missing Latin Modern Sans}{Install a TeX distribution containing Latin Modern before compiling. Font fallback is disabled.}
 }
 \IfFileExists{fonts/maple-mono-latin-400-normal.ttf}{}{
@@ -19,10 +19,16 @@
   \PackageError{classic-academic}{Missing LXGW WenKai Screen font}{Run ./scripts/setup-fonts.sh before compiling. Font fallback is disabled.}
 }
 
-% Main scientific prose: Latin Modern Roman. Sans is retained only for explicitly
-% sans-serif structural elements such as thesis chapter numerals.
-\setmainfont{Latin Modern Roman}
-\setsansfont{Latin Modern Sans}
+\setmainfont{lmroman10-regular.otf}[
+  BoldFont=lmroman10-bold.otf,
+  ItalicFont=lmroman10-italic.otf,
+  BoldItalicFont=lmroman10-bolditalic.otf
+]
+\setsansfont{lmsans10-regular.otf}[
+  BoldFont=lmsans10-bold.otf,
+  ItalicFont=lmsans10-oblique.otf,
+  BoldItalicFont=lmsans10-boldoblique.otf
+]
 \setmathfont{latinmodern-math.otf}
 
 \setmonofont{maple-mono-latin-400-normal.ttf}[
@@ -36,12 +42,14 @@
 \setCJKmonofont{LXGWWenKaiScreen.ttf}[Path=fonts/]
 \xeCJKsetup{CJKmath=true,AutoFakeSlant=false}
 
-\newfontfamily\AcademicHeadingFont{Latin Modern Roman}[
+\newfontfamily\AcademicHeadingFont{lmroman10-regular.otf}[
+  BoldFont=lmroman10-bold.otf,
   LetterSpace=7,
   Scale=MatchLowercase
 ]
 
-\newfontfamily\AcademicHeaderFont{Latin Modern Roman}[
+\newfontfamily\AcademicHeaderFont{lmroman10-regular.otf}[
+  BoldFont=lmroman10-bold.otf,
   LetterSpace=4,
   Scale=MatchLowercase
 ]
