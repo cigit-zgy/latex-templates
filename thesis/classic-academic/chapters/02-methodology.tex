@@ -1,30 +1,30 @@
-\chapter{Methodology}
+\chapter{\Localized{Methodology}{方法}}
 \label{chap:methodology}
 
-This chapter demonstrates common scientific elements in the same visual system.
+\Localized{This chapter demonstrates common scientific elements in the same visual system. English, Chinese, mathematics, tables, and code can coexist without local font commands.}{本章展示同一视觉体系下常见的科学内容。英文、中文、数学公式、表格和代码可以直接混排，无需在正文中手动切换字体。}
 
-\section{Model Configuration}
+\section{\Localized{Model Configuration}{模型配置}}
 
-Table~\ref{tab:methodology:configuration} shows a compact three-column table.
+\Localized{Table~\ref{tab:methodology:configuration} demonstrates the mandatory full-width table contract. All manuscript tables use the AcademicTable interface; column widths are distributed across the complete text block.}{表~\ref{tab:methodology:configuration} 展示强制满行宽表格规范。所有正文表格均通过 AcademicTable 接口生成，各列在完整正文宽度内分配。}
 
 \begin{table}[tb]
   \centering
-  \caption{Example computational configuration.}
+  \caption{\Localized{Example computational configuration.}{示例计算配置。}}
   \label{tab:methodology:configuration}
-  \begin{tabular}{lll}
+  \begin{AcademicTable}{LLL}
     \toprule
-    Component & Choice & Purpose \\
+    \Localized{Component}{组件} & \Localized{Choice}{选择} & \Localized{Purpose}{用途} \\
     \midrule
-    Solver & ODE & Dynamic integration \\
-    Backend & PyTorch & Differentiable computation \\
-    Device & MPS & Apple Silicon acceleration \\
+    \Localized{Solver}{求解器} & ODE & \Localized{Dynamic integration}{动态积分} \\
+    \Localized{Backend}{后端} & PyTorch & \Localized{Differentiable computation}{可微计算} \\
+    \Localized{Device}{设备} & MPS & \Localized{Apple Silicon acceleration}{Apple Silicon 加速} \\
     \bottomrule
-  \end{tabular}
+  \end{AcademicTable}
 \end{table}
 
-\section{Scientific Code}
+\section{\Localized{Scientific Code}{科学代码}}
 
-The code environment uses Maple Mono when it is installed locally and falls back to Latin Modern Mono otherwise.
+\Localized{The code environment uses Maple Mono explicitly; compilation stops when the required font asset is unavailable.}{代码环境显式使用 Maple Mono；当所需字体文件不存在时，编译会直接停止。}
 
 \begin{lstlisting}[language=Python,caption={Minimal process-rate function.},label={lst:methodology:rate}]
 def process_rate(x, theta):
@@ -33,9 +33,9 @@ def process_rate(x, theta):
     return mu_max * x / (half_saturation + x)
 \end{lstlisting}
 
-\section{Minimal Figure}
+\section{\Localized{Minimal Figure}{最小示意图}}
 
-Figure~\ref{fig:methodology:workflow} is constructed directly in LaTeX so the template has no mandatory external figure dependency.
+\Localized{Figure~\ref{fig:methodology:workflow} is constructed directly in LaTeX so the template has no mandatory external figure dependency.}{图~\ref{fig:methodology:workflow} 直接由 LaTeX 构建，因此模板本身不依赖外部示意图文件。}
 
 \begin{figure}[tb]
   \centering
@@ -47,6 +47,6 @@ Figure~\ref{fig:methodology:workflow} is constructed directly in LaTeX so the te
     \put(32,17){\vector(1,0){13}}
     \put(75,17){\vector(1,0){13}}
   \end{picture}
-  \caption{Minimal scientific modelling workflow used for layout demonstration.}
+  \caption{\Localized{Minimal scientific modelling workflow used for layout demonstration.}{用于版式展示的最小科学建模流程。}}
   \label{fig:methodology:workflow}
 \end{figure}
