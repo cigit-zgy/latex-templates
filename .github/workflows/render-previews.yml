@@ -34,22 +34,18 @@ jobs:
 
       - name: Build thesis sample
         working-directory: thesis/classic-academic
-        shell: bash
         run: |
-          set -o pipefail
-          ./scripts/setup-fonts.sh 2>&1 | tee /tmp/thesis-fonts.log
-          ./scripts/build.sh 2>&1 | tee /tmp/thesis-build.log
+          ./scripts/setup-fonts.sh
+          ./scripts/build.sh
           rm -f preview/page-*.png
           pdftoppm -f 1 -singlefile -png -r 72 main.pdf preview/page-01
           pdftoppm -f 15 -singlefile -png -r 72 main.pdf preview/page-15
 
       - name: Build report sample
         working-directory: report/classic-academic
-        shell: bash
         run: |
-          set -o pipefail
-          ./scripts/setup-fonts.sh 2>&1 | tee /tmp/report-fonts.log
-          ./scripts/build.sh 2>&1 | tee /tmp/report-build.log
+          ./scripts/setup-fonts.sh
+          ./scripts/build.sh
           rm -f preview/page-*.png
           pdftoppm -f 1 -singlefile -png -r 72 main.pdf preview/page-01
           pdftoppm -f 4 -singlefile -png -r 72 main.pdf preview/page-04
@@ -76,29 +72,7 @@ jobs:
               print(f"verified {path}: {width}x{height}")
           PY
 
-      - name: Commit diagnostic on failure
-        if: failure()
-        shell: bash
-        run: |
-          set -euo pipefail
-          {
-            echo "Template preview build failed."
-            for log in /tmp/thesis-fonts.log /tmp/thesis-build.log /tmp/report-fonts.log /tmp/report-build.log; do
-              if [[ -f "$log" ]]; then
-                echo
-                echo "===== $log ====="
-                tail -n 180 "$log"
-              fi
-            done
-          } > preview-build-diagnostic.txt
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add preview-build-diagnostic.txt
-          git commit -m "ci: capture template preview failure [skip ci]" || exit 0
-          git push
-
       - name: Commit renderer output
-        if: success()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
