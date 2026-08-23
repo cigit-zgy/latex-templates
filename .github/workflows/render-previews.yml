@@ -11,6 +11,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: render-template-previews
+  cancel-in-progress: true
+
 jobs:
   render:
     runs-on: ubuntu-latest
@@ -25,7 +29,8 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
             texlive-xetex texlive-latex-extra texlive-fonts-recommended \
-            texlive-bibtex-extra biber poppler-utils woff2 curl
+            texlive-lang-chinese texlive-bibtex-extra biber latexmk \
+            poppler-utils woff2 curl
 
       - name: Build thesis sample
         working-directory: thesis/classic-academic
@@ -47,7 +52,7 @@ jobs:
 
       - name: Verify intrinsic preview dimensions
         run: |
-          python - <<'PY'
+          python3 - <<'PY'
           import struct
           from pathlib import Path
 
