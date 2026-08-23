@@ -8,9 +8,26 @@ if grep -R -n -E '\\begin\{(tabular|tabularx|longtable)\}' chapters frontmatter 
   exit 1
 fi
 
+command -v kpsewhich >/dev/null 2>&1 || {
+  echo "ERROR: kpsewhich is required to validate TeX-distributed fonts." >&2
+  exit 1
+}
+
+for tex_font in \
+  lmroman10-regular.otf \
+  lmroman10-bold.otf \
+  lmroman10-italic.otf \
+  lmroman10-bolditalic.otf \
+  lmsans10-regular.otf \
+  lmsans10-bold.otf \
+  latinmodern-math.otf; do
+  if ! kpsewhich "$tex_font" >/dev/null 2>&1; then
+    echo "ERROR: required TeX font missing: $tex_font" >&2
+    exit 1
+  fi
+done
+
 for font in \
-  fonts/latin-modern-sans-regular.ttf \
-  fonts/latin-modern-sans-bold.ttf \
   fonts/maple-mono-latin-400-normal.ttf \
   fonts/maple-mono-latin-400-italic.ttf \
   fonts/LXGWWenKaiScreen.ttf; do
