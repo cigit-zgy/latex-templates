@@ -1,0 +1,11 @@
+Template preview build failed.
+
+===== /tmp/thesis-fonts.log =====
+Downloading fonts/maple-mono-latin-400-normal.woff2
+Downloading fonts/maple-mono-latin-400-italic.woff2
+Downloading fonts/LXGWWenKaiScreen.ttf
+Pinned non-TeX font assets are ready. Latin Modern is provided by TeX.
+
+===== /tmp/thesis-build.log =====
+ERROR: required font asset missing: fonts/latin-modern-sans-regular.ttf
+Run ./scripts/setup-fonts.sh first. No fallback fonts are used.
