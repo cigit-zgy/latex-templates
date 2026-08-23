@@ -1,0 +1,1 @@
+Binary previews will be committed via Git blobs.
