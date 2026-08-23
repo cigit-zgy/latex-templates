@@ -1,14 +1,9 @@
 % Deterministic bilingual font contract for XeLaTeX.
 % Latin scientific prose uses the TeX-distributed Latin Modern family.
+% scripts/validate.sh verifies TeX font availability with kpsewhich.
 
 \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
 
-\IfFileExists{lmroman10-regular.otf}{}{
-  \PackageError{classic-academic}{Missing Latin Modern Roman}{Install a TeX distribution containing Latin Modern before compiling. Font fallback is disabled.}
-}
-\IfFileExists{lmsans10-regular.otf}{}{
-  \PackageError{classic-academic}{Missing Latin Modern Sans}{Install a TeX distribution containing Latin Modern before compiling. Font fallback is disabled.}
-}
 \IfFileExists{fonts/maple-mono-latin-400-normal.ttf}{}{
   \PackageError{classic-academic}{Missing Maple Mono font}{Run ./scripts/setup-fonts.sh before compiling. Font fallback is disabled.}
 }
