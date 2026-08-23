@@ -2,6 +2,7 @@
 
 % Package layer.
 \usepackage{fontspec}
+\usepackage{xeCJK}
 \usepackage{amsmath}
 \usepackage{unicode-math}
 \usepackage{xcolor}
@@ -11,9 +12,13 @@
 \usepackage{fancyhdr}
 \usepackage{graphicx}
 \usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
 \usepackage{caption}
 \usepackage{listings}
 \usepackage{csquotes}
+\usepackage{etoolbox}
+\usepackage{xparse}
 \usepackage{hyperref}
 \usepackage[backend=biber,style=numeric-comp,sorting=none,maxbibnames=99]{biblatex}
 
@@ -51,6 +56,6 @@
 \input{chapters/02-methodology}
 
 \backmatter
-\printbibliography[heading=bibintoc,title={References}]
+\printbibliography[heading=bibintoc,title={\BibliographyTitle}]
 
 \end{document}
