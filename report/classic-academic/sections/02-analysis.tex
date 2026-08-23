@@ -1,0 +1,29 @@
+\section{\Localized{Analysis and Results}{分析与结果}}
+\label{sec:analysis}
+
+\Localized{The report template uses the same mandatory full-width table contract as the thesis template.}{报告模板与学位论文模板使用相同的强制满行宽表格规范。}
+
+\begin{table}[tb]
+  \centering
+  \caption{\Localized{Example report configuration.}{报告配置示例。}}
+  \label{tab:analysis:configuration}
+  \begin{AcademicTable}{LLL}
+    \toprule
+    \Localized{Item}{项目} & \Localized{Setting}{设置} & \Localized{Rationale}{说明} \\
+    \midrule
+    \Localized{Document model}{文档模型} & Article & \Localized{Compact technical report}{紧凑技术报告} \\
+    \Localized{Language}{语言} & \Localized{English / Chinese}{英文 / 中文} & \Localized{Bilingual scientific writing}{中英文学术写作} \\
+    \Localized{Tables}{表格} & \Localized{Full width}{满行宽} & \Localized{Consistent information density}{统一信息密度} \\
+    \bottomrule
+  \end{AcademicTable}
+\end{table}
+
+\subsection{\Localized{Scientific code}{科学代码}}
+
+\begin{lstlisting}[language=Python,caption={Minimal simulation interface.},label={lst:analysis:simulation}]
+def simulate(model, t_span):
+    """Run a scientific model over the requested time span."""
+    return model.solve(t_span)
+\end{lstlisting}
+
+\Localized{The same template can therefore be used for research reports, project reports, modelling notes, and technical documentation while remaining visually compatible with the thesis family \autocite{miedeClassicThesis2024}.}{因此，该模板可用于研究报告、项目报告、建模笔记和技术文档，同时与学位论文模板保持一致的视觉体系 \autocite{miedeClassicThesis2024}。}
