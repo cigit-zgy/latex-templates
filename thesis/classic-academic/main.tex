@@ -1,5 +1,6 @@
 \documentclass[11pt,letterpaper,twoside,openright]{book}
 
+% Package layer.
 \usepackage{fontspec}
 \usepackage{amsmath}
 \usepackage{unicode-math}
@@ -16,12 +17,16 @@
 \usepackage{hyperref}
 \usepackage[backend=biber,style=numeric-comp,sorting=none,maxbibnames=99]{biblatex}
 
+% User configuration.
 \input{config/metadata}
-\input{config/colors}
-\input{config/typography}
-\input{config/style}
+\input{config/theme}
 
-\addbibresource{backmatter/references.bib}
+% Template infrastructure.
+\input{style/typography}
+\input{style/layout}
+\input{style/components}
+
+\addbibresource{bibliography/references.bib}
 
 \begin{document}
 
@@ -43,7 +48,7 @@
 
 \mainmatter
 \input{chapters/01-introduction}
-\input{chapters/02-methods}
+\input{chapters/02-methodology}
 
 \backmatter
 \printbibliography[heading=bibintoc,title={References}]

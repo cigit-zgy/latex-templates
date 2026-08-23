@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" role="img" aria-labelledby="title desc">
+  <title id="title">Classic Academic thesis layout preview</title>
+  <desc id="desc">Three representative pages showing the title page, chapter opening, and scientific content layout.</desc>
+  <rect width="1200" height="520" fill="#f5f5f5"/>
+  <g font-family="Georgia, 'Times New Roman', serif" fill="#1c1c1c">
+    <!-- Title page -->
+    <g transform="translate(55 25)">
+      <rect width="330" height="470" fill="white" stroke="#d7d7d7"/>
+      <text x="165" y="95" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" letter-spacing="3" fill="#ad2231">A REUSABLE ACADEMIC</text>
+      <text x="165" y="124" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" letter-spacing="3" fill="#ad2231">THESIS TEMPLATE</text>
+      <text x="165" y="202" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" letter-spacing="2">PH.D. THESIS</text>
+      <text x="165" y="228" text-anchor="middle" font-size="14">Sample Author</text>
+      <text x="165" y="292" text-anchor="middle" font-size="12">Graduate School of Science and Engineering</text>
+      <text x="165" y="313" text-anchor="middle" font-size="12">University Name</text>
+      <text x="165" y="370" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" letter-spacing="2">SUPERVISOR</text>
+      <text x="165" y="397" text-anchor="middle" font-size="13">Prof. Supervisor Name</text>
+      <text x="165" y="448" text-anchor="middle" font-size="12">March 2026</text>
+    </g>
+    <!-- Chapter page -->
+    <g transform="translate(435 25)">
+      <rect width="330" height="470" fill="white" stroke="#d7d7d7"/>
+      <text x="292" y="66" text-anchor="end" font-family="Arial, sans-serif" font-size="52" fill="#ad2231">1</text>
+      <text x="35" y="88" font-family="Arial, sans-serif" font-size="19" letter-spacing="3">INTRODUCTION</text>
+      <line x1="35" y1="104" x2="295" y2="104" stroke="#333" stroke-width="0.7"/>
+      <text x="35" y="142" font-size="11">Scientific theses contain heterogeneous material:</text>
+      <text x="35" y="160" font-size="11">narrative argument, equations, figures, tables, code,</text>
+      <text x="35" y="178" font-size="11">and citations in one stable typographic hierarchy.</text>
+      <text x="35" y="218" font-family="Arial, sans-serif" font-size="12" letter-spacing="1.4" fill="#ad2231">1.1  RESEARCH BACKGROUND</text>
+      <text x="35" y="246" font-size="11">Mechanistic models encode explicit mathematical</text>
+      <text x="35" y="264" font-size="11">structures while data-driven models learn from data.</text>
+      <text x="35" y="305" font-family="Arial, sans-serif" font-size="11" letter-spacing="1" fill="#ad2231">1.1.1  A Generic Dynamical System</text>
+      <text x="165" y="350" text-anchor="middle" font-size="17">dx/dt = S r(x, θ)</text>
+      <text x="285" y="350" text-anchor="end" font-size="10">(1.1)</text>
+      <text x="165" y="450" text-anchor="middle" font-size="11">1</text>
+    </g>
+    <!-- Scientific content page -->
+    <g transform="translate(815 25)">
+      <rect width="330" height="470" fill="white" stroke="#d7d7d7"/>
+      <text x="292" y="66" text-anchor="end" font-family="Arial, sans-serif" font-size="52" fill="#ad2231">2</text>
+      <text x="35" y="88" font-family="Arial, sans-serif" font-size="19" letter-spacing="3">METHODOLOGY</text>
+      <line x1="35" y1="104" x2="295" y2="104" stroke="#333" stroke-width="0.7"/>
+      <text x="35" y="145" font-family="Arial, sans-serif" font-size="12" letter-spacing="1.4" fill="#ad2231">2.1  MODEL CONFIGURATION</text>
+      <text x="35" y="173" font-size="11">A compact scientific table, equation, figure, and</text>
+      <text x="35" y="191" font-size="11">code listing share the same visual system.</text>
+      <text x="35" y="233" font-family="Arial, sans-serif" font-size="12" letter-spacing="1.4" fill="#ad2231">2.2  SCIENTIFIC CODE</text>
+      <rect x="35" y="253" width="260" height="76" fill="#f7f7f7" stroke="#bdbdbd" stroke-width="0.6"/>
+      <text x="48" y="274" font-family="monospace" font-size="9" fill="#176fc0">def process_rate(x, theta):</text>
+      <text x="48" y="294" font-family="monospace" font-size="9" fill="#ad2231">    &quot;&quot;&quot;Return a process rate.&quot;&quot;&quot;</text>
+      <text x="48" y="314" font-family="monospace" font-size="9">    return theta[0] * x</text>
+      <text x="35" y="366" font-family="Arial, sans-serif" font-size="12" letter-spacing="1.4" fill="#ad2231">2.3  MINIMAL FIGURE</text>
+      <rect x="45" y="397" width="62" height="28" fill="white" stroke="#333"/>
+      <rect x="134" y="397" width="62" height="28" fill="white" stroke="#333"/>
+      <rect x="223" y="397" width="62" height="28" fill="white" stroke="#333"/>
+      <line x1="107" y1="411" x2="134" y2="411" stroke="#333"/><polygon points="134,411 128,407 128,415" fill="#333"/>
+      <line x1="196" y1="411" x2="223" y2="411" stroke="#333"/><polygon points="223,411 217,407 217,415" fill="#333"/>
+      <text x="76" y="414" text-anchor="middle" font-size="8">Data</text>
+      <text x="165" y="414" text-anchor="middle" font-size="8">Model</text>
+      <text x="254" y="414" text-anchor="middle" font-size="8">Prediction</text>
+      <text x="165" y="450" text-anchor="middle" font-size="11">3</text>
+    </g>
+  </g>
+</svg>

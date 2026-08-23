@@ -1,0 +1,39 @@
+% Reusable document components: links, captions, tables, and code.
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=ThesisLink,
+  citecolor=ThesisLink,
+  urlcolor=ThesisLink,
+  pdfauthor={\ThesisAuthor},
+  pdftitle={\ThesisTitle}
+}
+
+\captionsetup{
+  font=small,
+  labelfont=bf,
+  labelsep=colon,
+  justification=centering,
+  singlelinecheck=false
+}
+
+\renewcommand{\arraystretch}{1.12}
+
+\lstdefinestyle{thesiscode}{
+  basicstyle=\ttfamily\small,
+  backgroundcolor=\color{ThesisCodeBackground},
+  frame=single,
+  rulecolor=\color{ThesisRule!35},
+  numbers=left,
+  numberstyle=\ttfamily\scriptsize\color{ThesisMuted},
+  keywordstyle=\color{ThesisLink},
+  commentstyle=\itshape\color{ThesisMuted},
+  stringstyle=\color{ThesisAccent},
+  breaklines=true,
+  showstringspaces=false,
+  tabsize=2
+}
+\lstset{style=thesiscode}
+
+\newcommand{\term}[1]{\emph{#1}}
+\newcommand{\code}[1]{\texttt{#1}}

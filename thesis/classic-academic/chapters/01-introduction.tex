@@ -1,0 +1,25 @@
+\chapter{Introduction}
+\label{chap:introduction}
+
+Scientific theses contain heterogeneous material: narrative argument, equations, figures, tables, code, and citations. A reusable template should therefore separate scientific content from document styling while preserving a stable typographic hierarchy across the entire manuscript \autocite{miedeClassicThesis2024}.
+
+\section{Research Background}
+\label{sec:introduction:background}
+
+Mechanistic models encode domain knowledge through explicit mathematical structures, whereas data-driven models learn relationships from observations. Hybrid approaches combine these sources of information and are increasingly used for scientific modelling \autocite{rackauckasUniversalDifferentialEquations2020}.
+
+\subsection{A Generic Dynamical System}
+
+A compact representation of a process-based model is
+
+\begin{equation}
+  \frac{\mathrm{d}\symbf{x}}{\mathrm{d}t}
+  = \symbf{S}\,\symbf{r}(\symbf{x},\symbf{\theta}),
+  \label{eq:introduction:dynamics}
+\end{equation}
+
+where \(\symbf{x}\) denotes the model state, \(\symbf{S}\) the stoichiometric structure, \(\symbf{r}\) the process-rate vector, and \(\symbf{\theta}\) the parameter vector. Equation~\ref{eq:introduction:dynamics} is used here only to demonstrate the mathematical typography.
+
+\section{Template Design Principle}
+
+Project-specific information is restricted to \code{config/metadata.tex} and \code{config/theme.tex}. Typography, page geometry, chapter formatting, running heads, captions, and code listings live under \code{style/}. This prevents chapter files from accumulating local formatting commands.

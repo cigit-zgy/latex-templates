@@ -1,0 +1,52 @@
+\chapter{Methodology}
+\label{chap:methodology}
+
+This chapter demonstrates common scientific elements in the same visual system.
+
+\section{Model Configuration}
+
+Table~\ref{tab:methodology:configuration} shows a compact three-column table.
+
+\begin{table}[tb]
+  \centering
+  \caption{Example computational configuration.}
+  \label{tab:methodology:configuration}
+  \begin{tabular}{lll}
+    \toprule
+    Component & Choice & Purpose \\
+    \midrule
+    Solver & ODE & Dynamic integration \\
+    Backend & PyTorch & Differentiable computation \\
+    Device & MPS & Apple Silicon acceleration \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\section{Scientific Code}
+
+The code environment uses Maple Mono when it is installed locally and falls back to Latin Modern Mono otherwise.
+
+\begin{lstlisting}[language=Python,caption={Minimal process-rate function.},label={lst:methodology:rate}]
+def process_rate(x, theta):
+    """Return a Monod-type process rate."""
+    mu_max, half_saturation = theta
+    return mu_max * x / (half_saturation + x)
+\end{lstlisting}
+
+\section{Minimal Figure}
+
+Figure~\ref{fig:methodology:workflow} is constructed directly in LaTeX so the template has no mandatory external figure dependency.
+
+\begin{figure}[tb]
+  \centering
+  \setlength{\unitlength}{1mm}
+  \begin{picture}(120,34)
+    \put(2,10){\framebox(30,14){Scientific data}}
+    \put(45,10){\framebox(30,14){Model}}
+    \put(88,10){\framebox(30,14){Prediction}}
+    \put(32,17){\vector(1,0){13}}
+    \put(75,17){\vector(1,0){13}}
+  \end{picture}
+  \caption{Minimal scientific modelling workflow used for layout demonstration.}
+  \label{fig:methodology:workflow}
+\end{figure}
