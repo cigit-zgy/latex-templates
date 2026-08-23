@@ -19,32 +19,31 @@
 \setcounter{tocdepth}{2}
 \setcounter{secnumdepth}{3}
 
-% Classic academic chapter opening: large outer numeral + tracked heading + rule.
 \titleformat{\chapter}[display]
   {\normalfont}
-  {\makebox[\textwidth][r]{\color{ThesisAccent}\sffamily\fontsize{62}{62}\selectfont\thechapter}}
+  {\makebox[\textwidth][r]{\color{AcademicAccent}\sffamily\fontsize{62}{62}\selectfont\thechapter}}
   {-8pt}
-  {\color{ThesisText}\ThesisHeadingFont\fontsize{22}{28}\selectfont\MakeUppercase}
-  [\vspace{0.7ex}{\color{ThesisRule}\titlerule}]
+  {\color{AcademicText}\AcademicHeadingFont\fontsize{22}{28}\selectfont\HeadingText}
+  [\vspace{0.7ex}{\color{AcademicRule}\titlerule}]
 
 \titleformat{name=\chapter,numberless}[display]
   {\normalfont}
   {}
   {0pt}
-  {\color{ThesisText}\ThesisHeadingFont\fontsize{22}{28}\selectfont\MakeUppercase}
-  [\vspace{0.7ex}{\color{ThesisRule}\titlerule}]
+  {\color{AcademicText}\AcademicHeadingFont\fontsize{22}{28}\selectfont\HeadingText}
+  [\vspace{0.7ex}{\color{AcademicRule}\titlerule}]
 
 \titlespacing*{\chapter}{0pt}{-6pt}{32pt}
 
 \titleformat{\section}
-  {\normalfont\color{ThesisAccent}\ThesisHeadingFont\large}
+  {\normalfont\color{AcademicAccent}\AcademicHeadingFont\large}
   {\thesection}
   {0.9em}
-  {\MakeUppercase}
+  {\HeadingText}
 \titlespacing*{\section}{0pt}{3.2ex plus 1ex minus .2ex}{1.2ex}
 
 \titleformat{\subsection}
-  {\normalfont\color{ThesisAccent}\ThesisHeadingFont\normalsize}
+  {\normalfont\color{AcademicAccent}\AcademicHeadingFont\normalsize}
   {\thesubsection}
   {0.8em}
   {}
@@ -61,8 +60,8 @@
 \renewcommand{\headrulewidth}{0.45pt}
 \renewcommand{\footrulewidth}{0pt}
 \fancyhead[LE]{\small\thepage}
-\fancyhead[RE]{\small\ThesisSmallCapsFont\nouppercase{\rightmark}}
-\fancyhead[LO]{\small\ThesisSmallCapsFont\nouppercase{\leftmark}}
+\fancyhead[RE]{\small\AcademicHeaderFont\nouppercase{\rightmark}}
+\fancyhead[LO]{\small\AcademicHeaderFont\nouppercase{\leftmark}}
 \fancyhead[RO]{\small\thepage}
 
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
