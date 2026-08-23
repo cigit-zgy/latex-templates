@@ -1,15 +1,14 @@
 # Classic Academic Thesis
 
-A reusable XeLaTeX dissertation template inspired by the typographic architecture of ClassicThesis and calibrated against a completed scientific doctoral dissertation.
+A self-contained XeLaTeX thesis template based on a `book` document model and a ClassicThesis-inspired typographic hierarchy. It is intended for dissertations, monographs, and long-form academic manuscripts.
 
-The implementation is independent: it uses standard LaTeX packages and keeps the visual system modular so the template can evolve without coupling scientific content to formatting code.
+## Rendered preview
 
-## Preview
+These PNG files are direct 72-dpi renders of the compiled sample PDF. They are not cropped, resized, composited, sharpened, annotated, or redrawn. Markdown references them at their intrinsic size without `width` or `height` overrides.
 
-<p align="center">
-  <img src="preview/preview.svg" width="100%" alt="Rendered title page, chapter opening, and scientific content page" />
-</p>
+![Rendered thesis title page](preview/page-01.png)
 
+![Rendered thesis chapter page](preview/page-15.png)
 
 ## Architecture
 
@@ -17,80 +16,79 @@ The implementation is independent: it uses standard LaTeX packages and keeps the
 classic-academic/
 ├── main.tex
 ├── latexmkrc
-├── config/                 # Project-specific values
-│   ├── metadata.tex
-│   └── theme.tex
-├── style/                  # Template infrastructure
-│   ├── typography.tex
-│   ├── layout.tex
-│   └── components.tex
-├── frontmatter/            # Thesis front matter
-│   ├── titlepage.tex
-│   ├── acknowledgements.tex
-│   ├── declaration.tex
-│   └── abstract.tex
-├── chapters/               # Scientific content
-│   ├── 01-introduction.tex
-│   └── 02-methodology.tex
+├── config/
+│   ├── metadata.tex       # language + thesis metadata
+│   └── theme.tex          # colour tokens only
+├── style/
+│   ├── typography.tex     # exact font contract
+│   ├── layout.tex         # book geometry, chapters, running heads
+│   └── components.tex     # captions, tables, code, links, localization
+├── fonts/                 # local cache; binaries are gitignored
+├── frontmatter/
+├── chapters/
 ├── bibliography/
-│   └── references.bib
 ├── figures/
-└── preview/                # Generated visual examples
+├── scripts/
+│   ├── setup-fonts.sh
+│   ├── validate.sh
+│   └── build.sh
+└── preview/               # direct PDF renders only
 ```
 
-The boundary is intentional:
+## Font contract
 
-- `config/` is the normal customization surface.
-- `style/` is template infrastructure and should remain stable during ordinary writing.
-- `frontmatter/`, `chapters/`, `bibliography/`, and `figures/` contain manuscript content.
-- `preview/` contains generated outputs for repository visitors.
+The template follows the font policy used by [`cigit-zgy/water-modeling-notes`](https://github.com/cigit-zgy/water-modeling-notes):
 
-## Typography
+- Latin prose and headings: **Latin Modern Sans**
+- Chinese prose and headings: **LXGW WenKai Screen 1.522**
+- Code: **Maple Mono**, matching `@fontsource/maple-mono@5.3.0`
+- Mathematics: **Latin Modern Math**
 
-| Role | Font |
-| --- | --- |
-| Body | Latin Modern Roman |
-| Headings / sans-serif | Latin Modern Sans |
-| Mathematics | Latin Modern Math |
-| Code | Maple Mono if installed; Latin Modern Mono fallback |
+There is no fallback path. Before the first build:
 
-No font files are included in the repository.
+```bash
+./scripts/setup-fonts.sh
+```
 
-## Visual system
+The script installs the exact Maple Mono and LXGW WenKai Screen assets into the local gitignored `fonts/` directory. XeLaTeX stops with an error when any required font is absent.
 
-The page architecture uses a large outer-aligned chapter numeral, tracked uppercase chapter titles, restrained coloured section headings, thin rules, asymmetric running heads, Roman-numbered front matter, and Arabic-numbered main matter.
+## English / 中文
 
-All project colours are defined only in `config/theme.tex`.
+Set one value in `config/metadata.tex`:
 
-## Normal use
+```latex
+\newcommand{\DocumentLanguage}{english}
+% or
+\newcommand{\DocumentLanguage}{chinese}
+```
 
-For a new thesis:
+Generated labels switch language accordingly. English and Chinese may also be mixed in the same manuscript.
 
-1. Copy the complete `classic-academic/` directory into a new project.
-2. Edit `config/metadata.tex`.
-3. Adjust `config/theme.tex` only when a different palette is required.
-4. Replace the sample files in `frontmatter/` and `chapters/`.
-5. Add references to `bibliography/references.bib` and figures to `figures/`.
-6. Keep `style/` unchanged unless intentionally developing a new template version.
+## Mandatory full-width tables
+
+All manuscript tables must use `AcademicTable`; raw `tabular`, `tabularx`, and `longtable` are rejected by `scripts/validate.sh`. `AcademicTable` always occupies the complete `\linewidth`.
+
+```latex
+\begin{table}[tb]
+  \centering
+  \caption{Example table.}
+  \begin{AcademicTable}{LLR}
+    \toprule
+    Item & Description & Value \\
+    \midrule
+    A & Example & 1.0 \\
+    \bottomrule
+  \end{AcademicTable}
+\end{table}
+```
+
+Use `L`, `C`, and `R` for flexible left-, centre-, and right-aligned columns.
 
 ## Build
 
 ```bash
-latexmk -xelatex main.tex
+./scripts/setup-fonts.sh  # first build only
+./scripts/build.sh
 ```
 
-Clean temporary files:
-
-```bash
-latexmk -C
-```
-
-The bibliography uses `biblatex` + `biber`; `latexmk` handles the required passes.
-
-## Content rules
-
-- Keep visual formatting out of chapter files.
-- Use semantic LaTeX commands and labels.
-- Use `01-`, `02-`, ... prefixes for chapter filenames.
-- Use labels such as `fig:<chapter>:<name>`, `tab:<chapter>:<name>`, `eq:<chapter>:<name>`, and `sec:<chapter>:<name>`.
-- Prefer vector figures for diagrams and plots.
+During ordinary thesis writing, edit `config/`, `frontmatter/`, `chapters/`, `bibliography/references.bib`, and `figures/`. Treat `style/` as template infrastructure.
