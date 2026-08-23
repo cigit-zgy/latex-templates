@@ -4,7 +4,7 @@ A self-contained XeLaTeX report template for research reports, technical reports
 
 ## Rendered preview
 
-These PNG files are direct 72-dpi renders of the compiled sample PDF. They are not cropped, resized, composited, or redrawn.
+These PNG files are direct 72-dpi renders of the compiled sample PDF. They are not cropped, resized, composited, sharpened, annotated, or redrawn. Markdown references them at their intrinsic size without `width` or `height` overrides.
 
 ![Rendered report title page](preview/page-01.png)
 
@@ -38,7 +38,14 @@ The report template does not import any thesis file. It uses a one-sided `articl
 
 ## Font contract
 
-The font policy is identical to [`cigit-zgy/water-modeling-notes`](https://github.com/cigit-zgy/water-modeling-notes): Latin Modern Sans, LXGW WenKai Screen 1.522, Maple Mono matching Fontsource 5.3.0, and Latin Modern Math. No fallback fonts are permitted.
+The font policy follows [`cigit-zgy/water-modeling-notes`](https://github.com/cigit-zgy/water-modeling-notes):
+
+- Latin Modern Sans regular/bold comes from the exact WOFF2 assets in `water-modeling-notes`, pinned to commit `462c5e1609978b27fc0774780229fc41a0aba8f8`;
+- LXGW WenKai Screen is pinned to 1.522;
+- Maple Mono matches `@fontsource/maple-mono@5.3.0`;
+- Latin Modern Math is the only configured mathematics family.
+
+There is no fallback path. Because the source Latin Modern Sans assets provide regular and bold only, italic Latin text is a deterministic synthetic slant of those pinned files.
 
 ```bash
 ./scripts/setup-fonts.sh
