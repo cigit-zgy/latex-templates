@@ -1,12 +1,14 @@
-% Project metadata. This file is expected to change for every thesis.
+% Project metadata. Supported values: english, chinese.
+\newcommand{\DocumentLanguage}{english}
+\newcommand{\MetadataLocalized}[2]{\ifdefstring{\DocumentLanguage}{chinese}{#2}{#1}}
 
-\newcommand{\ThesisTitle}{A Reusable Academic Thesis Template for Scientific Modelling}
-\newcommand{\ThesisAuthor}{Sample Author}
-\newcommand{\ThesisDegree}{Doctor of Philosophy}
-\newcommand{\ThesisType}{Ph.D. Thesis}
-\newcommand{\ThesisMajor}{Major in Environmental Engineering}
-\newcommand{\ThesisSchool}{Graduate School of Science and Engineering}
-\newcommand{\ThesisUniversity}{University Name}
-\newcommand{\ThesisCountry}{Country}
-\newcommand{\ThesisSupervisor}{Prof. Supervisor Name}
-\newcommand{\ThesisDate}{March 2026}
+\newcommand{\ThesisTitle}{\MetadataLocalized{A Reusable Academic Thesis Template for Scientific Modelling}{科学建模学术论文模板}}
+\newcommand{\ThesisAuthor}{\MetadataLocalized{Sample Author}{示例作者}}
+\newcommand{\ThesisDegree}{\MetadataLocalized{Doctor of Philosophy}{博士}}
+\newcommand{\ThesisType}{\MetadataLocalized{Ph.D. Thesis}{博士学位论文}}
+\newcommand{\ThesisMajor}{\MetadataLocalized{Major in Environmental Engineering}{环境工程专业}}
+\newcommand{\ThesisSchool}{\MetadataLocalized{Graduate School of Science and Engineering}{理工学研究科}}
+\newcommand{\ThesisUniversity}{\MetadataLocalized{University Name}{大学名称}}
+\newcommand{\ThesisCountry}{\MetadataLocalized{Country}{国家}}
+\newcommand{\ThesisSupervisor}{\MetadataLocalized{Prof. Supervisor Name}{导师姓名 教授}}
+\newcommand{\ThesisDate}{\MetadataLocalized{March 2026}{2026年3月}}
