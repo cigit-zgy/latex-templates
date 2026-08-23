@@ -19,10 +19,12 @@
 \setcounter{tocdepth}{2}
 \setcounter{secnumdepth}{3}
 
+% Reports keep numbered structure internally and in the TOC, but do not print
+% the large display numeral at the upper right of each section heading.
 \titleformat{\section}[display]
   {\normalfont}
-  {\makebox[\textwidth][r]{\color{AcademicAccent}\sffamily\fontsize{34}{34}\selectfont\thesection}}
-  {-4pt}
+  {}
+  {0pt}
   {\color{AcademicText}\AcademicHeadingFont\fontsize{18}{23}\selectfont\HeadingText}
   [\vspace{0.5ex}{\color{AcademicRule}\titlerule}]
 \titlespacing*{\section}{0pt}{3.8ex plus 1ex minus .2ex}{2.4ex}

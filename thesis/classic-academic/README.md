@@ -37,20 +37,19 @@ classic-academic/
 
 ## Font contract
 
-The template follows the font policy used by [`cigit-zgy/water-modeling-notes`](https://github.com/cigit-zgy/water-modeling-notes):
-
-- Latin prose and headings: **Latin Modern Sans** regular/bold, taken from the exact WOFF2 assets in `water-modeling-notes` and pinned to repository commit `462c5e1609978b27fc0774780229fc41a0aba8f8`;
+- Latin scientific prose, headings, and running heads: **Latin Modern Roman**;
+- explicitly sans-serif structural elements, including the large chapter numeral: **Latin Modern Sans**;
 - Chinese prose and headings: **LXGW WenKai Screen 1.522**;
 - code: **Maple Mono**, matching `@fontsource/maple-mono@5.3.0`;
 - mathematics: **Latin Modern Math**.
 
-There is no fallback path. Before the first build:
+Latin Modern Roman, Sans, and Math are supplied by the TeX distribution. `scripts/setup-fonts.sh` prepares only the pinned non-TeX assets (LXGW WenKai Screen and Maple Mono). Font fallback is disabled.
+
+Before the first build:
 
 ```bash
 ./scripts/setup-fonts.sh
 ```
-
-The script prepares all required non-math font files in the local gitignored `fonts/` directory. XeLaTeX stops with an error when any required asset is absent. Because `water-modeling-notes` provides Latin Modern Sans regular and bold only, italic Latin text is a deterministic synthetic slant of the pinned regular/bold files rather than a fallback family.
 
 ## English / 中文
 

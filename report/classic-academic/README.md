@@ -34,18 +34,19 @@ classic-academic/
 └── preview/               # direct PDF renders only
 ```
 
-The report template does not import any thesis file. It uses a one-sided `article` layout, continuous section-based flow, compact running heads, and a report title page, while retaining the same heading language, colours, mathematics, captions, code style, and table contract.
+The report template does not import any thesis file. It uses a one-sided `article` layout, continuous section-based flow, compact running heads, and a report title page, while retaining the same colour, mathematics, captions, code style, and table contract as the thesis template.
+
+Report section headings intentionally omit the large upper-right display numeral used by the thesis chapter design. Numbering remains available internally and in the table of contents.
 
 ## Font contract
 
-The font policy follows [`cigit-zgy/water-modeling-notes`](https://github.com/cigit-zgy/water-modeling-notes):
+- Latin scientific prose, headings, and running heads: **Latin Modern Roman**;
+- explicitly sans-serif structural elements: **Latin Modern Sans**;
+- Chinese prose and headings: **LXGW WenKai Screen 1.522**;
+- code: **Maple Mono**, matching `@fontsource/maple-mono@5.3.0`;
+- mathematics: **Latin Modern Math**.
 
-- Latin Modern Sans regular/bold comes from the exact WOFF2 assets in `water-modeling-notes`, pinned to commit `462c5e1609978b27fc0774780229fc41a0aba8f8`;
-- LXGW WenKai Screen is pinned to 1.522;
-- Maple Mono matches `@fontsource/maple-mono@5.3.0`;
-- Latin Modern Math is the only configured mathematics family.
-
-There is no fallback path. Because the source Latin Modern Sans assets provide regular and bold only, italic Latin text is a deterministic synthetic slant of those pinned files.
+Latin Modern Roman, Sans, and Math are supplied by the TeX distribution. `scripts/setup-fonts.sh` prepares only the pinned non-TeX assets (LXGW WenKai Screen and Maple Mono). Font fallback is disabled.
 
 ```bash
 ./scripts/setup-fonts.sh

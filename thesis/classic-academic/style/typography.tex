@@ -1,13 +1,13 @@
 % Deterministic bilingual font contract for XeLaTeX.
-% Font choices mirror cigit-zgy/water-modeling-notes. No fallback is permitted.
+% Latin scientific prose uses the TeX-distributed Latin Modern family.
 
 \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
 
-\IfFileExists{fonts/latin-modern-sans-regular.ttf}{}{
-  \PackageError{classic-academic}{Missing Latin Modern Sans regular font}{Run ./scripts/setup-fonts.sh before compiling. Font fallback is disabled.}
+\IfFontExistsTF{Latin Modern Roman}{}{
+  \PackageError{classic-academic}{Missing Latin Modern Roman}{Install a TeX distribution containing Latin Modern before compiling. Font fallback is disabled.}
 }
-\IfFileExists{fonts/latin-modern-sans-bold.ttf}{}{
-  \PackageError{classic-academic}{Missing Latin Modern Sans bold font}{Run ./scripts/setup-fonts.sh before compiling. Font fallback is disabled.}
+\IfFontExistsTF{Latin Modern Sans}{}{
+  \PackageError{classic-academic}{Missing Latin Modern Sans}{Install a TeX distribution containing Latin Modern before compiling. Font fallback is disabled.}
 }
 \IfFileExists{fonts/maple-mono-latin-400-normal.ttf}{}{
   \PackageError{classic-academic}{Missing Maple Mono font}{Run ./scripts/setup-fonts.sh before compiling. Font fallback is disabled.}
@@ -19,26 +19,10 @@
   \PackageError{classic-academic}{Missing LXGW WenKai Screen font}{Run ./scripts/setup-fonts.sh before compiling. Font fallback is disabled.}
 }
 
-% water-modeling-notes stores Latin Modern Sans regular and bold only.
-% Italics are deterministic synthetic slants of those exact local font files.
-\setmainfont{latin-modern-sans-regular.ttf}[
-  Path=fonts/,
-  BoldFont=latin-modern-sans-bold.ttf,
-  ItalicFont=latin-modern-sans-regular.ttf,
-  ItalicFeatures={FakeSlant=0.18},
-  BoldItalicFont=latin-modern-sans-bold.ttf,
-  BoldItalicFeatures={FakeSlant=0.18}
-]
-\setsansfont{latin-modern-sans-regular.ttf}[
-  Path=fonts/,
-  BoldFont=latin-modern-sans-bold.ttf,
-  ItalicFont=latin-modern-sans-regular.ttf,
-  ItalicFeatures={FakeSlant=0.18},
-  BoldItalicFont=latin-modern-sans-bold.ttf,
-  BoldItalicFeatures={FakeSlant=0.18}
-]
-
-% Latin Modern Math is a required TeX-distributed asset; no alternate math font is configured.
+% Main scientific prose: Latin Modern Roman. Sans is retained only for explicitly
+% sans-serif structural elements such as thesis chapter numerals.
+\setmainfont{Latin Modern Roman}
+\setsansfont{Latin Modern Sans}
 \setmathfont{latinmodern-math.otf}
 
 \setmonofont{maple-mono-latin-400-normal.ttf}[
@@ -52,16 +36,12 @@
 \setCJKmonofont{LXGWWenKaiScreen.ttf}[Path=fonts/]
 \xeCJKsetup{CJKmath=true,AutoFakeSlant=false}
 
-\newfontfamily\AcademicHeadingFont{latin-modern-sans-regular.ttf}[
-  Path=fonts/,
-  BoldFont=latin-modern-sans-bold.ttf,
+\newfontfamily\AcademicHeadingFont{Latin Modern Roman}[
   LetterSpace=7,
   Scale=MatchLowercase
 ]
 
-\newfontfamily\AcademicHeaderFont{latin-modern-sans-regular.ttf}[
-  Path=fonts/,
-  BoldFont=latin-modern-sans-bold.ttf,
+\newfontfamily\AcademicHeaderFont{Latin Modern Roman}[
   LetterSpace=4,
   Scale=MatchLowercase
 ]
