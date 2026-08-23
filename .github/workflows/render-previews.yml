@@ -1,0 +1,81 @@
+name: Render template previews
+
+on:
+  push:
+    branches: [master]
+    paths-ignore:
+      - "thesis/classic-academic/preview/**"
+      - "report/classic-academic/preview/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install TeX and render dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            texlive-xetex texlive-latex-extra texlive-fonts-recommended \
+            texlive-bibtex-extra biber poppler-utils woff2 curl
+
+      - name: Build thesis sample
+        working-directory: thesis/classic-academic
+        run: |
+          ./scripts/setup-fonts.sh
+          ./scripts/build.sh
+          rm -f preview/page-*.png
+          pdftoppm -f 1 -singlefile -png -r 72 main.pdf preview/page-01
+          pdftoppm -f 15 -singlefile -png -r 72 main.pdf preview/page-15
+
+      - name: Build report sample
+        working-directory: report/classic-academic
+        run: |
+          ./scripts/setup-fonts.sh
+          ./scripts/build.sh
+          rm -f preview/page-*.png
+          pdftoppm -f 1 -singlefile -png -r 72 main.pdf preview/page-01
+          pdftoppm -f 4 -singlefile -png -r 72 main.pdf preview/page-04
+
+      - name: Verify intrinsic preview dimensions
+        run: |
+          python - <<'PY'
+          import struct
+          from pathlib import Path
+
+          paths = [
+              Path("thesis/classic-academic/preview/page-01.png"),
+              Path("thesis/classic-academic/preview/page-15.png"),
+              Path("report/classic-academic/preview/page-01.png"),
+              Path("report/classic-academic/preview/page-04.png"),
+          ]
+          for path in paths:
+              data = path.read_bytes()
+              if data[:8] != b"\x89PNG\r\n\x1a\n":
+                  raise SystemExit(f"not a PNG: {path}")
+              width, height = struct.unpack(">II", data[16:24])
+              if (width, height) != (612, 792):
+                  raise SystemExit(f"unexpected preview size {width}x{height}: {path}")
+              print(f"verified {path}: {width}x{height}")
+          PY
+
+      - name: Commit renderer output
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add thesis/classic-academic/preview/page-*.png \
+                  report/classic-academic/preview/page-*.png
+          if git diff --cached --quiet; then
+            echo "Preview images are current."
+            exit 0
+          fi
+          git commit -m "chore: regenerate direct PDF previews [skip ci]"
+          git push
