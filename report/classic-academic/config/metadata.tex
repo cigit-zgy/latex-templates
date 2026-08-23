@@ -1,0 +1,12 @@
+% Project metadata. Supported values: english, chinese.
+\newcommand{\DocumentLanguage}{english}
+\newcommand{\MetadataLocalized}[2]{\ifdefstring{\DocumentLanguage}{chinese}{#2}{#1}}
+
+\newcommand{\ReportTitle}{\MetadataLocalized{Scientific Modelling Report}{科学建模报告}}
+\newcommand{\ReportSubtitle}{\MetadataLocalized{A reusable bilingual academic report template}{可复用的中英文学术报告模板}}
+\newcommand{\ReportAuthor}{\MetadataLocalized{Sample Author}{示例作者}}
+\newcommand{\ReportAffiliation}{\MetadataLocalized{Research Group / Institution}{研究组 / 机构}}
+\newcommand{\ReportType}{\MetadataLocalized{Technical Report}{技术报告}}
+\newcommand{\ReportNumber}{TR-2026-001}
+\newcommand{\ReportDate}{\MetadataLocalized{March 2026}{2026年3月}}
+\newcommand{\ReportShortTitle}{\MetadataLocalized{Scientific Modelling Report}{科学建模报告}}
