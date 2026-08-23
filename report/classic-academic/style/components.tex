@@ -1,0 +1,63 @@
+% Reusable components: language, links, captions, full-width tables, and code.
+
+\newcommand{\Localized}[2]{\ifdefstring{\DocumentLanguage}{chinese}{#2}{#1}}
+\ifdefstring{\DocumentLanguage}{chinese}{%
+  \pdfstringdefDisableCommands{%
+    \def\Localized#1#2{#2}%
+    \def\MetadataLocalized#1#2{#2}%
+  }%
+}{%
+  \pdfstringdefDisableCommands{%
+    \def\Localized#1#2{#1}%
+    \def\MetadataLocalized#1#2{#1}%
+  }%
+}
+\newcommand{\BibliographyTitle}{\Localized{References}{参考文献}}
+\newcommand{\AbstractTitle}{\Localized{Executive Summary}{摘要}}
+\newcommand{\ReportNumberLabel}{\Localized{Report No.}{报告编号}}
+\newcommand{\HeadingText}[1]{\ifdefstring{\DocumentLanguage}{chinese}{#1}{\MakeUppercase{#1}}}
+
+\renewcommand{\contentsname}{\Localized{Contents}{目录}}
+\renewcommand{\listfigurename}{\Localized{List of Figures}{插图目录}}
+\renewcommand{\listtablename}{\Localized{List of Tables}{表格目录}}
+\renewcommand{\figurename}{\Localized{Figure}{图}}
+\renewcommand{\tablename}{\Localized{Table}{表}}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=AcademicLink,
+  citecolor=AcademicLink,
+  urlcolor=AcademicLink,
+  pdfauthor={\ReportAuthor},
+  pdftitle={\ReportTitle}
+}
+
+\captionsetup{font=small,labelfont=bf,labelsep=colon,justification=centering,singlelinecheck=false}
+
+% Mandatory table interface. Every manuscript table occupies exactly \linewidth.
+\renewcommand{\arraystretch}{1.16}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}
+\NewDocumentEnvironment{AcademicTable}{m +b}{%
+  \begin{tabularx}{\linewidth}{@{}#1@{}}#2\end{tabularx}%
+}{}
+
+\lstdefinestyle{academiccode}{
+  basicstyle=\ttfamily\small,
+  backgroundcolor=\color{AcademicCodeBackground},
+  frame=single,
+  rulecolor=\color{AcademicRule!35},
+  numbers=left,
+  numberstyle=\ttfamily\scriptsize\color{AcademicMuted},
+  keywordstyle=\color{AcademicLink},
+  commentstyle=\itshape\color{AcademicMuted},
+  stringstyle=\color{AcademicAccent},
+  breaklines=true,
+  showstringspaces=false,
+  tabsize=2
+}
+\lstset{style=academiccode}
+
+\newcommand{\term}[1]{\emph{#1}}
+\newcommand{\code}[1]{\texttt{#1}}
