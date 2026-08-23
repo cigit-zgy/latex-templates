@@ -9,6 +9,8 @@ if grep -R -n -E '\\begin\{(tabular|tabularx|longtable)\}' sections --include='*
 fi
 
 for font in \
+  fonts/latin-modern-sans-regular.ttf \
+  fonts/latin-modern-sans-bold.ttf \
   fonts/maple-mono-latin-400-normal.ttf \
   fonts/maple-mono-latin-400-italic.ttf \
   fonts/LXGWWenKaiScreen.ttf; do
