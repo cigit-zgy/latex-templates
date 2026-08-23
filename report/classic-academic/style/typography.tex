@@ -3,6 +3,12 @@
 
 \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
 
+\IfFileExists{fonts/latin-modern-sans-regular.ttf}{}{
+  \PackageError{classic-academic}{Missing Latin Modern Sans regular font}{Run ./scripts/setup-fonts.sh before compiling. Font fallback is disabled.}
+}
+\IfFileExists{fonts/latin-modern-sans-bold.ttf}{}{
+  \PackageError{classic-academic}{Missing Latin Modern Sans bold font}{Run ./scripts/setup-fonts.sh before compiling. Font fallback is disabled.}
+}
 \IfFileExists{fonts/maple-mono-latin-400-normal.ttf}{}{
   \PackageError{classic-academic}{Missing Maple Mono font}{Run ./scripts/setup-fonts.sh before compiling. Font fallback is disabled.}
 }
@@ -13,16 +19,26 @@
   \PackageError{classic-academic}{Missing LXGW WenKai Screen font}{Run ./scripts/setup-fonts.sh before compiling. Font fallback is disabled.}
 }
 
-\setmainfont{lmsans10-regular.otf}[
-  BoldFont=lmsans10-bold.otf,
-  ItalicFont=lmsans10-oblique.otf,
-  BoldItalicFont=lmsans10-boldoblique.otf
+% water-modeling-notes stores Latin Modern Sans regular and bold only.
+% Italics are deterministic synthetic slants of those exact local font files.
+\setmainfont{latin-modern-sans-regular.ttf}[
+  Path=fonts/,
+  BoldFont=latin-modern-sans-bold.ttf,
+  ItalicFont=latin-modern-sans-regular.ttf,
+  ItalicFeatures={FakeSlant=0.18},
+  BoldItalicFont=latin-modern-sans-bold.ttf,
+  BoldItalicFeatures={FakeSlant=0.18}
 ]
-\setsansfont{lmsans10-regular.otf}[
-  BoldFont=lmsans10-bold.otf,
-  ItalicFont=lmsans10-oblique.otf,
-  BoldItalicFont=lmsans10-boldoblique.otf
+\setsansfont{latin-modern-sans-regular.ttf}[
+  Path=fonts/,
+  BoldFont=latin-modern-sans-bold.ttf,
+  ItalicFont=latin-modern-sans-regular.ttf,
+  ItalicFeatures={FakeSlant=0.18},
+  BoldItalicFont=latin-modern-sans-bold.ttf,
+  BoldItalicFeatures={FakeSlant=0.18}
 ]
+
+% Latin Modern Math is a required TeX-distributed asset; no alternate math font is configured.
 \setmathfont{latinmodern-math.otf}
 
 \setmonofont{maple-mono-latin-400-normal.ttf}[
@@ -36,16 +52,16 @@
 \setCJKmonofont{LXGWWenKaiScreen.ttf}[Path=fonts/]
 \xeCJKsetup{CJKmath=true,AutoFakeSlant=false}
 
-\newfontfamily\AcademicHeadingFont{lmsans10-regular.otf}[
-  BoldFont=lmsans10-bold.otf,
-  ItalicFont=lmsans10-oblique.otf,
+\newfontfamily\AcademicHeadingFont{latin-modern-sans-regular.ttf}[
+  Path=fonts/,
+  BoldFont=latin-modern-sans-bold.ttf,
   LetterSpace=7,
   Scale=MatchLowercase
 ]
 
-\newfontfamily\AcademicHeaderFont{lmsans10-regular.otf}[
-  BoldFont=lmsans10-bold.otf,
-  ItalicFont=lmsans10-oblique.otf,
+\newfontfamily\AcademicHeaderFont{latin-modern-sans-regular.ttf}[
+  Path=fonts/,
+  BoldFont=latin-modern-sans-bold.ttf,
   LetterSpace=4,
   Scale=MatchLowercase
 ]
