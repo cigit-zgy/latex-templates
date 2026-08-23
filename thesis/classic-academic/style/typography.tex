@@ -1,41 +1,51 @@
-% Font contract for XeLaTeX.
-% Latin Modern comes with TeX Live / MacTeX. Maple Mono is optional.
+% Deterministic bilingual font contract for XeLaTeX.
+% Font choices mirror cigit-zgy/water-modeling-notes. No fallback is permitted.
 
 \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
 
-\setmainfont{lmroman10-regular.otf}[
-  BoldFont=lmroman10-bold.otf,
-  ItalicFont=lmroman10-italic.otf,
-  BoldItalicFont=lmroman10-bolditalic.otf
-]
-
-\setsansfont{lmsans10-regular.otf}[
-  BoldFont=lmsans10-bold.otf,
-  ItalicFont=lmsans10-oblique.otf
-]
-
-\setmathfont{latinmodern-math.otf}
-
-\IfFontExistsTF{Maple Mono}{
-  \setmonofont{Maple Mono}[Scale=MatchLowercase]
-}{
-  \setmonofont{lmmono10-regular.otf}[
-    ItalicFont=lmmono10-italic.otf,
-    Scale=MatchLowercase
-  ]
+\IfFileExists{fonts/maple-mono-latin-400-normal.ttf}{}{
+  \PackageError{classic-academic}{Missing Maple Mono font}{Run ./scripts/setup-fonts.sh before compiling. Font fallback is disabled.}
+}
+\IfFileExists{fonts/maple-mono-latin-400-italic.ttf}{}{
+  \PackageError{classic-academic}{Missing Maple Mono italic font}{Run ./scripts/setup-fonts.sh before compiling. Font fallback is disabled.}
+}
+\IfFileExists{fonts/LXGWWenKaiScreen.ttf}{}{
+  \PackageError{classic-academic}{Missing LXGW WenKai Screen font}{Run ./scripts/setup-fonts.sh before compiling. Font fallback is disabled.}
 }
 
-\newfontfamily\ThesisHeadingFont{lmsans10-regular.otf}[
+\setmainfont{lmsans10-regular.otf}[
+  BoldFont=lmsans10-bold.otf,
+  ItalicFont=lmsans10-oblique.otf,
+  BoldItalicFont=lmsans10-boldoblique.otf
+]
+\setsansfont{lmsans10-regular.otf}[
+  BoldFont=lmsans10-bold.otf,
+  ItalicFont=lmsans10-oblique.otf,
+  BoldItalicFont=lmsans10-boldoblique.otf
+]
+\setmathfont{latinmodern-math.otf}
+
+\setmonofont{maple-mono-latin-400-normal.ttf}[
+  Path=fonts/,
+  ItalicFont=maple-mono-latin-400-italic.ttf,
+  Scale=MatchLowercase
+]
+
+\setCJKmainfont{LXGWWenKaiScreen.ttf}[Path=fonts/,AutoFakeBold=1.6]
+\setCJKsansfont{LXGWWenKaiScreen.ttf}[Path=fonts/,AutoFakeBold=1.6]
+\setCJKmonofont{LXGWWenKaiScreen.ttf}[Path=fonts/]
+\xeCJKsetup{CJKmath=true,AutoFakeSlant=false}
+
+\newfontfamily\AcademicHeadingFont{lmsans10-regular.otf}[
   BoldFont=lmsans10-bold.otf,
   ItalicFont=lmsans10-oblique.otf,
   LetterSpace=7,
   Scale=MatchLowercase
 ]
 
-\newfontfamily\ThesisSmallCapsFont{lmroman10-regular.otf}[
-  BoldFont=lmroman10-bold.otf,
-  ItalicFont=lmroman10-italic.otf,
-  Letters=SmallCaps,
-  LetterSpace=5,
+\newfontfamily\AcademicHeaderFont{lmsans10-regular.otf}[
+  BoldFont=lmsans10-bold.otf,
+  ItalicFont=lmsans10-oblique.otf,
+  LetterSpace=4,
   Scale=MatchLowercase
 ]
