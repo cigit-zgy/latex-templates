@@ -19,15 +19,14 @@
 \setcounter{tocdepth}{2}
 \setcounter{secnumdepth}{3}
 
-% Reports keep numbered structure internally and in the TOC, but do not print
-% the large display numeral at the upper right of each section heading.
+% Report section headings are typography-only: no display numeral and no rule.
+% Numbering remains available internally and in the table of contents.
 \titleformat{\section}[display]
   {\normalfont}
   {}
   {0pt}
   {\color{AcademicText}\AcademicHeadingFont\fontsize{18}{23}\selectfont\HeadingText}
-  [\vspace{0.5ex}{\color{AcademicRule}\titlerule}]
-\titlespacing*{\section}{0pt}{3.8ex plus 1ex minus .2ex}{2.4ex}
+\titlespacing*{\section}{0pt}{3.8ex plus 1ex minus .2ex}{1.8ex}
 
 \titleformat{\subsection}
   {\normalfont\color{AcademicAccent}\AcademicHeadingFont\large}
