@@ -43,25 +43,25 @@ The workflow uses semantic preview filenames (`title.png`, `hierarchy.png`, `cv.
 
 ### Thesis · Classic Academic
 
-![Thesis title page](thesis/classic-academic/preview/title.png)
+![Thesis title page](thesis/classic-academic/preview/title.png?rev=c548ccd53a43)
 
-![Thesis hierarchy specimen](thesis/classic-academic/preview/hierarchy.png)
+![Thesis hierarchy specimen](thesis/classic-academic/preview/hierarchy.png?rev=3662e53d0e42)
 
 ### Report · Classic Academic
 
-![Classic report title page](report/classic-academic/preview/title.png)
+![Classic report title page](report/classic-academic/preview/title.png?rev=a14f4f986958)
 
-![Classic report hierarchy specimen](report/classic-academic/preview/hierarchy.png)
+![Classic report hierarchy specimen](report/classic-academic/preview/hierarchy.png?rev=e0c037a6cff3)
 
 ### Report · Short Charter
 
-![Short Charter report title page](report/short-charter/preview/title.png)
+![Short Charter report title page](report/short-charter/preview/title.png?rev=f212a23fb8e7)
 
-![Short Charter report hierarchy specimen](report/short-charter/preview/hierarchy.png)
+![Short Charter report hierarchy specimen](report/short-charter/preview/hierarchy.png?rev=213ede755db9)
 
 ### CV · Academic CurVe
 
-![Academic CurVe CV](cv/curve-academic/preview/cv.png)
+![Academic CurVe CV](cv/curve-academic/preview/cv.png?rev=7446cde3df34)
 
 ## Repository contract
 

@@ -6,9 +6,9 @@ A self-contained XeLaTeX thesis template based on a `book` document model and a 
 
 These PNG files are direct **200-dpi** renders of the compiled sample PDF. They are not cropped, resized, composited, sharpened, annotated, or redrawn. Markdown references them at intrinsic size without `width` or `height` overrides. The renderer appends a content-hash query parameter to the README URLs only to invalidate GitHub image caches; the PNG bytes remain untouched.
 
-![Rendered thesis title page](preview/title.png)
+![Rendered thesis title page](preview/title.png?rev=c548ccd53a43)
 
-![Rendered thesis hierarchy specimen](preview/hierarchy.png)
+![Rendered thesis hierarchy specimen](preview/hierarchy.png?rev=3662e53d0e42)
 
 ## Font and hierarchy contract
 

@@ -36,8 +36,8 @@ All manuscript tables use the full line width through `AcademicTable`.
 
 The hierarchy specimen intentionally contains `section`, `subsection`, and `subsubsection` on the same rendered page so the three-level colour and weight contract can be inspected directly.
 
-![Short report title page](preview/title.png)
+![Short report title page](preview/title.png?rev=f212a23fb8e7)
 
-![Short report hierarchy specimen](preview/hierarchy.png)
+![Short report hierarchy specimen](preview/hierarchy.png?rev=213ede755db9)
 
 Preview images are direct **200-dpi** renders of the compiled PDF. They must not be cropped, resized, composited, sharpened, annotated, or redrawn. The renderer appends a content-hash query parameter to the README URLs only to invalidate GitHub image caches; the PNG bytes remain untouched.
