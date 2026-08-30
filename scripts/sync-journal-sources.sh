@@ -13,7 +13,17 @@ sync_file() {
 
   mkdir -p "$(dirname "$target")"
   if [[ ! -s "$target" ]]; then
-    curl --fail --location --silent --show-error "${BASE}/${source_path}" -o "$target"
+    curl \
+      --fail \
+      --location \
+      --silent \
+      --show-error \
+      --retry 5 \
+      --retry-delay 2 \
+      --retry-all-errors \
+      --connect-timeout 20 \
+      "${BASE}/${source_path}" \
+      -o "$target"
   fi
 
   local actual_blob
