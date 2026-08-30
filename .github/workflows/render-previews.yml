@@ -61,6 +61,7 @@ jobs:
           grep -Eiq 'TimesNewRoman|Times.New.Roman' /tmp/kxtb-fonts.txt
           grep -Eiq 'SimSun' /tmp/kxtb-fonts.txt
           ! grep -Eiq 'FandolHei|FandolSong|TeXGyreTermes|TeX.Gyre.Termes' /tmp/kxtb-fonts.txt
+          test "$(pdfinfo main.pdf | awk '/^Pages:/ {print $2}')" -ge 2
           mkdir -p preview
           rm -f preview/*.png
           pdftoppm -f 1 -singlefile -png -r 150 main.pdf preview/article
@@ -76,6 +77,8 @@ jobs:
           fi
           pdffonts main.pdf | tee /tmp/nsfc-general-fonts.txt
           grep -Eiq 'SimSun' /tmp/nsfc-general-fonts.txt
+          grep -Eiq 'Arial' /tmp/nsfc-general-fonts.txt
+          test "$(pdfinfo main.pdf | awk '/^Pages:/ {print $2}')" -ge 2
           mkdir -p preview
           rm -f preview/*.png
           pdftoppm -f 1 -singlefile -png -r 150 main.pdf preview/application
@@ -91,6 +94,8 @@ jobs:
           fi
           pdffonts main.pdf | tee /tmp/nsfc-young-fonts.txt
           grep -Eiq 'SimSun' /tmp/nsfc-young-fonts.txt
+          grep -Eiq 'Arial' /tmp/nsfc-young-fonts.txt
+          test "$(pdfinfo main.pdf | awk '/^Pages:/ {print $2}')" -ge 2
           mkdir -p preview
           rm -f preview/*.png
           pdftoppm -f 1 -singlefile -png -r 150 main.pdf preview/application
@@ -103,6 +108,7 @@ jobs:
           rm -f preview/*.png
           pdftoppm -f 1 -singlefile -png -r 150 main.pdf preview/title
           pages=$(pdfinfo main.pdf | awk '/^Pages:/ {print $2}')
+          test "$pages" -ge 2
           page=""
           for p in $(seq 1 "$pages"); do
             if pdftotext -f "$p" -l "$p" main.pdf - 2>/dev/null | grep -Fqi "Research Background"; then page="$p"; break; fi
@@ -117,6 +123,7 @@ jobs:
           rm -f preview/*.png
           pdftoppm -f 1 -singlefile -png -r 150 main.pdf preview/title
           pages=$(pdfinfo main.pdf | awk '/^Pages:/ {print $2}')
+          test "$pages" -ge 2
           page=""
           for p in $(seq 1 "$pages"); do
             if pdftotext -f "$p" -l "$p" main.pdf - 2>/dev/null | grep -Fqi "Analysis and Results"; then page="$p"; break; fi
@@ -131,6 +138,7 @@ jobs:
           rm -f preview/*.png
           pdftoppm -f 1 -singlefile -png -r 150 main.pdf preview/title
           pages=$(pdfinfo main.pdf | awk '/^Pages:/ {print $2}')
+          test "$pages" -ge 2
           page=""
           for p in $(seq 1 "$pages"); do
             if pdftotext -f "$p" -l "$p" main.pdf - 2>/dev/null | grep -Fqi "Methods"; then page="$p"; break; fi
@@ -138,55 +146,77 @@ jobs:
           test -n "$page"
           pdftoppm -f "$page" -singlefile -png -r 150 main.pdf preview/hierarchy
 
-      - name: Build CV preview
-        working-directory: cv/curve-academic
-        run: |
-          ./scripts/build.sh
-          rm -f preview/*.png
-          pdftoppm -f 1 -singlefile -png -r 150 main.pdf preview/cv
-
       - name: Build publisher journal previews
         run: |
           for dir in journal/nature journal/elsevier journal/acs; do
             (
               cd "$dir"
               latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
+              pages=$(pdfinfo main.pdf | awk '/^Pages:/ {print $2}')
+              if [ "$pages" -lt 2 ]; then
+                echo "$dir must compile to at least two pages for preview validation." >&2
+                exit 1
+              fi
               mkdir -p preview
               rm -f preview/*.png
               pdftoppm -f 1 -singlefile -png -r 150 main.pdf preview/article
+              pdftoppm -f 2 -singlefile -png -r 150 main.pdf preview/content
             )
           done
 
-      - name: Verify 150 DPI previews
+      - name: Build CV preview last
+        working-directory: cv/curve-academic
+        run: |
+          ./scripts/build.sh
+          rm -f preview/*.png
+          pdftoppm -f 1 -singlefile -png -r 150 main.pdf preview/cv
+
+      - name: Verify 150 DPI preview count and equal pair sizes
         run: |
           python3 - <<'PY'
           import struct
           from pathlib import Path
 
-          exact_a4 = [
-              Path("journal/kxtbcas/preview/article.png"),
-              Path("journal/kxtbcas/preview/content.png"),
-              Path("nsfc-general/preview/application.png"),
-              Path("nsfc-general/preview/content.png"),
-              Path("nsfc-young/preview/application.png"),
-              Path("nsfc-young/preview/content.png"),
+          pairs = [
+              (Path("thesis/classic-academic/preview/title.png"), Path("thesis/classic-academic/preview/hierarchy.png")),
+              (Path("report/classic-academic/preview/title.png"), Path("report/classic-academic/preview/hierarchy.png")),
+              (Path("report/short-charter/preview/title.png"), Path("report/short-charter/preview/hierarchy.png")),
+              (Path("journal/nature/preview/article.png"), Path("journal/nature/preview/content.png")),
+              (Path("journal/elsevier/preview/article.png"), Path("journal/elsevier/preview/content.png")),
+              (Path("journal/acs/preview/article.png"), Path("journal/acs/preview/content.png")),
+              (Path("journal/kxtbcas/preview/article.png"), Path("journal/kxtbcas/preview/content.png")),
+              (Path("nsfc-general/preview/application.png"), Path("nsfc-general/preview/content.png")),
+              (Path("nsfc-young/preview/application.png"), Path("nsfc-young/preview/content.png")),
           ]
-          all_pngs = list(Path(".").glob("**/preview/*.png"))
-          if len(all_pngs) < 17:
-              raise SystemExit(f"Expected at least 17 preview PNGs, found {len(all_pngs)}")
-          for path in all_pngs:
+          cv = Path("cv/curve-academic/preview/cv.png")
+
+          def png_size(path: Path) -> tuple[int, int]:
               data = path.read_bytes()
               if data[:8] != b"\x89PNG\r\n\x1a\n":
                   raise SystemExit(f"Not a PNG: {path}")
-              width, height = struct.unpack(">II", data[16:24])
-              if width < 1000 or height < 1000:
-                  raise SystemExit(f"Preview is below 150-DPI scale: {width}x{height}: {path}")
-          for path in exact_a4:
-              data = path.read_bytes()
-              width, height = struct.unpack(">II", data[16:24])
-              if width not in {1240, 1241} or height not in {1754, 1755}:
-                  raise SystemExit(f"Unexpected 150-DPI A4 size {width}x{height}: {path}")
-              print(f"verified {path}: {width}x{height}")
+              return struct.unpack(">II", data[16:24])
+
+          expected = {p for pair in pairs for p in pair} | {cv}
+          actual = set(Path(".").glob("**/preview/*.png"))
+          if len(expected) != 19:
+              raise SystemExit(f"Internal preview contract error: expected set contains {len(expected)} files")
+          missing = expected - actual
+          if missing:
+              raise SystemExit("Missing preview files: " + ", ".join(str(p) for p in sorted(missing)))
+
+          for left, right in pairs:
+              left_size = png_size(left)
+              right_size = png_size(right)
+              if left_size != right_size:
+                  raise SystemExit(f"Preview pair size mismatch: {left}={left_size}, {right}={right_size}")
+              if left_size[0] < 1000 or left_size[1] < 1000:
+                  raise SystemExit(f"Preview pair is below 150-DPI scale: {left_size}: {left}, {right}")
+              print(f"equal pair: {left} == {right} == {left_size}")
+
+          cv_size = png_size(cv)
+          if cv_size[0] < 1000 or cv_size[1] < 1000:
+              raise SystemExit(f"CV preview is below 150-DPI scale: {cv_size}")
+          print(f"single CV preview: {cv} == {cv_size}")
           PY
 
       - name: Refresh README preview hashes
@@ -200,14 +230,14 @@ jobs:
             thesis/classic-academic/README.md thesis/classic-academic/preview \
             report/classic-academic/README.md report/classic-academic/preview \
             report/short-charter/README.md report/short-charter/preview \
-            cv/curve-academic/README.md cv/curve-academic/preview \
             journal/nature journal/elsevier journal/acs \
             journal/kxtbcas/README.md journal/kxtbcas/preview \
             nsfc-general/README.md nsfc-general/preview \
-            nsfc-young/README.md nsfc-young/preview
+            nsfc-young/README.md nsfc-young/preview \
+            cv/curve-academic/README.md cv/curve-academic/preview
           if git diff --cached --quiet; then
-            echo "All 150 DPI previews and cache keys are current."
+            echo "All 150 DPI previews and README references are current."
           else
-            git commit -m "chore: refresh 150 dpi previews [skip ci]"
+            git commit -m "chore: refresh equal-size 150 dpi previews [skip ci]"
             git push origin master
           fi
