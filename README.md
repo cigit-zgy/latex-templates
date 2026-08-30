@@ -36,7 +36,7 @@ The KXTB-CAS template follows the font contract of the `structure-object-perspec
 
 ## Rendered previews
 
-All committed preview PNGs are direct 100-dpi renders of compiled PDFs.
+All committed preview PNGs are 100-dpi renders of compiled PDFs. Templates that require proprietary local fonts use a pinned, already compiled reference PDF for preview generation, so the preview does not silently switch to substitute fonts in CI.
 
 ### Thesis · Classic Academic
 
@@ -72,9 +72,23 @@ All committed preview PNGs are direct 100-dpi renders of compiled PDFs.
 
 ![ACS article](journal/acs/preview/article.png?rev=e2d637a07492)
 
-### Journal · KXTB-CAS
+### Journal · KXTB-CAS / 科学通报
 
-The previous KXTB-CAS preview was removed because it was rendered with substitute fonts. A valid preview must be generated from an exact Times New Roman + SimSun build and rendered at 100 DPI.
+![KXTB-CAS first page](journal/kxtbcas/preview/article.png)
+
+![KXTB-CAS content page](journal/kxtbcas/preview/content.png)
+
+### NSFC · 2026 面上项目
+
+![NSFC General first page](nsfc-general/preview/application.png)
+
+![NSFC General content page](nsfc-general/preview/content.png)
+
+### NSFC · 2026 青年科学基金项目（C类）
+
+![NSFC Young first page](nsfc-young/preview/application.png)
+
+![NSFC Young content page](nsfc-young/preview/content.png)
 
 ## Sources
 
@@ -93,6 +107,7 @@ The previous KXTB-CAS preview was removed because it was rendered with substitut
 - Publisher class and bibliography files under `journal/nature`, `journal/elsevier`, and `journal/acs` retain publisher-defined typography and are not restyled.
 - `journal/kxtbcas` retains KXTB-CAS layout rules and requires exact Times New Roman + SimSun font files.
 - `nsfc-general` and `nsfc-young` retain their NSFC typography and page geometry.
+- Proprietary-font previews are rendered from pinned reference PDFs, not from substitute-font CI builds.
 - Report manuscript tables use the full `\linewidth` through `AcademicTable`.
 - `report/short-charter` has no table of contents by default.
 - Preview PNGs are generated with `pdftoppm -png -r 100` and are not cropped, resized, composited, sharpened, annotated, or redrawn.
