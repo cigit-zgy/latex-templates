@@ -36,7 +36,7 @@ The KXTB-CAS template follows the font contract of the `structure-object-perspec
 
 ## Rendered previews
 
-All committed preview PNGs are 100-dpi renders of compiled PDFs. Templates that require proprietary local fonts use a pinned, already compiled reference PDF for preview generation, so the preview does not silently switch to substitute fonts in CI.
+All committed preview PNGs are 100-dpi renders of compiled PDFs. Templates that require proprietary local fonts use a pinned, already compiled reference PDF for preview generation, so the preview does not silently switch to substitute fonts in CI. Preview provenance is recorded inside each template's `preview/README.md` where a reference PDF is used.
 
 ### Thesis · Classic Academic
 
