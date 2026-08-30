@@ -26,6 +26,9 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Validate shared document style contract
+        run: python3 scripts/validate-style-contract.py
+
       - name: Install TeX and render dependencies
         run: |
           sudo apt-get update
