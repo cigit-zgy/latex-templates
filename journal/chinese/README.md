@@ -22,10 +22,11 @@ Standalone XeLaTeX Chinese scientific manuscript using the project-maintained `k
 | Chinese italic role | FandolKai Regular |
 | Chinese sans-serif title and section roles | FandolHei Regular / Bold |
 | Chinese monospaced role | FandolFang Regular |
-| Latin text | TeX Gyre Termes |
+| Latin serif text | Latin Modern Roman |
+| Latin sans-serif text | Latin Modern Sans |
 | Mathematics | STIX Two Math when available |
 
-The Chinese body is Song-style serif text. `kxtbcas.cls` uses the sans-serif role only for display elements explicitly marked with `\sffamily`, including the Chinese article title and section headings.
+The Chinese body is Song-style serif text. `kxtbcas.cls` uses the sans-serif role for display elements explicitly marked with `\sffamily`, including the Chinese article title and section headings.
 
 ## Build
 
@@ -33,7 +34,7 @@ The Chinese body is Song-style serif text. `kxtbcas.cls` uses the sans-serif rol
 latexmk -xelatex -interaction=nonstopmode -halt-on-error main.tex
 ```
 
-The required Fandol and TeX Gyre fonts are supplied by TeX Live packages installed with the XeLaTeX/Chinese toolchain.
+The required Fandol and Latin Modern fonts are supplied by the TeX Live XeLaTeX/Chinese toolchain.
 
 ## Preview
 
