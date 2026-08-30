@@ -32,11 +32,11 @@ The self-owned templates currently use the same design roles where applicable—
 | `journal/acs` | `achemso.cls` | class-managed ACS style | CTAN `achemso` |
 | `journal/kxtbcas` | `kxtbcas.cls` | `kxtbcas-numeric.bst` | KXTB-CAS / 科学通报 project resource |
 
-The KXTB-CAS template follows the font contract of the `structure-object-perspective` reference class: Times New Roman for Latin text and SimSun for Chinese text, with the class display roles mapped to the same serif files. Its local `scripts/setup-fonts.sh` stages legally installed exact fonts into `journal/kxtbcas/fonts/`; missing exact files stop the build rather than selecting a substitute.
+The KXTB-CAS template follows the font contract of the `structure-object-perspective` reference class: Times New Roman for Latin text and SimSun for Chinese text, with the class display roles mapped to the same serif files. Its own `scripts/setup-fonts.sh` / `scripts/setup-fonts.ps1` stage legally installed exact fonts into `journal/kxtbcas/fonts/`; missing exact files stop the build rather than selecting a substitute.
 
 ## Rendered previews
 
-All committed preview PNGs are 100-dpi renders of compiled PDFs. Templates that require proprietary local fonts use a pinned, already compiled reference PDF for preview generation, so the preview does not silently switch to substitute fonts in CI. Preview provenance is recorded inside each template's `preview/README.md` where a reference PDF is used.
+All committed preview PNGs are generated from PDFs compiled from the source files in this repository and rendered at 100 DPI. KXTB-CAS and the two NSFC templates are compiled on a Windows runner so their required Times New Roman, SimSun, KaiTi, FangSong, and Arial font families can be staged into each template's own `fonts/` directory before XeLaTeX runs. The CI also inspects the generated PDFs with `pdffonts` before accepting the previews.
 
 ### Thesis · Classic Academic
 
@@ -107,7 +107,7 @@ All committed preview PNGs are 100-dpi renders of compiled PDFs. Templates that 
 - Publisher class and bibliography files under `journal/nature`, `journal/elsevier`, and `journal/acs` retain publisher-defined typography and are not restyled.
 - `journal/kxtbcas` retains KXTB-CAS layout rules and requires exact Times New Roman + SimSun font files.
 - `nsfc-general` and `nsfc-young` retain their NSFC typography and page geometry.
-- Proprietary-font previews are rendered from pinned reference PDFs, not from substitute-font CI builds.
+- Every preview validates the current repository template by compiling that template's own `main.tex`; CI does not reuse a precompiled PDF from a reference repository.
 - Report manuscript tables use the full `\linewidth` through `AcademicTable`.
 - `report/short-charter` has no table of contents by default.
 - Preview PNGs are generated with `pdftoppm -png -r 100` and are not cropped, resized, composited, sharpened, annotated, or redrawn.
