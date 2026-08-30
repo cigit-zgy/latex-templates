@@ -20,7 +20,7 @@ Its three heading levels are identical to the classic report and thesis ordinary
 | `subsection` | 13 / 16 pt | Bold | `RoyalBlue` |
 | `subsubsection` | 11 / 14 pt | Bold | `ForestGreen` |
 
-The section number and section title now use the same `BrickRed` style; the same number/title rule applies to all lower levels. Paragraph indent is `1.2em`, line spread is `1.08`, caption style and table row spacing are shared with the other document templates, and running heads use muted Latin Modern Sans without a rule.
+The section number and section title use the same `BrickRed` style; the same number/title rule applies to all lower levels. Paragraph indent is `1.2em`, line spread is `1.08`, caption style and table row spacing are shared with the other document templates, and running heads use muted Latin Modern Sans without a rule.
 
 The template retains only its compact single-sided A4 geometry and approximately ten-page target as document-specific behaviour.
 
@@ -34,8 +34,10 @@ All manuscript tables use the full line width through `AcademicTable`.
 
 ## Preview
 
-![Short report title page](preview/page-01.png)
+The hierarchy specimen intentionally contains `section`, `subsection`, and `subsubsection` on the same rendered page so the three-level colour and weight contract can be inspected directly.
 
-![Short report section page](preview/page-03.png)
+![Short report title page](preview/title.png)
 
-Preview images are direct **200-dpi** renders of the compiled PDF. They must not be cropped, resized, composited, sharpened, annotated, or redrawn.
+![Short report hierarchy specimen](preview/hierarchy.png)
+
+Preview images are direct **200-dpi** renders of the compiled PDF. They must not be cropped, resized, composited, sharpened, annotated, or redrawn. The renderer appends a content-hash query parameter to the README URLs only to invalidate GitHub image caches; the PNG bytes remain untouched.
