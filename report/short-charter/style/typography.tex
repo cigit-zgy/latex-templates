@@ -1,10 +1,11 @@
-% Deterministic scientific typography for XeLaTeX.
-% Latin prose: XCharter (open extension of Bitstream Charter).
-% Mathematics: XCharter-Math, designed for XCharter.
-% Structural sans-serif: Latin Modern Sans.
-% Chinese: LXGW WenKai Screen 1.522.
-% Code: Maple Mono 5.3.0.
+% Unified scientific typography for XeLaTeX.
+% Project-wide font roles are defined in FONT_POLICY.md and STYLE_POLICY.md.
+
 \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+
+\IfFileExists{fonts/maple-mono-latin-400-normal.ttf}{}{\PackageError{short-charter}{Missing Maple Mono font}{Run ./scripts/setup-fonts.sh before compiling.}}
+\IfFileExists{fonts/maple-mono-latin-400-italic.ttf}{}{\PackageError{short-charter}{Missing Maple Mono italic font}{Run ./scripts/setup-fonts.sh before compiling.}}
+\IfFileExists{fonts/LXGWWenKaiScreen.ttf}{}{\PackageError{short-charter}{Missing LXGW WenKai Screen font}{Run ./scripts/setup-fonts.sh before compiling.}}
 
 \setmainfont{XCharter-Roman.otf}[
   BoldFont=XCharter-Bold.otf,
@@ -13,23 +14,33 @@
 ]
 \setsansfont{lmsans10-regular.otf}[
   BoldFont=lmsans10-bold.otf,
-  ItalicFont=lmsans10-oblique.otf
+  ItalicFont=lmsans10-oblique.otf,
+  BoldItalicFont=lmsans10-boldoblique.otf
 ]
 \setmathfont{XCharter-Math.otf}[BoldFont=XCharter-Math-Bold.otf]
 
-\IfFileExists{fonts/LXGWWenKaiScreen.ttf}{}{\PackageError{short-charter}{Missing LXGW WenKai Screen}{Run ./scripts/setup-fonts.sh.}}
-\IfFileExists{fonts/maple-mono-latin-400-normal.ttf}{}{\PackageError{short-charter}{Missing Maple Mono}{Run ./scripts/setup-fonts.sh.}}
-\IfFileExists{fonts/maple-mono-latin-400-italic.ttf}{}{\PackageError{short-charter}{Missing Maple Mono italic}{Run ./scripts/setup-fonts.sh.}}
-\setCJKmainfont{LXGWWenKaiScreen.ttf}[Path=fonts/,AutoFakeBold=1.6]
-\setCJKsansfont{LXGWWenKaiScreen.ttf}[Path=fonts/,AutoFakeBold=1.6]
-\setCJKmonofont{LXGWWenKaiScreen.ttf}[Path=fonts/]
 \setmonofont{maple-mono-latin-400-normal.ttf}[
   Path=fonts/,
   ItalicFont=maple-mono-latin-400-italic.ttf,
   Scale=MatchLowercase
 ]
-\newfontfamily\AcademicSans{lmsans10-regular.otf}[
+\setCJKmainfont{LXGWWenKaiScreen.ttf}[Path=fonts/,AutoFakeBold=1.6]
+\setCJKsansfont{LXGWWenKaiScreen.ttf}[Path=fonts/,AutoFakeBold=1.6]
+\setCJKmonofont{LXGWWenKaiScreen.ttf}[Path=fonts/]
+\xeCJKsetup{CJKmath=true,AutoFakeSlant=false}
+
+% All document headings use this same structural family.
+\newfontfamily\AcademicHeadingFont{lmsans10-regular.otf}[
   BoldFont=lmsans10-bold.otf,
   ItalicFont=lmsans10-oblique.otf,
-  LetterSpace=3
+  BoldItalicFont=lmsans10-boldoblique.otf,
+  LetterSpace=2,
+  Scale=MatchLowercase
+]
+\newfontfamily\AcademicHeaderFont{lmsans10-regular.otf}[
+  BoldFont=lmsans10-bold.otf,
+  ItalicFont=lmsans10-oblique.otf,
+  BoldItalicFont=lmsans10-boldoblique.otf,
+  LetterSpace=2,
+  Scale=MatchLowercase
 ]
