@@ -15,6 +15,7 @@ Typography and page layout are owned by this template. No project-level font map
 - `scripts/setup-fonts.sh` — resolves legally installed exact font files into `fonts/`.
 - `scripts/build.sh` — stages this template's fonts and compiles with XeLaTeX.
 - `references.bib` — sample bibliography.
+- `preview/` — two-page 100-DPI visual reference.
 - `LICENSE.md` — class license information.
 
 ## Typography and layout
@@ -33,11 +34,15 @@ The setup script searches standard macOS/Linux font locations and the optional `
 
 ## Preview
 
-The previous CI preview was removed because it had been rendered with substitute fonts. A KXTB-CAS preview is valid only after an exact Times New Roman + SimSun local build; previews should be rendered from that PDF at 100 DPI.
+CI does not rebuild KXTB-CAS with substitute Linux fonts. The committed preview is extracted at 100 DPI from the pinned `structure-object-perspective` reference PDF that was already compiled with the original KXTB-CAS font setup.
+
+![KXTB-CAS first page](preview/article.png)
+
+![KXTB-CAS content page](preview/content.png)
 
 ## Source
 
-- Reference implementation: `cigit-zgy/structure-object-perspective`, archived `kxtbcas.cls`.
+- Reference implementation and preview PDF: `cigit-zgy/structure-object-perspective`, commit `7acb43750182ec1ffe5e992d2fc7c9d625a5a118`, `00_archive/260819/main.pdf`.
 - Manuscript workflow source: `cigit-zgy/sci-manuscript-skill`.
 - Class version: 2026/03/08, `CASAD-style journal template`.
 - License: MIT.
