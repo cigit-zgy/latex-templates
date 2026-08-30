@@ -6,5 +6,5 @@
 *.log
 *.out
 *.pdf
+*.xdv
 *.synctex.gz
-fonts/*.ttf
