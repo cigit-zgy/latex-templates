@@ -7,35 +7,55 @@ A curated collection of reusable LaTeX templates for academic writing. Templates
 | Type | Template | Engine | Structure | Languages |
 | --- | --- | --- | --- | --- |
 | Thesis | [`classic-academic`](thesis/classic-academic/) | XeLaTeX | Book / dissertation | English + 中文 |
-| Report | [`classic-academic`](report/classic-academic/) | XeLaTeX | Scientific / technical report | English + 中文 |
+| Report | [`classic-academic`](report/classic-academic/) | XeLaTeX | Full scientific / technical report | English + 中文 |
+| Short report | [`short-charter`](report/short-charter/) | XeLaTeX | Compact ~10-page section-based report | English + 中文 |
+| CV | [`curve-academic`](cv/curve-academic/) | XeLaTeX | Academic CV / publication list | English + 中文 |
 
-The two templates use the same academic visual language while remaining implementation-independent. Latin scientific prose, headings, and running heads use **Latin Modern Roman**; explicitly sans-serif structural elements use **Latin Modern Sans**; Chinese uses **LXGW WenKai Screen 1.522**; code uses Maple Mono 5.3.0; mathematics uses **Latin Modern Math**. Font fallback is disabled.
+## Typography
+
+The templates share one restrained academic colour language while using typography appropriate to each document type.
+
+- `thesis/classic-academic` and `report/classic-academic`: Latin Modern Roman body, Latin Modern Sans structural elements, Latin Modern Math.
+- `report/short-charter`: **XCharter** body with matching **XCharter-Math**, plus Latin Modern Sans structural elements.
+- `cv/curve-academic`: Latin Modern Roman body with Latin Modern Sans rubric headings, adapted from LianTze Lim's CurVe CV under CC BY 4.0.
+- Chinese: **LXGW WenKai Screen 1.522**.
+- Code / monospaced text: **Maple Mono 5.3.0**.
 
 ## Rendered previews
 
-The images below are **direct 72-dpi renders of the compiled PDFs**. They are committed exactly as produced by `pdftoppm`: no crop, collage, scaling, sharpening, annotation, or manual reconstruction is applied. Markdown references the files directly and does not set `width` or `height`.
+Every image below is a **direct 72-dpi render of the compiled PDF**. Preview files are committed exactly as produced by `pdftoppm`: no crop, collage, scaling, sharpening, annotation, or manual reconstruction is applied. Markdown references the files directly and does not set `width` or `height`.
 
-### Thesis
+### Thesis · Classic Academic
 
 ![Thesis title page](thesis/classic-academic/preview/page-01.png)
 
 ![Thesis chapter page](thesis/classic-academic/preview/page-15.png)
 
-### Report
+### Report · Classic Academic
 
-![Report title page](report/classic-academic/preview/page-01.png)
+![Classic report title page](report/classic-academic/preview/page-01.png)
 
-![Report content page](report/classic-academic/preview/page-04.png)
+![Classic report content page](report/classic-academic/preview/page-04.png)
+
+### Report · Short Charter
+
+![Short Charter report title page](report/short-charter/preview/page-01.png)
+
+![Short Charter report section page](report/short-charter/preview/page-03.png)
+
+### CV · Academic CurVe
+
+![Academic CurVe CV](cv/curve-academic/preview/page-01.png)
 
 ## Repository contract
 
 - One directory = one complete reusable template.
-- Thesis and report templates never import files from each other.
-- `config/` contains project-specific metadata and theme values.
-- `style/` contains stable template infrastructure.
-- Scientific content lives in `chapters/` for thesis templates and `sections/` for report templates.
-- Every manuscript table uses `AcademicTable`, fixed to the full `\linewidth`; raw `tabular`, `tabularx`, and `longtable` are rejected in content files.
+- Templates do not import implementation files from sibling templates.
+- `config/` contains project-specific metadata/theme values where applicable.
+- `style/` contains stable template infrastructure where applicable.
+- Long-form thesis content lives in `chapters/`; report content lives in `sections/`; CV content lives in `rubrics/`.
+- Report manuscript tables use `AcademicTable`, fixed to the complete `\linewidth`.
 - English, Chinese, and mixed-language scientific writing are supported under XeLaTeX.
-- TeX supplies Latin Modern Roman, Latin Modern Sans, and Latin Modern Math; each template's `scripts/setup-fonts.sh` prepares the pinned non-TeX fonts. Font binaries are excluded from Git and no fallback family is configured.
+- Required non-TeX fonts are prepared by the template build scripts; generated font binaries are excluded from Git.
 - Generated LaTeX build artifacts are excluded. Only deliberate direct-render preview PNGs are committed under `preview/`.
-- Preview PNGs must remain the intrinsic 612 × 792 px output of a Letter-size PDF rendered at 72 dpi; README display code must not rescale them.
+- Preview dimensions remain intrinsic to the source page: Letter samples render to 612 × 792 px at 72 dpi; A4 samples render to approximately 596 × 842 px. README display code must not rescale them.

@@ -1,0 +1,35 @@
+\documentclass[a4paper,skipsamekey,11pt,english]{curve}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\usepackage{graphicx}
+\PassOptionsToPackage{style=numeric,sorting=ydnt,defernumbers=true,maxbibnames=99}{biblatex}
+\usepackage{settings}
+\addbibresource{publications.bib}
+
+\leftheader{%
+  {\LARGE\bfseries\sffamily Guangyao Zhao}\\[0.45em]
+  \makefield{\faGithub}{\href{https://github.com/cigit-zgy}{\texttt{cigit-zgy}}}
+  \makefield{\faOrcid}{\href{https://orcid.org/0009-0001-7406-5638}{\texttt{0009-0001-7406-5638}}}\\
+  \makefield{\faGlobe}{\href{https://cigit-zgy.vercel.app/}{\texttt{cigit-zgy.vercel.app}}}
+}
+\rightheader{~}
+\includecomment{fullonly}
+\begin{fullonly}
+\photo[r]{assets/github-avatar}
+\photoscale{0.12}
+\end{fullonly}
+\title{Curriculum Vitae}
+
+\begin{document}
+\makeheaders[c]
+\makerubric{rubrics/profile}
+\makerubric{rubrics/employment}
+\makerubric{rubrics/education}
+\makerubrichead{Journal Articles}
+\nocite{*}
+\printbibliography[heading=none,type=article]
+\makerubric{rubrics/research}
+\makerubric{rubrics/skills}
+\vspace{1em}
+\textit{Last updated August 2026.}
+\end{document}

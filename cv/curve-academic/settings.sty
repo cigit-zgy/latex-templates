@@ -1,0 +1,67 @@
+% Adapted from LianTze Lim's "A Customised CurVe CV" (CC BY 4.0).
+\RequirePackage{silence}
+\WarningsOff[longtable]
+\WarningsOff[array]
+\RequirePackage{graphicx}
+\RequirePackage[hyphens]{url}
+\RequirePackage[fixed]{fontawesome5}
+\RequirePackage{academicons}
+\RequirePackage[a4paper,nohead,nofoot,hmargin=2.25cm,vmargin=2cm]{geometry}
+\RequirePackage[dvipsnames,svgnames]{xcolor}
+\RequirePackage{tikz}
+\RequirePackage{relsize}
+\RequirePackage{etoolbox}
+\RequirePackage{comment}
+\RequirePackage{csquotes}
+\RequirePackage{biblatex}
+\RequirePackage{hyperref}
+\raggedright
+
+\definecolor{SwishLineColour}{RGB}{50,50,50}
+\definecolor{MarkerColour}{RGB}{173,34,49}
+\definecolor{LinkColour}{RGB}{23,111,192}
+
+\defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\setmainfont{lmroman10-regular.otf}[BoldFont=lmroman10-bold.otf,ItalicFont=lmroman10-italic.otf,BoldItalicFont=lmroman10-bolditalic.otf]
+\setsansfont{lmsans10-regular.otf}[BoldFont=lmsans10-bold.otf,ItalicFont=lmsans10-oblique.otf,BoldItalicFont=lmsans10-boldoblique.otf]
+\IfFileExists{fonts/LXGWWenKaiScreen.ttf}{}{\PackageError{academic-curve-cv}{Missing LXGW WenKai Screen}{Run ./scripts/setup-fonts.sh.}}
+\setCJKmainfont{LXGWWenKaiScreen.ttf}[Path=fonts/,AutoFakeBold=1.6]
+\setCJKsansfont{LXGWWenKaiScreen.ttf}[Path=fonts/,AutoFakeBold=1.6]
+\setCJKmonofont{LXGWWenKaiScreen.ttf}[Path=fonts/]
+\IfFileExists{fonts/maple-mono-latin-400-normal.ttf}{}{\PackageError{academic-curve-cv}{Missing Maple Mono}{Run ./scripts/setup-fonts.sh.}}
+\setmonofont{maple-mono-latin-400-normal.ttf}[Path=fonts/,ItalicFont=maple-mono-latin-400-italic.ttf,Scale=MatchLowercase]
+
+\DeclareNameAlias{author}{given-family}
+\AtEveryBibitem{\iffieldundef{doi}{}{\clearfield{url}}}
+\DeclareFieldFormat{labelnumberwidth}{\makebox[2.0em][l]{#1.}}
+\setlength{\biblabelsep}{0pt}
+\setlength{\bibitemsep}{1.2ex}
+\setlength{\bibhang}{2.0em}
+\DeclareFieldFormat{doi}{\href{https://doi.org/#1}{\color{LinkColour}\nolinkurl{#1}}}
+
+\headerscale{1}
+\rubricfont{\Large\bfseries\sffamily}
+\setlength{\rubricspace}{2pt}
+\setlength{\rubricafterspace}{-3pt}
+\setlength{\subrubricspace}{3pt}
+\setlength{\subrubricbeforespace}{4pt}
+\makeatletter
+\def\@@rubrichead#1{%
+  \begin{tikzpicture}[baseline]
+  \shade[left color=SwishLineColour!55!white,right color=white] rectangle (\@almosttextwidth,2.2pt);
+  \node[font={\@rubricfont},inner sep=0pt,anchor=south west,text depth=.5ex,text height=1.5ex] at (1pt,2pt) {#1};
+  \end{tikzpicture}\vspace\rubricspace}
+\makeatother
+\subrubricfont{\large\bfseries\sffamily}
+\subrubricalignment{l}
+\keyalignment{r}
+\rubricalignment{l}
+\renewcommand{\arraystretch}{1.2}
+\newcommand{\makefield}[2]{\makebox[1.5em]{\color{MarkerColour}#1} #2\hspace{1.6em}}
+\makeatletter
+\newcommand{\prefixmarker}[1]{\def\@prefixmarker{#1}}
+\def\@prefixmarker{\relscale{.9}\faBookmark}
+\prefix{\hspace*{-1ex}\color{MarkerColour}\@prefixmarker\hspace*{1ex}}
+\newcommand{\makerubrichead}[1]{\vskip\baselineskip\@@rubrichead{#1}}
+\makeatother
+\hypersetup{colorlinks=true,allcolors=LinkColour,breaklinks=true}

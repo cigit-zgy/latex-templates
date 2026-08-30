@@ -1,0 +1,35 @@
+% Deterministic scientific typography for XeLaTeX.
+% Latin prose: XCharter (open extension of Bitstream Charter).
+% Mathematics: XCharter-Math, designed for XCharter.
+% Structural sans-serif: Latin Modern Sans.
+% Chinese: LXGW WenKai Screen 1.522.
+% Code: Maple Mono 5.3.0.
+\defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+
+\setmainfont{XCharter-Roman.otf}[
+  BoldFont=XCharter-Bold.otf,
+  ItalicFont=XCharter-Italic.otf,
+  BoldItalicFont=XCharter-BoldItalic.otf
+]
+\setsansfont{lmsans10-regular.otf}[
+  BoldFont=lmsans10-bold.otf,
+  ItalicFont=lmsans10-oblique.otf
+]
+\setmathfont{XCharter-Math.otf}[BoldFont=XCharter-Math-Bold.otf]
+
+\IfFileExists{fonts/LXGWWenKaiScreen.ttf}{}{\PackageError{short-charter}{Missing LXGW WenKai Screen}{Run ./scripts/setup-fonts.sh.}}
+\IfFileExists{fonts/maple-mono-latin-400-normal.ttf}{}{\PackageError{short-charter}{Missing Maple Mono}{Run ./scripts/setup-fonts.sh.}}
+\IfFileExists{fonts/maple-mono-latin-400-italic.ttf}{}{\PackageError{short-charter}{Missing Maple Mono italic}{Run ./scripts/setup-fonts.sh.}}
+\setCJKmainfont{LXGWWenKaiScreen.ttf}[Path=fonts/,AutoFakeBold=1.6]
+\setCJKsansfont{LXGWWenKaiScreen.ttf}[Path=fonts/,AutoFakeBold=1.6]
+\setCJKmonofont{LXGWWenKaiScreen.ttf}[Path=fonts/]
+\setmonofont{maple-mono-latin-400-normal.ttf}[
+  Path=fonts/,
+  ItalicFont=maple-mono-latin-400-italic.ttf,
+  Scale=MatchLowercase
+]
+\newfontfamily\AcademicSans{lmsans10-regular.otf}[
+  BoldFont=lmsans10-bold.otf,
+  ItalicFont=lmsans10-oblique.otf,
+  LetterSpace=3
+]

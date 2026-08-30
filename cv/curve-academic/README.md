@@ -1,0 +1,29 @@
+# Academic CurVe CV
+
+Academic CV adapted from LianTze Lim's **A Customised CurVe CV** on Overleaf. The upstream template is licensed under **CC BY 4.0**.
+
+Upstream: https://www.overleaf.com/latex/templates/a-customised-curve-cv/mvmbhkwsnmwv
+
+This adaptation keeps the CurVe rubric layout while applying the typography used across this repository: Latin Modern Roman for Latin prose, Latin Modern Sans for structural headings, LXGW WenKai Screen 1.522 for Chinese, and Maple Mono 5.3.0 for monospaced text. The header avatar is downloaded from the public `cigit-zgy` GitHub profile during the build. Journal articles use ordinary sequential labels (`1.`, `2.`, `3.`, `4.`) with no circled markers.
+
+## Build
+
+```bash
+./scripts/build.sh
+```
+
+The build prepares the pinned non-TeX fonts and refreshes the GitHub avatar before compiling with XeLaTeX + Biber.
+
+## Chinese support
+
+Chinese may be used directly in any rubric. The CJK family is fixed to LXGW WenKai Screen 1.522; no CJK fallback is configured.
+
+## Rendered preview
+
+![Academic CurVe CV](preview/page-01.png)
+
+The preview is a direct 72-dpi render of the compiled A4 PDF after refreshing the public GitHub avatar. It is not cropped, resized, composited, sharpened, annotated, or redrawn.
+
+## Attribution
+
+This repository changes typography, colours, publication numbering, header identity, CJK support, and sample content. See `NOTICE.md` for the CC BY 4.0 attribution.

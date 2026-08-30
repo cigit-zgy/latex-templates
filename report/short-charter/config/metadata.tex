@@ -1,0 +1,9 @@
+% Supported values: english, chinese.
+\newcommand{\DocumentLanguage}{english}
+\newcommand{\MetadataLocalized}[2]{\ifdefstring{\DocumentLanguage}{chinese}{#2}{#1}}
+\newcommand{\ReportTitle}{\MetadataLocalized{Short Scientific Report}{短篇科研报告}}
+\newcommand{\ReportSubtitle}{\MetadataLocalized{A section-based template for approximately ten pages}{约十页的 section-based 学术模板}}
+\newcommand{\ReportAuthor}{Sample Author}
+\newcommand{\ReportAffiliation}{Research Group / Institution}
+\newcommand{\ReportDate}{August 2026}
+\newcommand{\ReportShortTitle}{\MetadataLocalized{Short Scientific Report}{短篇科研报告}}
