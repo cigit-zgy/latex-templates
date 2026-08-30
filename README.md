@@ -74,19 +74,19 @@ All committed preview PNGs are direct 200-dpi renders of compiled PDFs.
 
 ### Journal · Springer Nature
 
-![Springer Nature article](journal/nature/preview/article.png?rev=000000000000)
+![Springer Nature article](journal/nature/preview/article.png?rev=bf8426bfaeca)
 
 ### Journal · Elsevier
 
-![Elsevier article](journal/elsevier/preview/article.png?rev=000000000000)
+![Elsevier article](journal/elsevier/preview/article.png?rev=8a25f8f6fdf1)
 
 ### Journal · ACS
 
-![ACS article](journal/acs/preview/article.png?rev=000000000000)
+![ACS article](journal/acs/preview/article.png?rev=bf89486f57fd)
 
 ### Journal · Chinese
 
-![Chinese journal article](journal/chinese/preview/article.png?rev=000000000000)
+![Chinese journal article](journal/chinese/preview/article.png?rev=ecc8e57d6d1e)
 
 ## Sources
 

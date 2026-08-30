@@ -21,7 +21,7 @@ latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
 
 ## Preview
 
-![ACS article](preview/article.png?rev=000000000000)
+![ACS article](preview/article.png?rev=bf89486f57fd)
 
 ## Source
 

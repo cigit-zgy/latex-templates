@@ -24,7 +24,7 @@ latexmk -xelatex -interaction=nonstopmode -halt-on-error main.tex
 
 ## Preview
 
-![Chinese journal article](preview/article.png?rev=000000000000)
+![Chinese journal article](preview/article.png?rev=ecc8e57d6d1e)
 
 ## Source
 
