@@ -23,6 +23,18 @@ Every template uses the same font contract. Layout may differ by document type; 
 
 No template may substitute another serif or mathematics family. See [`FONT_POLICY.md`](FONT_POLICY.md).
 
+## Unified document hierarchy
+
+The thesis and both report templates implement exactly the same three ordinary heading levels. Heading numbers and heading text always share the same font, weight, size, and colour.
+
+| Level | LaTeX | Size / leading | Weight | Colour |
+| --- | --- | --- | --- | --- |
+| 1 | `section` | 16 / 20 pt | Bold | `BrickRed` |
+| 2 | `subsection` | 13 / 16 pt | Bold | `RoyalBlue` |
+| 3 | `subsubsection` | 11 / 14 pt | Bold | `ForestGreen` |
+
+All three levels use Latin Modern Sans Bold. The thesis adds a document-specific chapter opening at 22 / 28 pt in `BrickRed`, with a 62 pt chapter numeral. Paragraph indentation, line spacing, heading spacing, caption styling, table row spacing, and running-head styling are also shared across the three document templates. See [`STYLE_POLICY.md`](STYLE_POLICY.md).
+
 ## Rendered previews
 
 Every image below is a **direct 200-dpi render of the compiled PDF**. Preview files are committed exactly as produced by `pdftoppm`: no crop, collage, scaling, sharpening, annotation, or manual reconstruction is applied. Markdown references the files directly and does not set `width` or `height`.
