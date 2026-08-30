@@ -1,16 +1,12 @@
 # Preview
 
-A KXTB-CAS preview is committed only when it is rendered from a PDF built with the template-local exact Times New Roman and SimSun font files. The previous substitute-font preview was removed.
+`article.png` and `content.png` are direct 100-DPI renders of pages 1 and 2 of the pinned `structure-object-perspective` reference PDF at commit `7acb43750182ec1ffe5e992d2fc7c9d625a5a118`, path `00_archive/260819/main.pdf`.
 
-When an exact local build is available, render page 1 with:
-
-```bash
-pdftoppm -f 1 -singlefile -png -r 100 main.pdf preview/article
-```
+That PDF was compiled with the original KXTB-CAS Times New Roman + SimSun font setup. Public CI only rasterizes the already compiled PDF; it does not rebuild KXTB-CAS with substitute Linux fonts.
 
 ## Constraints
 
-- Exact Times New Roman + SimSun build only.
+- Exact Times New Roman + SimSun reference build only.
 - 100 DPI.
 - No cropping.
 - No resizing.
