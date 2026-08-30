@@ -36,6 +36,9 @@ def digest(path: Path) -> str:
 
 for readme in READMES:
     text = readme.read_text(encoding="utf-8")
+    matches = list(IMAGE.finditer(text))
+    if not matches:
+        raise SystemExit(f"No preview image references found in {readme}")
 
     def replace(match: re.Match[str]) -> str:
         relative = match.group("path")
@@ -48,8 +51,8 @@ for readme in READMES:
         )
 
     updated = IMAGE.sub(replace, text)
-    if updated == text:
-        raise SystemExit(f"No preview image references found in {readme}")
     readme.write_text(updated, encoding="utf-8")
+    state = "updated" if updated != text else "already current"
+    print(f"{readme.relative_to(ROOT)}: {len(matches)} preview reference(s), {state}.")
 
-print("README preview cache keys updated from PNG content hashes.")
+print("README preview cache keys verified against PNG content hashes.")
