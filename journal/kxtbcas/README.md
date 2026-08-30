@@ -12,10 +12,10 @@ Typography and page layout are owned by this template. No project-level font map
 - `kxtbcas.cls` — authoritative manuscript class for typography and layout.
 - `kxtbcas-numeric.bst` — numeric bibliography style.
 - `fonts/` — template-local Times New Roman and SimSun staging directory.
-- `scripts/setup-fonts.sh` — resolves legally installed exact font files into `fonts/`.
-- `scripts/build.sh` — stages this template's fonts and compiles with XeLaTeX.
+- `scripts/setup-fonts.sh` / `scripts/setup-fonts.ps1` — resolve legally installed exact font files into `fonts/`.
+- `scripts/build.sh` / `scripts/build.ps1` — stage this template's fonts and compile with XeLaTeX.
 - `references.bib` — sample bibliography.
-- `preview/` — two-page 100-DPI visual reference.
+- `preview/` — two-page 100-DPI visual validation generated from this template's own PDF.
 - `LICENSE.md` — class license information.
 
 ## Typography and layout
@@ -26,15 +26,23 @@ The six required local filenames are `TimesNewRoman-Regular.ttf`, `TimesNewRoman
 
 ## Build
 
+macOS / Linux:
+
 ```bash
 ./scripts/build.sh
 ```
 
-The setup script searches standard macOS/Linux font locations and the optional `KXTBCAS_FONT_SOURCE_DIR`, then copies the exact installed files into this template's own `fonts/` directory. The public repository does not redistribute proprietary Times New Roman or SimSun binaries; the build stops when the exact required fonts cannot be resolved.
+Windows:
+
+```powershell
+./scripts/build.ps1
+```
+
+The setup scripts copy the exact locally installed Times New Roman and SimSun files into this template's own `fonts/` directory. On Windows, `simsun.ttc` is deterministically extracted to the required local `SimSun.ttf` face when necessary. The public repository does not redistribute proprietary font binaries; missing required fonts stop the build.
 
 ## Preview
 
-CI does not rebuild KXTB-CAS with substitute Linux fonts. The committed preview is extracted at 100 DPI from the pinned `structure-object-perspective` reference PDF that was already compiled with the original KXTB-CAS font setup.
+CI compiles `journal/kxtbcas/main.tex` from this repository on Windows after staging the exact Times New Roman and SimSun files. The generated `main.pdf` is checked with `pdffonts`, then pages 1 and 2 are rendered directly at 100 DPI.
 
 ![KXTB-CAS first page](preview/article.png)
 
@@ -42,7 +50,7 @@ CI does not rebuild KXTB-CAS with substitute Linux fonts. The committed preview 
 
 ## Source
 
-- Reference implementation and preview PDF: `cigit-zgy/structure-object-perspective`, commit `7acb43750182ec1ffe5e992d2fc7c9d625a5a118`, `00_archive/260819/main.pdf`.
+- Reference implementation: `cigit-zgy/structure-object-perspective`, archived `kxtbcas.cls`.
 - Manuscript workflow source: `cigit-zgy/sci-manuscript-skill`.
 - Class version: 2026/03/08, `CASAD-style journal template`.
 - License: MIT.
@@ -53,3 +61,4 @@ CI does not rebuild KXTB-CAS with substitute Linux fonts. The committed preview 
 - `kxtbcas.cls` is the single source of truth for typography and layout.
 - Exact Times New Roman and SimSun files are required; font substitution is a build error.
 - No local title/section layout override is permitted outside the class.
+- Preview PNGs must come from this directory's compiled `main.pdf`, never from a precompiled PDF in another repository.
