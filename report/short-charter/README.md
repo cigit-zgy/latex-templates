@@ -2,9 +2,27 @@
 
 A section-based XeLaTeX template for compact scientific or technical reports of roughly 8–12 pages.
 
-This template follows the repository-wide font contract: **XCharter** for Latin serif body text, matching **XCharter-Math** for mathematics, Latin Modern Sans for structural sans-serif text, **LXGW WenKai Screen 1.522** for Chinese, and **Maple Mono 5.3.0** for code.
+## Font and hierarchy contract
 
-The template borrows the restrained red/blue palette and heading logic from the `classic-academic` family, but uses a compact single-sided A4 `article` layout whose document hierarchy starts at `section`.
+This template follows the repository-wide [`FONT_POLICY.md`](../../FONT_POLICY.md) and [`STYLE_POLICY.md`](../../STYLE_POLICY.md).
+
+- body: **XCharter**;
+- mathematics: **XCharter-Math**;
+- structural headings: **Latin Modern Sans Bold**;
+- Chinese: **LXGW WenKai Screen 1.522**;
+- code: **Maple Mono 5.3.0**.
+
+Its three heading levels are identical to the classic report and thesis ordinary heading levels:
+
+| Level | Size / leading | Weight | Colour |
+| --- | --- | --- | --- |
+| `section` | 16 / 20 pt | Bold | `BrickRed` |
+| `subsection` | 13 / 16 pt | Bold | `RoyalBlue` |
+| `subsubsection` | 11 / 14 pt | Bold | `ForestGreen` |
+
+The section number and section title now use the same `BrickRed` style; the same number/title rule applies to all lower levels. Paragraph indent is `1.2em`, line spread is `1.08`, caption style and table row spacing are shared with the other document templates, and running heads use muted Latin Modern Sans without a rule.
+
+The template retains only its compact single-sided A4 geometry and approximately ten-page target as document-specific behaviour.
 
 ## Build
 
@@ -12,7 +30,7 @@ The template borrows the restrained red/blue palette and heading logic from the 
 ./scripts/build.sh
 ```
 
-The sample compiles to approximately ten pages. All manuscript tables use the full line width through `AcademicTable`.
+All manuscript tables use the full line width through `AcademicTable`.
 
 ## Preview
 
@@ -20,4 +38,4 @@ The sample compiles to approximately ten pages. All manuscript tables use the fu
 
 ![Short report section page](preview/page-03.png)
 
-Preview images are direct **200-dpi** renders of the compiled PDF. They must not be cropped, resized, composited, sharpened, annotated, or redrawn. See [`../../FONT_POLICY.md`](../../FONT_POLICY.md).
+Preview images are direct **200-dpi** renders of the compiled PDF. They must not be cropped, resized, composited, sharpened, annotated, or redrawn.
