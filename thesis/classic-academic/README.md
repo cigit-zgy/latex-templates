@@ -34,9 +34,9 @@ This template follows [`../../STYLE_SPEC.md`](../../STYLE_SPEC.md).
 
 ## Preview
 
-![Thesis title page](preview/title.png?rev=ced154624288)
+![Thesis title page](preview/title.png?rev=5b9ff3ef9517)
 
-![Thesis hierarchy specimen](preview/hierarchy.png?rev=3662e53d0e42)
+![Thesis hierarchy specimen](preview/hierarchy.png?rev=f051345934f5)
 
 ## Constraints
 

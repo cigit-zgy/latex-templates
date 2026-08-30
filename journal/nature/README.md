@@ -21,7 +21,7 @@ latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
 
 ## Preview
 
-![Springer Nature article](preview/article.png?rev=bf8426bfaeca)
+![Springer Nature article](preview/article.png?rev=835f465eafde)
 
 ## Source
 

@@ -40,37 +40,37 @@ All committed preview PNGs are direct 100-dpi renders of compiled PDFs.
 
 ### Thesis · Classic Academic
 
-![Thesis title page](thesis/classic-academic/preview/title.png?rev=ced154624288)
+![Thesis title page](thesis/classic-academic/preview/title.png?rev=5b9ff3ef9517)
 
-![Thesis hierarchy specimen](thesis/classic-academic/preview/hierarchy.png?rev=3662e53d0e42)
+![Thesis hierarchy specimen](thesis/classic-academic/preview/hierarchy.png?rev=f051345934f5)
 
 ### Report · Classic Academic
 
-![Classic report title page](report/classic-academic/preview/title.png?rev=7e93f78b1d8d)
+![Classic report title page](report/classic-academic/preview/title.png?rev=13344c92e262)
 
-![Classic report hierarchy specimen](report/classic-academic/preview/hierarchy.png?rev=e0c037a6cff3)
+![Classic report hierarchy specimen](report/classic-academic/preview/hierarchy.png?rev=843c956a9f70)
 
 ### Report · Short Charter
 
-![Short report title page](report/short-charter/preview/title.png?rev=f212a23fb8e7)
+![Short report title page](report/short-charter/preview/title.png?rev=28f1192173fe)
 
-![Short report hierarchy specimen](report/short-charter/preview/hierarchy.png?rev=9437a0384a22)
+![Short report hierarchy specimen](report/short-charter/preview/hierarchy.png?rev=867b222a93ff)
 
 ### CV · Academic CurVe
 
-![Academic CurVe CV](cv/curve-academic/preview/cv.png?rev=7446cde3df34)
+![Academic CurVe CV](cv/curve-academic/preview/cv.png?rev=4db47848316f)
 
 ### Journal · Springer Nature
 
-![Springer Nature article](journal/nature/preview/article.png?rev=bf8426bfaeca)
+![Springer Nature article](journal/nature/preview/article.png?rev=835f465eafde)
 
 ### Journal · Elsevier
 
-![Elsevier article](journal/elsevier/preview/article.png?rev=8a25f8f6fdf1)
+![Elsevier article](journal/elsevier/preview/article.png?rev=7eb0e058afb7)
 
 ### Journal · ACS
 
-![ACS article](journal/acs/preview/article.png?rev=bf89486f57fd)
+![ACS article](journal/acs/preview/article.png?rev=e2d637a07492)
 
 ### Journal · KXTB-CAS
 

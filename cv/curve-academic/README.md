@@ -32,7 +32,7 @@ This template follows [`../../STYLE_SPEC.md`](../../STYLE_SPEC.md).
 
 ## Preview
 
-![Academic CurVe CV](preview/cv.png?rev=7446cde3df34)
+![Academic CurVe CV](preview/cv.png?rev=4db47848316f)
 
 ## Source
 

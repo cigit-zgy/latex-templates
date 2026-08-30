@@ -33,9 +33,9 @@ This template follows [`../../STYLE_SPEC.md`](../../STYLE_SPEC.md).
 
 ## Preview
 
-![Report title page](preview/title.png?rev=7e93f78b1d8d)
+![Report title page](preview/title.png?rev=13344c92e262)
 
-![Report hierarchy specimen](preview/hierarchy.png?rev=e0c037a6cff3)
+![Report hierarchy specimen](preview/hierarchy.png?rev=843c956a9f70)
 
 ## Constraints
 
