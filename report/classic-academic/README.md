@@ -4,7 +4,7 @@ A self-contained XeLaTeX report template for research reports, technical reports
 
 ## Rendered preview
 
-These PNG files are direct 72-dpi renders of the compiled sample PDF. They are not cropped, resized, composited, sharpened, annotated, or redrawn. Markdown references them at their intrinsic size without `width` or `height` overrides.
+These PNG files are direct **200-dpi** renders of the compiled sample PDF. They are not cropped, resized, composited, sharpened, annotated, or redrawn. Markdown references them at their intrinsic size without `width` or `height` overrides.
 
 ![Rendered report title page](preview/page-01.png)
 
@@ -36,21 +36,17 @@ classic-academic/
 
 The report template does not import any thesis file. It uses a one-sided `article` layout, continuous section-based flow, compact running heads, and a report title page, while retaining the same colour, mathematics, captions, code style, and table contract as the thesis template.
 
-Report section headings intentionally omit the large upper-right display numeral used by the thesis chapter design. Numbering remains available internally and in the table of contents.
-
 ## Font contract
 
-- Latin scientific prose, headings, and running heads: **Latin Modern Roman**;
-- explicitly sans-serif structural elements: **Latin Modern Sans**;
-- Chinese prose and headings: **LXGW WenKai Screen 1.522**;
-- code: **Maple Mono**, matching `@fontsource/maple-mono@5.3.0`;
-- mathematics: **Latin Modern Math**.
+This template follows the repository-wide font rule:
 
-Latin Modern Roman, Sans, and Math are supplied by the TeX distribution. `scripts/setup-fonts.sh` prepares only the pinned non-TeX assets (LXGW WenKai Screen and Maple Mono). Font fallback is disabled.
+- Latin serif body text: **XCharter**;
+- mathematics: **XCharter-Math**;
+- structural sans-serif elements: **Latin Modern Sans**;
+- Chinese: **LXGW WenKai Screen 1.522**;
+- code: **Maple Mono 5.3.0**.
 
-```bash
-./scripts/setup-fonts.sh
-```
+XCharter, XCharter-Math, and Latin Modern Sans are supplied by the TeX distribution. `scripts/setup-fonts.sh` prepares only the pinned non-TeX assets. Font fallback is disabled. See [`../../FONT_POLICY.md`](../../FONT_POLICY.md).
 
 ## English / 中文
 
