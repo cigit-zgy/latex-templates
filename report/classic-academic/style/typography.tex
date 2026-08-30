@@ -1,22 +1,11 @@
 % Unified scientific typography for XeLaTeX.
-% Project-wide contract:
-% - Latin serif prose: XCharter
-% - Mathematics: XCharter-Math
-% - Structural sans-serif: Latin Modern Sans
-% - Chinese: LXGW WenKai Screen 1.522
-% - Code: Maple Mono 5.3.0
+% Project-wide font roles are defined in FONT_POLICY.md and STYLE_POLICY.md.
 
 \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
 
-\IfFileExists{fonts/maple-mono-latin-400-normal.ttf}{}{
-  \PackageError{classic-academic}{Missing Maple Mono font}{Run ./scripts/setup-fonts.sh before compiling. Font fallback is disabled.}
-}
-\IfFileExists{fonts/maple-mono-latin-400-italic.ttf}{}{
-  \PackageError{classic-academic}{Missing Maple Mono italic font}{Run ./scripts/setup-fonts.sh before compiling. Font fallback is disabled.}
-}
-\IfFileExists{fonts/LXGWWenKaiScreen.ttf}{}{
-  \PackageError{classic-academic}{Missing LXGW WenKai Screen font}{Run ./scripts/setup-fonts.sh before compiling. Font fallback is disabled.}
-}
+\IfFileExists{fonts/maple-mono-latin-400-normal.ttf}{}{\PackageError{classic-academic}{Missing Maple Mono font}{Run ./scripts/setup-fonts.sh before compiling.}}
+\IfFileExists{fonts/maple-mono-latin-400-italic.ttf}{}{\PackageError{classic-academic}{Missing Maple Mono italic font}{Run ./scripts/setup-fonts.sh before compiling.}}
+\IfFileExists{fonts/LXGWWenKaiScreen.ttf}{}{\PackageError{classic-academic}{Missing LXGW WenKai Screen font}{Run ./scripts/setup-fonts.sh before compiling.}}
 
 \setmainfont{XCharter-Roman.otf}[
   BoldFont=XCharter-Bold.otf,
@@ -35,22 +24,23 @@
   ItalicFont=maple-mono-latin-400-italic.ttf,
   Scale=MatchLowercase
 ]
-
 \setCJKmainfont{LXGWWenKaiScreen.ttf}[Path=fonts/,AutoFakeBold=1.6]
 \setCJKsansfont{LXGWWenKaiScreen.ttf}[Path=fonts/,AutoFakeBold=1.6]
 \setCJKmonofont{LXGWWenKaiScreen.ttf}[Path=fonts/]
 \xeCJKsetup{CJKmath=true,AutoFakeSlant=false}
 
+% All document headings use this same structural family.
 \newfontfamily\AcademicHeadingFont{lmsans10-regular.otf}[
   BoldFont=lmsans10-bold.otf,
   ItalicFont=lmsans10-oblique.otf,
-  LetterSpace=7,
+  BoldItalicFont=lmsans10-boldoblique.otf,
+  LetterSpace=2,
   Scale=MatchLowercase
 ]
-
 \newfontfamily\AcademicHeaderFont{lmsans10-regular.otf}[
   BoldFont=lmsans10-bold.otf,
   ItalicFont=lmsans10-oblique.otf,
-  LetterSpace=4,
+  BoldItalicFont=lmsans10-boldoblique.otf,
+  LetterSpace=2,
   Scale=MatchLowercase
 ]
