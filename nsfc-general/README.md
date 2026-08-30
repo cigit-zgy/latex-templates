@@ -1,27 +1,43 @@
-# NSFC General Program · 面上项目
+# 国家自然科学基金面上项目（2026）LaTeX 模板
 
-## Overview
+该目录是一套完整、独立、可单独复制的面上项目正文模板，不依赖 Git submodule、符号链接、上级目录文件或另一个模板。
 
-Standalone 2026 National Natural Science Foundation of China General Program application-body template.
+## 目录
 
-## Files
+```text
+nsfc-general/
+├── main.tex
+├── nsfc.cls
+├── references.bib
+├── README.md
+├── sections/
+│   ├── 01-basis.tex
+│   ├── 02-content.tex
+│   ├── 03-foundation.tex
+│   └── 04-other.tex
+├── figures/
+│   └── README.md
+└── fonts/
+    └── README.md
+```
 
-- `main.tex` — document entry point.
-- `nsfc.cls` — template class.
-- `references.bib` — bibliography database.
-- `sections/` — application content.
-- `figures/` — figure assets.
-- `fonts/` — required local Chinese fonts.
+`main.tex` 只负责文档配置和装配；申请书正文按基金委提纲拆分在 `sections/`。图片统一放入 `figures/`，参考文献统一写入 `references.bib`。
 
-## Typography
+## 固定字体与版式
 
-- 宋体: SimSun.
-- 楷体: KaiTi.
-- 仿宋: FangSong.
-- Latin sans-serif: Arial.
-- A4 page geometry follows the General Program template.
+模板保持基金委版式所用的宋体、楷体、仿宋和 Arial，以及面上项目 A4 页面左右边距 3.05 cm。模板不使用仓库其他文档的 XCharter 字体与彩色标题体系，也不设置替代中文字体。
 
-## Build
+编译前需将合法取得的以下字体文件分别放入本模板自己的 `fonts/`：
+
+```text
+SimSun.ttf
+KaiTi.ttf
+FangSong.ttf
+```
+
+字体文件不在本仓库中二次分发。
+
+## 编译
 
 ```bash
 xelatex main.tex
@@ -30,14 +46,8 @@ xelatex main.tex
 xelatex main.tex
 ```
 
-## Source
+## 来源
 
-- Reference repository: https://github.com/andy123t/nsfc-latex
-- Reference commit: `11a02726f6190fcb89859dfaed18e3d1d68af0b8`.
-- Reference entry: `main-GP.tex`.
+通用 NSFC 模板设计参考 `MCG-NKU/NSFC-LaTex`，固定参考提交为 `3f69bc50dc6d44ef8330a21e585e043addb5cf8d`。2026 年面上项目提纲、项目类别差异、字体与页面几何参数参考 `andy123t/nsfc-latex`，固定参考提交为 `11a02726f6190fcb89859dfaed18e3d1d68af0b8`，对应上游入口 `main-GP.tex`。
 
-## Constraints
-
-- The NSFC typography and page geometry are retained.
-- Required ZhongYi font binaries are not distributed in this repository.
-- Local `fonts/` contains the required font-file names and setup information.
+两个上游仓库当前均未声明仓库级许可证，因此本目录明确记录来源，且不复制受限字体或上游示例图片。
