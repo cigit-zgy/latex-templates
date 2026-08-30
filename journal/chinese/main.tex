@@ -1,7 +1,13 @@
 \documentclass[review]{kxtbcas}
 
-\kxtbsetcjkfontpath{fonts/}
-\kxtbsetcjkfontfiles{LXGWWenKaiScreen.ttf}{LXGWWenKaiScreen.ttf}{LXGWWenKaiScreen.ttf}
+% Deterministic local CJK font resource for the standalone build.
+\makeatletter
+\renewcommand{\kxtb@applycjkfonts}{%
+  \setCJKmainfont{LXGWWenKaiScreen.ttf}[Path=fonts/,AutoFakeBold=1.6]%
+  \setCJKsansfont{LXGWWenKaiScreen.ttf}[Path=fonts/,AutoFakeBold=1.6]%
+  \setCJKmonofont{LXGWWenKaiScreen.ttf}[Path=fonts/]%
+}
+\makeatother
 
 \title{中文科学论文示例}
 \author{第一作者，第二作者}
