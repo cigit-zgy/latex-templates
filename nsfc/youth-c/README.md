@@ -1,25 +1,49 @@
 # NSFC Youth Science Fund (C) · 青年科学基金项目（C类）
 
-This entry points to the fixed 2026 upstream NSFC template [`main-YF.tex`](https://github.com/andy123t/nsfc-latex/blob/master/main-YF.tex).
+A flat, directly usable 2026 NSFC Youth Science Fund (C) LaTeX template.
 
-The template is intentionally left unchanged. Its original page geometry, font families, font sizes, colours, headings, and bibliography configuration remain authoritative.
+## Files
 
-Initialize the upstream submodule first:
-
-```bash
-git submodule update --init --recursive
+```text
+youth-c/
+├── main.tex
+├── nsfc.cls
+├── reference.bib
+├── README.md
+└── fonts/
+    └── README.md
 ```
 
-Then build from the upstream directory following the upstream instructions:
+There is no submodule, symlink, wrapper repository, or shared implementation dependency. `main.tex` compiles against the `nsfc.cls` in this same directory.
+
+## Typography and layout
+
+This is a fixed-format NSFC template and is excluded from the repository-wide XCharter style policy. It keeps the font families and layout used by the referenced 2026 upstream template:
+
+- 宋体: SimSun;
+- 楷体: KaiTi;
+- 仿宋: FangSong;
+- Latin sans-serif: Arial;
+- A4, Youth-specific left/right margins of 3.2 cm;
+- original blue/red instruction colours and NSFC heading hierarchy.
+
+The three ZhongYi font binaries are not redistributed here. Place legally obtained `SimSun.ttf`, `KaiTi.ttf`, and `FangSong.ttf` in `fonts/` before compiling. The class does not fall back to substitute Chinese fonts.
+
+## Build
 
 ```bash
-cd nsfc/upstream
-xelatex main-YF.tex
-bibtex main-YF
-xelatex main-YF.tex
-xelatex main-YF.tex
+xelatex main.tex
+bibtex main
+xelatex main.tex
+xelatex main.tex
 ```
 
-On systems that need local font files, follow the upstream `字体说明.txt` and its `fonts` class option. Do not substitute the repository-wide Charter typography into this template.
+## Provenance
 
-Upstream: https://github.com/andy123t/nsfc-latex
+The layout and 2026 outline were organized with reference to the public upstream project:
+
+- upstream: https://github.com/andy123t/nsfc-latex
+- pinned reference commit: `11a02726f6190fcb89859dfaed18e3d1d68af0b8`
+- upstream Youth entry: `main-YF.tex`
+
+The upstream repository does not currently declare a repository-level license. This directory therefore records provenance explicitly; do not infer redistribution rights for third-party assets, especially fonts.

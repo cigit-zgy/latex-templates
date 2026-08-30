@@ -1,4 +1,0 @@
-[submodule "nsfc/upstream"]
-	path = nsfc/upstream
-	url = https://github.com/andy123t/nsfc-latex.git
-	branch = master
