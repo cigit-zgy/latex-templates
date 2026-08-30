@@ -24,155 +24,10 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  exact-font-previews:
-    runs-on: windows-2022
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-        with:
-          ref: master
-          fetch-depth: 0
-
-      - name: Verify Windows Times and SimSun
-        shell: pwsh
-        run: |
-          $required = @("times.ttf", "timesbd.ttf", "timesi.ttf", "timesbi.ttf", "simsun.ttc", "simsunb.ttf")
-          foreach ($name in $required) {
-            $path = Join-Path $env:WINDIR "Fonts\$name"
-            if (-not (Test-Path $path)) {
-              throw "Required Windows font is missing: $path"
-            }
-          }
-
-      - name: Install TeX, Poppler, and fontTools
-        shell: pwsh
-        run: |
-          $ErrorActionPreference = "Stop"
-          choco install miktex --no-progress --params "/Set:basic" -y
-          choco install poppler --no-progress -y
-          python -m pip install --disable-pip-version-check fonttools
-          Import-Module "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
-          refreshenv
-          $miktexBin = "C:\Program Files\MiKTeX\miktex\bin\x64"
-          if (-not (Test-Path $miktexBin)) {
-            throw "MiKTeX executable directory is missing."
-          }
-          $miktexBin | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-          $env:Path = "$miktexBin;$env:Path"
-          initexmf --admin '--set-config-value=[MPM]AutoInstall=1'
-          initexmf --admin --update-fndb
-          xelatex --version
-          bibtex --version
-          pdftoppm -v
-          pdffonts -v
-
-      - name: Stage pinned NSFC font resources
-        shell: pwsh
-        run: |
-          $ErrorActionPreference = "Stop"
-          $fontSource = Join-Path $env:RUNNER_TEMP "nsfc-font-source"
-          New-Item -ItemType Directory -Force -Path $fontSource | Out-Null
-          $base = "https://raw.githubusercontent.com/andy123t/nsfc-latex/11a02726f6190fcb89859dfaed18e3d1d68af0b8/fonts"
-          curl.exe --fail --location --silent --show-error "$base/SimSun.ttf" --output (Join-Path $fontSource "SimSun.ttf")
-          curl.exe --fail --location --silent --show-error "$base/KaiTi.ttf" --output (Join-Path $fontSource "KaiTi.ttf")
-          curl.exe --fail --location --silent --show-error "$base/FangSong.ttf" --output (Join-Path $fontSource "FangSong.ttf")
-          foreach ($name in @("SimSun.ttf", "KaiTi.ttf", "FangSong.ttf")) {
-            $path = Join-Path $fontSource $name
-            if (-not (Test-Path $path) -or (Get-Item $path).Length -eq 0) {
-              throw "NSFC font staging failed: $name"
-            }
-          }
-          "NSFC_FONT_SOURCE_DIR=$fontSource" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-
-      - name: Build KXTB-CAS from current repository source
-        shell: pwsh
-        run: |
-          $ErrorActionPreference = "Stop"
-          & .\journal\kxtbcas\scripts\build.ps1
-          $pdf = ".\journal\kxtbcas\main.pdf"
-          if (-not (Test-Path $pdf)) { throw "KXTB-CAS main.pdf is missing." }
-          $fonts = (& pdffonts $pdf) -join "`n"
-          Write-Host $fonts
-          if ($fonts -notmatch "TimesNewRoman|Times New Roman") { throw "KXTB-CAS PDF is missing Times New Roman." }
-          if ($fonts -notmatch "SimSun") { throw "KXTB-CAS PDF is missing SimSun." }
-          New-Item -ItemType Directory -Force .\journal\kxtbcas\preview | Out-Null
-          Remove-Item .\journal\kxtbcas\preview\*.png -ErrorAction SilentlyContinue
-          pdftoppm -f 1 -singlefile -png -r 100 $pdf .\journal\kxtbcas\preview\article
-          pdftoppm -f 2 -singlefile -png -r 100 $pdf .\journal\kxtbcas\preview\content
-
-      - name: Build NSFC General from current repository source
-        shell: pwsh
-        run: |
-          $ErrorActionPreference = "Stop"
-          & .\nsfc-general\scripts\build.ps1
-          $pdf = ".\nsfc-general\main.pdf"
-          if (-not (Test-Path $pdf)) { throw "NSFC General main.pdf is missing." }
-          $fonts = (& pdffonts $pdf) -join "`n"
-          Write-Host $fonts
-          if ($fonts -notmatch "SimSun") { throw "NSFC General PDF is missing SimSun." }
-          New-Item -ItemType Directory -Force .\nsfc-general\preview | Out-Null
-          Remove-Item .\nsfc-general\preview\*.png -ErrorAction SilentlyContinue
-          pdftoppm -f 1 -singlefile -png -r 100 $pdf .\nsfc-general\preview\application
-          pdftoppm -f 2 -singlefile -png -r 100 $pdf .\nsfc-general\preview\content
-
-      - name: Build NSFC Young from current repository source
-        shell: pwsh
-        run: |
-          $ErrorActionPreference = "Stop"
-          & .\nsfc-young\scripts\build.ps1
-          $pdf = ".\nsfc-young\main.pdf"
-          if (-not (Test-Path $pdf)) { throw "NSFC Young main.pdf is missing." }
-          $fonts = (& pdffonts $pdf) -join "`n"
-          Write-Host $fonts
-          if ($fonts -notmatch "SimSun") { throw "NSFC Young PDF is missing SimSun." }
-          New-Item -ItemType Directory -Force .\nsfc-young\preview | Out-Null
-          Remove-Item .\nsfc-young\preview\*.png -ErrorAction SilentlyContinue
-          pdftoppm -f 1 -singlefile -png -r 100 $pdf .\nsfc-young\preview\application
-          pdftoppm -f 2 -singlefile -png -r 100 $pdf .\nsfc-young\preview\content
-
-      - name: Verify 100 DPI exact-font previews
-        shell: pwsh
-        run: |
-          @'
-          import struct
-          from pathlib import Path
-
-          paths = [
-              Path("journal/kxtbcas/preview/article.png"),
-              Path("journal/kxtbcas/preview/content.png"),
-              Path("nsfc-general/preview/application.png"),
-              Path("nsfc-general/preview/content.png"),
-              Path("nsfc-young/preview/application.png"),
-              Path("nsfc-young/preview/content.png"),
-          ]
-          for path in paths:
-              data = path.read_bytes()
-              if data[:8] != b"\x89PNG\r\n\x1a\n":
-                  raise SystemExit(f"not a PNG: {path}")
-              width, height = struct.unpack(">II", data[16:24])
-              if (width, height) not in {(827, 1169), (827, 1170)}:
-                  raise SystemExit(f"unexpected 100-DPI A4 size {width}x{height}: {path}")
-              print(f"verified {path}: {width}x{height}")
-          '@ | python -
-
-      - name: Commit exact-font previews
-        shell: pwsh
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add journal/kxtbcas/preview nsfc-general/preview nsfc-young/preview
-          if (git diff --cached --quiet) {
-            Write-Host "Exact-font previews are current."
-          } else {
-            git commit -m "chore: render exact-font 100 dpi previews [skip ci]"
-            git push origin master
-          }
-
-  open-font-previews:
-    needs: exact-font-previews
+  render:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out latest repository state
+      - name: Check out repository
         uses: actions/checkout@v4
         with:
           ref: master
@@ -194,56 +49,103 @@ jobs:
             biber latexmk poppler-utils woff2 curl
           sudo mktexlsr
 
+      - name: Build KXTB-CAS from bundled exact fonts
+        working-directory: journal/kxtbcas
+        run: |
+          bash scripts/build.sh
+          if grep -q 'Missing character:' main.log; then
+            grep 'Missing character:' main.log | head -n 30 >&2
+            exit 1
+          fi
+          pdffonts main.pdf | tee /tmp/kxtb-fonts.txt
+          grep -Eiq 'TimesNewRoman|Times.New.Roman' /tmp/kxtb-fonts.txt
+          grep -Eiq 'SimSun' /tmp/kxtb-fonts.txt
+          ! grep -Eiq 'FandolHei|FandolSong|TeXGyreTermes|TeX.Gyre.Termes' /tmp/kxtb-fonts.txt
+          mkdir -p preview
+          rm -f preview/*.png
+          pdftoppm -f 1 -singlefile -png -r 150 main.pdf preview/article
+          pdftoppm -f 2 -singlefile -png -r 150 main.pdf preview/content
+
+      - name: Build NSFC General from bundled exact fonts
+        working-directory: nsfc-general
+        run: |
+          bash scripts/build.sh
+          if grep -q 'Missing character:' main.log; then
+            grep 'Missing character:' main.log | head -n 30 >&2
+            exit 1
+          fi
+          pdffonts main.pdf | tee /tmp/nsfc-general-fonts.txt
+          grep -Eiq 'SimSun' /tmp/nsfc-general-fonts.txt
+          mkdir -p preview
+          rm -f preview/*.png
+          pdftoppm -f 1 -singlefile -png -r 150 main.pdf preview/application
+          pdftoppm -f 2 -singlefile -png -r 150 main.pdf preview/content
+
+      - name: Build NSFC Young from bundled exact fonts
+        working-directory: nsfc-young
+        run: |
+          bash scripts/build.sh
+          if grep -q 'Missing character:' main.log; then
+            grep 'Missing character:' main.log | head -n 30 >&2
+            exit 1
+          fi
+          pdffonts main.pdf | tee /tmp/nsfc-young-fonts.txt
+          grep -Eiq 'SimSun' /tmp/nsfc-young-fonts.txt
+          mkdir -p preview
+          rm -f preview/*.png
+          pdftoppm -f 1 -singlefile -png -r 150 main.pdf preview/application
+          pdftoppm -f 2 -singlefile -png -r 150 main.pdf preview/content
+
       - name: Build thesis preview
         working-directory: thesis/classic-academic
         run: |
           ./scripts/build.sh
           rm -f preview/*.png
-          pdftoppm -f 1 -singlefile -png -r 100 main.pdf preview/title
+          pdftoppm -f 1 -singlefile -png -r 150 main.pdf preview/title
           pages=$(pdfinfo main.pdf | awk '/^Pages:/ {print $2}')
           page=""
           for p in $(seq 1 "$pages"); do
             if pdftotext -f "$p" -l "$p" main.pdf - 2>/dev/null | grep -Fqi "Research Background"; then page="$p"; break; fi
           done
           test -n "$page"
-          pdftoppm -f "$page" -singlefile -png -r 100 main.pdf preview/hierarchy
+          pdftoppm -f "$page" -singlefile -png -r 150 main.pdf preview/hierarchy
 
       - name: Build classic report preview
         working-directory: report/classic-academic
         run: |
           ./scripts/build.sh
           rm -f preview/*.png
-          pdftoppm -f 1 -singlefile -png -r 100 main.pdf preview/title
+          pdftoppm -f 1 -singlefile -png -r 150 main.pdf preview/title
           pages=$(pdfinfo main.pdf | awk '/^Pages:/ {print $2}')
           page=""
           for p in $(seq 1 "$pages"); do
             if pdftotext -f "$p" -l "$p" main.pdf - 2>/dev/null | grep -Fqi "Analysis and Results"; then page="$p"; break; fi
           done
           test -n "$page"
-          pdftoppm -f "$page" -singlefile -png -r 100 main.pdf preview/hierarchy
+          pdftoppm -f "$page" -singlefile -png -r 150 main.pdf preview/hierarchy
 
       - name: Build short report preview
         working-directory: report/short-charter
         run: |
           ./scripts/build.sh
           rm -f preview/*.png
-          pdftoppm -f 1 -singlefile -png -r 100 main.pdf preview/title
+          pdftoppm -f 1 -singlefile -png -r 150 main.pdf preview/title
           pages=$(pdfinfo main.pdf | awk '/^Pages:/ {print $2}')
           page=""
           for p in $(seq 1 "$pages"); do
             if pdftotext -f "$p" -l "$p" main.pdf - 2>/dev/null | grep -Fqi "Methods"; then page="$p"; break; fi
           done
           test -n "$page"
-          pdftoppm -f "$page" -singlefile -png -r 100 main.pdf preview/hierarchy
+          pdftoppm -f "$page" -singlefile -png -r 150 main.pdf preview/hierarchy
 
       - name: Build CV preview
         working-directory: cv/curve-academic
         run: |
           ./scripts/build.sh
           rm -f preview/*.png
-          pdftoppm -f 1 -singlefile -png -r 100 main.pdf preview/cv
+          pdftoppm -f 1 -singlefile -png -r 150 main.pdf preview/cv
 
-      - name: Build journal previews
+      - name: Build publisher journal previews
         run: |
           for dir in journal/nature journal/elsevier journal/acs; do
             (
@@ -251,14 +153,46 @@ jobs:
               latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
               mkdir -p preview
               rm -f preview/*.png
-              pdftoppm -f 1 -singlefile -png -r 100 main.pdf preview/article
+              pdftoppm -f 1 -singlefile -png -r 150 main.pdf preview/article
             )
           done
+
+      - name: Verify 150 DPI previews
+        run: |
+          python3 - <<'PY'
+          import struct
+          from pathlib import Path
+
+          exact_a4 = [
+              Path("journal/kxtbcas/preview/article.png"),
+              Path("journal/kxtbcas/preview/content.png"),
+              Path("nsfc-general/preview/application.png"),
+              Path("nsfc-general/preview/content.png"),
+              Path("nsfc-young/preview/application.png"),
+              Path("nsfc-young/preview/content.png"),
+          ]
+          all_pngs = list(Path(".").glob("**/preview/*.png"))
+          if len(all_pngs) < 17:
+              raise SystemExit(f"Expected at least 17 preview PNGs, found {len(all_pngs)}")
+          for path in all_pngs:
+              data = path.read_bytes()
+              if data[:8] != b"\x89PNG\r\n\x1a\n":
+                  raise SystemExit(f"Not a PNG: {path}")
+              width, height = struct.unpack(">II", data[16:24])
+              if width < 1000 or height < 1000:
+                  raise SystemExit(f"Preview is below 150-DPI scale: {width}x{height}: {path}")
+          for path in exact_a4:
+              data = path.read_bytes()
+              width, height = struct.unpack(">II", data[16:24])
+              if width not in {1240, 1241} or height not in {1754, 1755}:
+                  raise SystemExit(f"Unexpected 150-DPI A4 size {width}x{height}: {path}")
+              print(f"verified {path}: {width}x{height}")
+          PY
 
       - name: Refresh README preview hashes
         run: python3 scripts/update-preview-revisions.py
 
-      - name: Commit remaining previews and README hashes
+      - name: Commit 150 DPI previews and README hashes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -268,10 +202,12 @@ jobs:
             report/short-charter/README.md report/short-charter/preview \
             cv/curve-academic/README.md cv/curve-academic/preview \
             journal/nature journal/elsevier journal/acs \
-            journal/kxtbcas/README.md nsfc-general/README.md nsfc-young/README.md
+            journal/kxtbcas/README.md journal/kxtbcas/preview \
+            nsfc-general/README.md nsfc-general/preview \
+            nsfc-young/README.md nsfc-young/preview
           if git diff --cached --quiet; then
-            echo "All previews and cache keys are current."
+            echo "All 150 DPI previews and cache keys are current."
           else
-            git commit -m "chore: refresh 100 dpi previews [skip ci]"
+            git commit -m "chore: refresh 150 dpi previews [skip ci]"
             git push origin master
           fi
