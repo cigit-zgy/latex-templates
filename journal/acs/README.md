@@ -6,12 +6,12 @@ Standalone ACS journal manuscript using the `achemso` class distributed through 
 
 ## Files
 
-- `main.tex` — directly compilable sample manuscript.
+- `main.tex` — directly compilable two-page-or-longer sample manuscript.
 - `achemso.cls` — ACS manuscript class.
 - `achemso.dtx` — package source file.
 - `LICENSE.md` — package license.
 - `references.bib` — sample bibliography.
-- `preview/article.png` — rendered sample first page.
+- `preview/article.png` / `preview/content.png` — first and second preview pages.
 
 ## Build
 
@@ -21,7 +21,12 @@ latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
 
 ## Preview
 
-![ACS article](preview/article.png?rev=e2d637a07492)
+<table>
+<tr><th width="50%">First page</th><th width="50%">Content page</th></tr>
+<tr><td width="50%"><img src="preview/article.png" width="100%" alt="ACS first page"></td><td width="50%"><img src="preview/content.png" width="100%" alt="ACS content page"></td></tr>
+</table>
+
+Both PNGs are direct 150-DPI renders from the current repository PDF and must have identical pixel dimensions.
 
 ## Source
 
@@ -36,4 +41,5 @@ latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
 
 - `achemso.cls`, `achemso.dtx`, and `LICENSE.md` are retained as source resources without style changes.
 - Target-journal Author Guidelines remain authoritative.
-- Preview PNGs are direct 200-dpi PDF renders.
+- The sample manuscript contains at least two pages solely to exercise opening-page and body-page preview behavior.
+- Preview PNGs are direct 150-DPI PDF renders with equal dimensions.
