@@ -17,4 +17,5 @@ jobs:
         with:
           ref: master
           fetch-depth: 0
-      - run: chmod +x scripts/vendor-fonts-once-v3.sh && scripts/vendor-fonts-once-v3.sh
+      - name: Vendor fonts, compile current templates, and render previews
+        run: chmod +x scripts/vendor-fonts-once-v3.sh && scripts/vendor-fonts-once-v3.sh
