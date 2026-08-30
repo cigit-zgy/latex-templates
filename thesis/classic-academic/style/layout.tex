@@ -1,5 +1,4 @@
-% Page geometry, heading hierarchy, and running heads.
-
+% Page geometry plus project-wide heading and running-head tokens.
 \geometry{
   letterpaper,
   inner=31mm,
@@ -15,60 +14,54 @@
 \setlength{\parskip}{0pt}
 \linespread{1.08}
 \raggedbottom
-
 \setcounter{tocdepth}{2}
 \setcounter{secnumdepth}{3}
 
+% Thesis-only chapter opening. Number and title share the same colour.
 \titleformat{\chapter}[display]
-  {\normalfont}
-  {\makebox[\textwidth][r]{\color{AcademicAccent}\sffamily\fontsize{62}{62}\selectfont\thechapter}}
+  {\normalfont\AcademicHeadingFont\bfseries\color{AcademicChapter}}
+  {\makebox[\textwidth][r]{\sffamily\bfseries\fontsize{62}{62}\selectfont\thechapter}}
   {-8pt}
-  {\color{AcademicText}\AcademicHeadingFont\fontsize{22}{28}\selectfont\HeadingText}
-  [\vspace{0.7ex}{\color{AcademicRule}\titlerule}]
-
+  {\fontsize{22}{28}\selectfont\HeadingText}
+  [\vspace{0.7ex}{\color{AcademicRule}\titlerule[0.5pt]}]
 \titleformat{name=\chapter,numberless}[display]
-  {\normalfont}
+  {\normalfont\AcademicHeadingFont\bfseries\color{AcademicChapter}}
   {}
   {0pt}
-  {\color{AcademicText}\AcademicHeadingFont\fontsize{22}{28}\selectfont\HeadingText}
-  [\vspace{0.7ex}{\color{AcademicRule}\titlerule}]
-
+  {\fontsize{22}{28}\selectfont\HeadingText}
+  [\vspace{0.7ex}{\color{AcademicRule}\titlerule[0.5pt]}]
 \titlespacing*{\chapter}{0pt}{-6pt}{32pt}
 
+% Shared three-level hierarchy. Number and title inherit exactly the same style.
 \titleformat{\section}
-  {\normalfont\color{AcademicAccent}\AcademicHeadingFont\large}
-  {\thesection}
-  {0.9em}
-  {\HeadingText}
-\titlespacing*{\section}{0pt}{3.2ex plus 1ex minus .2ex}{1.2ex}
+  {\normalfont\AcademicHeadingFont\bfseries\fontsize{16}{20}\selectfont\color{AcademicLevelOne}}
+  {\thesection}{0.75em}{}
+\titlespacing*{\section}{0pt}{3.0ex plus .8ex minus .2ex}{1.1ex}
 
 \titleformat{\subsection}
-  {\normalfont\color{AcademicAccent}\AcademicHeadingFont\normalsize}
-  {\thesubsection}
-  {0.8em}
-  {}
-\titlespacing*{\subsection}{0pt}{2.6ex plus .8ex minus .2ex}{0.8ex}
+  {\normalfont\AcademicHeadingFont\bfseries\fontsize{13}{16}\selectfont\color{AcademicLevelTwo}}
+  {\thesubsection}{0.70em}{}
+\titlespacing*{\subsection}{0pt}{2.4ex plus .6ex minus .2ex}{0.8ex}
 
 \titleformat{\subsubsection}
-  {\normalfont\bfseries}
-  {\thesubsubsection}
-  {0.7em}
-  {}
+  {\normalfont\AcademicHeadingFont\bfseries\fontsize{11}{14}\selectfont\color{AcademicLevelThree}}
+  {\thesubsubsection}{0.65em}{}
+\titlespacing*{\subsubsection}{0pt}{2.0ex plus .5ex minus .2ex}{0.6ex}
 
+% Shared running-head treatment: muted, sans-serif, no rule.
 \pagestyle{fancy}
 \fancyhf{}
-\renewcommand{\headrulewidth}{0.45pt}
+\renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
-\fancyhead[LE]{\small\thepage}
-\fancyhead[RE]{\small\AcademicHeaderFont\nouppercase{\rightmark}}
-\fancyhead[LO]{\small\AcademicHeaderFont\nouppercase{\leftmark}}
-\fancyhead[RO]{\small\thepage}
-
+\fancyhead[LE]{\small\color{AcademicMuted}\thepage}
+\fancyhead[RE]{\small\AcademicHeaderFont\color{AcademicMuted}\nouppercase{\rightmark}}
+\fancyhead[LO]{\small\AcademicHeaderFont\color{AcademicMuted}\nouppercase{\leftmark}}
+\fancyhead[RO]{\small\color{AcademicMuted}\thepage}
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
 \renewcommand{\sectionmark}[1]{\markright{#1}}
 
 \fancypagestyle{plain}{
   \fancyhf{}
   \renewcommand{\headrulewidth}{0pt}
-  \fancyfoot[C]{\thepage}
+  \fancyfoot[C]{\small\color{AcademicMuted}\thepage}
 }
