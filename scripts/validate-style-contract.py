@@ -42,8 +42,6 @@ REQUIRED_TYPOGRAPHY_TOKENS = [
     "LetterSpace=2",
 ]
 
-DEPRECATED_STYLE_TOKENS = [r"\AcademicSans"]
-
 for template in TEMPLATES:
     theme = (template / "config/theme.tex").read_text()
     if theme != EXPECTED_THEME:
@@ -69,12 +67,35 @@ for template in TEMPLATES:
     if r"rulecolor=\color{AcademicRule}" not in components:
         raise SystemExit(f"style contract violation: code frame colour differs in {template}")
 
-    for tex_file in template.rglob("*.tex"):
-        text = tex_file.read_text()
-        for token in DEPRECATED_STYLE_TOKENS:
-            if token in text:
-                raise SystemExit(
-                    f"style contract violation: deprecated token {token!r} in {tex_file}"
-                )
+    for path in template.rglob("*.tex"):
+        if r"\AcademicSans" in path.read_text():
+            raise SystemExit(f"style contract violation: deprecated \\AcademicSans remains in {path}")
+
+# Display-oriented sans-serif roles must be bold.
+thesis_title = (ROOT / "thesis/classic-academic/frontmatter/titlepage.tex").read_text()
+for token in [
+    r"\AcademicHeadingFont\bfseries\color{AcademicAccent}",
+    r"\AcademicHeadingFont\bfseries\fontsize{14}{18}",
+    r"\AcademicHeadingFont\bfseries\fontsize{12}{16}",
+]:
+    if token not in thesis_title:
+        raise SystemExit(f"style contract violation: thesis display sans is not bold: {token}")
+
+report_title = (ROOT / "report/classic-academic/sections/00-title.tex").read_text()
+for token in [
+    r"\AcademicHeadingFont\bfseries\color{AcademicAccent}",
+    r"\AcademicHeadingFont\bfseries\fontsize{12}{16}",
+]:
+    if token not in report_title:
+        raise SystemExit(f"style contract violation: report display sans is not bold: {token}")
+
+short_title = (ROOT / "report/short-charter/sections/00-title.tex").read_text()
+if r"\AcademicHeadingFont\bfseries" not in short_title:
+    raise SystemExit("style contract violation: short-report display sans is not bold")
+
+# Compact short report intentionally omits a TOC.
+short_main = (ROOT / "report/short-charter/main.tex").read_text()
+if r"\tableofcontents" in short_main:
+    raise SystemExit("style contract violation: short report must not include a TOC by default")
 
 print("Shared thesis/report style contract: PASS")

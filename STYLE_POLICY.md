@@ -1,6 +1,6 @@
 # Project-wide document style policy
 
-The thesis and both report templates share one visual system. Document structure may differ, but equivalent typographic roles must render identically.
+The thesis and both report templates share one visual system. Document structure may differ, but equivalent typographic roles must render identically. External fixed-layout templates such as `nsfc/` are explicitly excluded.
 
 ## Font roles
 
@@ -9,6 +9,10 @@ The thesis and both report templates share one visual system. Document structure
 - Structural sans-serif: **Latin Modern Sans**.
 - Chinese: **LXGW WenKai Screen 1.522**.
 - Code / monospace: **Maple Mono 5.3.0**.
+
+## Display weight rule
+
+All display-oriented uses of Latin Modern Sans are **Bold**. This includes cover/document titles, document-type labels, thesis supervisor labels, chapter titles, chapter numerals, and the three ordinary heading levels. Small running heads are the deliberate exception and remain regular/muted.
 
 ## Heading hierarchy
 
@@ -36,7 +40,7 @@ The thesis chapter numeral is 62 pt bold Latin Modern Sans in `BrickRed`. Chapte
 - Table row stretch: `1.16`.
 - Running heads: Latin Modern Sans, `small`, muted grey, no horizontal rule.
 
-Paper size, one-/two-sided pagination, and thesis chapter-opening behaviour remain document-specific.
+Paper size, one-/two-sided pagination, thesis chapter-opening behaviour, and whether a report includes a table of contents remain document-specific. `report/short-charter` intentionally has **no TOC by default**.
 
 ## Colour tokens
 
