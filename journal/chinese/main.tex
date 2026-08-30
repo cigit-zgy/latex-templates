@@ -1,7 +1,12 @@
 \documentclass[review]{kxtbcas}
 
-% Deterministic local CJK font resource for the standalone build.
+% Deterministic fonts for the standalone XeLaTeX build.
+% Latin Modern is supplied by TeX Live; LXGW WenKai is downloaded locally.
 \makeatletter
+\renewcommand{\kxtb@applylatinfonts}{%
+  \setmainfont{Latin Modern Roman}%
+  \setsansfont{Latin Modern Sans}%
+}
 \renewcommand{\kxtb@applycjkfonts}{%
   \setCJKmainfont{LXGWWenKaiScreen.ttf}[Path=fonts/,AutoFakeBold=1.6]%
   \setCJKsansfont{LXGWWenKaiScreen.ttf}[Path=fonts/,AutoFakeBold=1.6]%
