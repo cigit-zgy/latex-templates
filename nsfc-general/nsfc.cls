@@ -61,8 +61,13 @@
 \setlength{\parskip}{1pt plus 1pt minus 1pt}
 \linespread{1.5}
 
-% NSFC chapters continue on the current page.
-\renewcommand{\chapter}{\secdef\@chapter\@schapter}
+% Keep the upstream NSFC chapter state handling exactly: it avoids the
+% titlesec horizontal-mode failure while suppressing the unwanted book-style
+% chapter opening behavior used by the reference template.
+\renewcommand{\chapter}{%
+  \if@openright\else\clearpage\fi
+  \secdef\@chapter\@schapter
+}
 
 \titleformat{\chapter}
   {\linespread{1.3}\color{NSFCblue}\kaishu\enkai\zihao{4}}
