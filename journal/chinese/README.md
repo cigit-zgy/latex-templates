@@ -2,14 +2,14 @@
 
 ## Overview
 
-Standalone XeLaTeX Chinese scientific manuscript using the pinned project-maintained `kxtbcas.cls` and `kxtbcas-numeric.bst` resources from `cigit-zgy/sci-manuscript-skill`.
+Standalone XeLaTeX Chinese scientific manuscript using the project-maintained `kxtbcas.cls` and `kxtbcas-numeric.bst` resources.
 
 The standalone sample does not redefine typography or page layout. Font selection, title alignment, title and section styling, spacing, geometry, captions, and front matter are controlled by `kxtbcas.cls` itself.
 
 ## Files
 
 - `main.tex` — directly compilable sample manuscript.
-- `kxtbcas.cls` — pinned manuscript class; kept unchanged from the source repository.
+- `kxtbcas.cls` — authoritative manuscript class for typography and layout.
 - `kxtbcas-numeric.bst` — pinned numeric bibliography style.
 - `references.bib` — sample bibliography.
 - `LICENSE.md` — class license information.
@@ -19,7 +19,7 @@ The standalone sample does not redefine typography or page layout. Font selectio
 
 No local `fontspec`, `xeCJK`, `titlesec`, `geometry`, or title-format override is applied by `main.tex`.
 
-The source class defines Times New Roman and SimSun as its local-file defaults, with its own system-font fallback chain. The article title is centered by the source class inside `\kxtb@frontmatter`; the standalone template does not duplicate or alter that rule.
+The class keeps the original Times/SimSun serif roles and resolves portable fallbacks to TeX Gyre Termes and Song-style serif Chinese families. Both body and display-family roles are serif. The article title remains centered inside `\kxtb@frontmatter`; its size, weight, spacing, and alignment are unchanged.
 
 This directory intentionally does not carry a separate font-mapping file. In particular, it does not remap the source class to Latin Modern Sans or FandolHei for title and section roles.
 
@@ -29,7 +29,7 @@ This directory intentionally does not carry a separate font-mapping file. In par
 latexmk -xelatex -interaction=nonstopmode -halt-on-error main.tex
 ```
 
-The source class requires XeLaTeX and suitable fonts in the build environment. Font availability is an environment requirement and is not compensated for by changing the template typography.
+The class requires XeLaTeX. Portable fallback fonts preserve the same serif typography without introducing a sans-serif Chinese display family.
 
 ## Preview
 

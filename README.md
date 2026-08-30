@@ -48,7 +48,7 @@ Each journal directory contains a directly compilable `main.tex`, bibliography s
 
 ## Rendered previews
 
-All committed preview PNGs are direct 200-dpi renders of compiled PDFs.
+All committed preview PNGs are direct 100-dpi renders of compiled PDFs.
 
 ### Thesis · Classic Academic
 
@@ -106,5 +106,5 @@ All committed preview PNGs are direct 200-dpi renders of compiled PDFs.
 - `nsfc-general` and `nsfc-young` retain their NSFC typography and page geometry.
 - Report manuscript tables use the full `\linewidth` through `AcademicTable`.
 - `report/short-charter` has no table of contents by default.
-- Preview PNGs are generated with `pdftoppm -png -r 200` and are not cropped, resized, composited, sharpened, annotated, or redrawn.
+- Preview PNGs are generated with `pdftoppm -png -r 100` and are not cropped, resized, composited, sharpened, annotated, or redrawn.
 - README image markup does not set explicit width or height.

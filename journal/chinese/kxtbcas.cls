@@ -83,9 +83,9 @@
 \def\kxtb@latinfallback@sans{Times New Roman}
 \def\kxtb@latinfallback@sansalt{TeX Gyre Termes}
 \def\kxtb@cjkfallback@main{Songti SC}
-\def\kxtb@cjkfallback@mainalt{STSong}
-\def\kxtb@cjkfallback@sans{Heiti SC}
-\def\kxtb@cjkfallback@sansalt{STHeiti}
+\def\kxtb@cjkfallback@mainalt{FandolSong}
+\def\kxtb@cjkfallback@sans{Songti SC}
+\def\kxtb@cjkfallback@sansalt{FandolSong}
 
 \newcommand{\kxtbsetfontroot}[1]{%
   \gdef\kxtb@latinfontpath{#1}%

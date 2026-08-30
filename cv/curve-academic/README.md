@@ -45,4 +45,4 @@ This template follows [`../../STYLE_SPEC.md`](../../STYLE_SPEC.md).
 - Journal articles use sequential numeric labels (`1.`, `2.`, `3.`, ...).
 - Chinese text uses LXGW WenKai Screen 1.522.
 - The build refreshes the public GitHub avatar.
-- Preview PNGs are direct 200-dpi PDF renders.
+- Preview PNGs are direct 100-dpi PDF renders.
