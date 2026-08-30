@@ -1,18 +1,5 @@
 \documentclass[review]{kxtbcas}
-
-% Deterministic fonts for the standalone XeLaTeX build.
-% Latin Modern is supplied by TeX Live; LXGW WenKai is downloaded locally.
-\makeatletter
-\renewcommand{\kxtb@applylatinfonts}{%
-  \setmainfont{Latin Modern Roman}%
-  \setsansfont{Latin Modern Sans}%
-}
-\renewcommand{\kxtb@applycjkfonts}{%
-  \setCJKmainfont{LXGWWenKaiScreen.ttf}[Path=fonts/,AutoFakeBold=1.6]%
-  \setCJKsansfont{LXGWWenKaiScreen.ttf}[Path=fonts/,AutoFakeBold=1.6]%
-  \setCJKmonofont{LXGWWenKaiScreen.ttf}[Path=fonts/]%
-}
-\makeatother
+\input{fonts}
 
 \title{中文科学论文示例}
 \author{第一作者，第二作者}
