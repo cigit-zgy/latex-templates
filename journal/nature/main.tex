@@ -1,5 +1,6 @@
 \documentclass[pdflatex,sn-nature]{sn-jnl}
 \usepackage{amsmath}
+\usepackage{booktabs}
 
 \title[Sample Springer Nature Article]{A Sample Scientific Article Using the Springer Nature Template}
 
@@ -13,16 +14,50 @@
 \maketitle
 
 \section{Introduction}
-This directory contains a standalone journal manuscript template. A sample citation is included here~\cite{sample2026}.
+This directory contains a standalone journal manuscript template. A sample citation is included here~\cite{sample2026}. The specimen intentionally includes enough representative content to validate both the opening page and a normal manuscript page without modifying the publisher class.
 
 \section{Methods}
-The document uses the class-defined manuscript typography and bibliography configuration.
+The document uses the class-defined manuscript typography and bibliography configuration. Standard scientific content can be written directly in this file, including equations such as
+\begin{equation}
+  y(t)=y_0\exp(-kt),
+\end{equation}
+where $k$ denotes a first-order rate coefficient.
 
 \section{Results}
-Tables, figures, equations, citations, and standard manuscript sections can be added directly to this file.
+Tables, figures, equations, citations, and standard manuscript sections can be added directly to this file. Table~\ref{tab:sample} provides a compact layout specimen.
+
+\begin{table}[htbp]
+\caption{Representative values used to exercise the publisher table style.}\label{tab:sample}
+\centering
+\begin{tabular}{lcc}
+\toprule
+Condition & Observation & Unit \\
+\midrule
+Baseline & 1.00 & a.u. \\
+Case A & 1.24 & a.u. \\
+Case B & 0.86 & a.u. \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \section{Discussion}
-The source files are organized for direct compilation from this directory.
+The source files are organized for direct compilation from this directory. The first preview page therefore exercises front matter and opening manuscript structure.
+
+\clearpage
+\section{Content-page specimen}
+This second page is deliberate preview content. It validates the body typography, heading hierarchy, mathematical typesetting, paragraph spacing, and reference handling of the current repository template. It does not override any dimensions, fonts, spacing rules, or other settings owned by \texttt{sn-jnl.cls}.
+
+A reusable manuscript template should remain predictable when ordinary prose spans multiple paragraphs. For that reason, this page contains representative scientific text rather than blank vertical space. Model descriptions often combine definitions, assumptions, observations, and quantitative comparisons. These elements should retain the publisher defaults without local formatting patches.
+
+\subsection{Representative analysis}
+Suppose that an observable $x$ changes according to a simple balance,
+\begin{equation}
+  \frac{\mathrm{d}x}{\mathrm{d}t}=r_{\mathrm{in}}-r_{\mathrm{out}}.
+\end{equation}
+The expression is included only to verify equation placement and surrounding text. The sample remains intentionally domain-neutral so that the directory can be reused as a clean starting point for different scientific manuscripts.
+
+\subsection{Reproducible preview contract}
+The committed preview is generated from this source file, not from a precompiled external PDF. The CI workflow requires at least two pages and renders the first two pages at 150 DPI. The two PNG files must have identical pixel dimensions before they can be committed.
 
 \bibliography{references}
 \end{document}
