@@ -9,13 +9,13 @@ A collection of reusable LaTeX templates for academic writing, journal manuscrip
 | Thesis | [`thesis/classic-academic`](thesis/classic-academic/) | XeLaTeX | Dissertation / monograph |
 | Report | [`report/classic-academic`](report/classic-academic/) | XeLaTeX | Full scientific / technical report |
 | Report | [`report/short-charter`](report/short-charter/) | XeLaTeX | Compact 8–12 page report; no TOC by default |
-| CV | [`cv/curve-academic`](cv/curve-academic/) | XeLaTeX | Academic CV |
 | Journal | [`journal/nature`](journal/nature/) | pdfLaTeX | Springer Nature `sn-jnl`, Nature reference style |
 | Journal | [`journal/elsevier`](journal/elsevier/) | pdfLaTeX | Elsevier `elsarticle` |
 | Journal | [`journal/acs`](journal/acs/) | pdfLaTeX | ACS `achemso` |
 | Journal | [`journal/kxtbcas`](journal/kxtbcas/) | XeLaTeX | KXTB-CAS / 科学通报 manuscript |
 | NSFC | [`nsfc-general`](nsfc-general/) | XeLaTeX | 2026 面上项目 |
 | NSFC | [`nsfc-young`](nsfc-young/) | XeLaTeX | 2026 青年科学基金项目（C类） |
+| CV | [`cv/curve-academic`](cv/curve-academic/) | XeLaTeX | Academic CV |
 
 ## Style specification
 
@@ -36,59 +36,74 @@ The KXTB-CAS template follows the font contract of the `structure-object-perspec
 
 ## Rendered previews
 
-All committed preview PNGs are generated from PDFs compiled from the source files in this repository and rendered directly at 150 DPI. CI builds the templates from the repository-local runtime resources, inspects the exact-font PDFs with `pdffonts`, and then regenerates the previews.
+All committed preview PNGs are generated from PDFs compiled from source files in this repository and rendered directly at 150 DPI. Every template except the CV exposes two preview pages. Each pair is generated from pages with the same PDF page geometry, and CI rejects any pair whose PNG pixel dimensions differ. The CV remains a single-page preview and is listed last.
 
 ### Thesis · Classic Academic
 
-| Title page | Hierarchy specimen |
-| --- | --- |
-| ![Thesis title page](thesis/classic-academic/preview/title.png?rev=5b9ff3ef9517) | ![Thesis hierarchy specimen](thesis/classic-academic/preview/hierarchy.png?rev=f051345934f5) |
+<table>
+<tr><th width="50%">Title page</th><th width="50%">Hierarchy specimen</th></tr>
+<tr><td width="50%"><img src="thesis/classic-academic/preview/title.png" width="100%" alt="Thesis title page"></td><td width="50%"><img src="thesis/classic-academic/preview/hierarchy.png" width="100%" alt="Thesis hierarchy specimen"></td></tr>
+</table>
 
 ### Report · Classic Academic
 
-| Title page | Hierarchy specimen |
-| --- | --- |
-| ![Classic report title page](report/classic-academic/preview/title.png?rev=13344c92e262) | ![Classic report hierarchy specimen](report/classic-academic/preview/hierarchy.png?rev=843c956a9f70) |
+<table>
+<tr><th width="50%">Title page</th><th width="50%">Hierarchy specimen</th></tr>
+<tr><td width="50%"><img src="report/classic-academic/preview/title.png" width="100%" alt="Classic report title page"></td><td width="50%"><img src="report/classic-academic/preview/hierarchy.png" width="100%" alt="Classic report hierarchy specimen"></td></tr>
+</table>
 
 ### Report · Short Charter
 
-| Title page | Hierarchy specimen |
-| --- | --- |
-| ![Short report title page](report/short-charter/preview/title.png?rev=28f1192173fe) | ![Short report hierarchy specimen](report/short-charter/preview/hierarchy.png?rev=867b222a93ff) |
-
-### CV · Academic CurVe
-
-![Academic CurVe CV](cv/curve-academic/preview/cv.png?rev=4db47848316f)
+<table>
+<tr><th width="50%">Title page</th><th width="50%">Hierarchy specimen</th></tr>
+<tr><td width="50%"><img src="report/short-charter/preview/title.png" width="100%" alt="Short report title page"></td><td width="50%"><img src="report/short-charter/preview/hierarchy.png" width="100%" alt="Short report hierarchy specimen"></td></tr>
+</table>
 
 ### Journal · Springer Nature
 
-![Springer Nature article](journal/nature/preview/article.png?rev=835f465eafde)
+<table>
+<tr><th width="50%">First page</th><th width="50%">Content page</th></tr>
+<tr><td width="50%"><img src="journal/nature/preview/article.png" width="100%" alt="Springer Nature first page"></td><td width="50%"><img src="journal/nature/preview/content.png" width="100%" alt="Springer Nature content page"></td></tr>
+</table>
 
 ### Journal · Elsevier
 
-![Elsevier article](journal/elsevier/preview/article.png?rev=7eb0e058afb7)
+<table>
+<tr><th width="50%">First page</th><th width="50%">Content page</th></tr>
+<tr><td width="50%"><img src="journal/elsevier/preview/article.png" width="100%" alt="Elsevier first page"></td><td width="50%"><img src="journal/elsevier/preview/content.png" width="100%" alt="Elsevier content page"></td></tr>
+</table>
 
 ### Journal · ACS
 
-![ACS article](journal/acs/preview/article.png?rev=e2d637a07492)
+<table>
+<tr><th width="50%">First page</th><th width="50%">Content page</th></tr>
+<tr><td width="50%"><img src="journal/acs/preview/article.png" width="100%" alt="ACS first page"></td><td width="50%"><img src="journal/acs/preview/content.png" width="100%" alt="ACS content page"></td></tr>
+</table>
 
 ### Journal · KXTB-CAS / 科学通报
 
-| First page | Content page |
-| --- | --- |
-| ![KXTB-CAS first page](journal/kxtbcas/preview/article.png) | ![KXTB-CAS content page](journal/kxtbcas/preview/content.png) |
+<table>
+<tr><th width="50%">First page</th><th width="50%">Content page</th></tr>
+<tr><td width="50%"><img src="journal/kxtbcas/preview/article.png" width="100%" alt="KXTB-CAS first page"></td><td width="50%"><img src="journal/kxtbcas/preview/content.png" width="100%" alt="KXTB-CAS content page"></td></tr>
+</table>
 
 ### NSFC · 2026 面上项目
 
-| First page | Content page |
-| --- | --- |
-| ![NSFC General first page](nsfc-general/preview/application.png) | ![NSFC General content page](nsfc-general/preview/content.png) |
+<table>
+<tr><th width="50%">First page</th><th width="50%">Content page</th></tr>
+<tr><td width="50%"><img src="nsfc-general/preview/application.png" width="100%" alt="NSFC General first page"></td><td width="50%"><img src="nsfc-general/preview/content.png" width="100%" alt="NSFC General content page"></td></tr>
+</table>
 
 ### NSFC · 2026 青年科学基金项目（C类）
 
-| First page | Content page |
-| --- | --- |
-| ![NSFC Young first page](nsfc-young/preview/application.png) | ![NSFC Young content page](nsfc-young/preview/content.png) |
+<table>
+<tr><th width="50%">First page</th><th width="50%">Content page</th></tr>
+<tr><td width="50%"><img src="nsfc-young/preview/application.png" width="100%" alt="NSFC Young first page"></td><td width="50%"><img src="nsfc-young/preview/content.png" width="100%" alt="NSFC Young content page"></td></tr>
+</table>
+
+### CV · Academic CurVe
+
+<p align="center"><img src="cv/curve-academic/preview/cv.png" width="50%" alt="Academic CurVe CV"></p>
 
 ## Sources
 
@@ -108,7 +123,8 @@ All committed preview PNGs are generated from PDFs compiled from the source file
 - `journal/kxtbcas` retains KXTB-CAS layout rules and uses its bundled Times New Roman + SimSun + STIX Two Math files.
 - `nsfc-general` and `nsfc-young` retain their NSFC typography and page geometry with template-local Arial, SimSun, KaiTi, and FangSong.
 - Every preview validates the current repository template by compiling that template's own `main.tex`; CI does not reuse a precompiled PDF from a reference repository.
+- All non-CV preview sets contain exactly two displayed pages at 150 DPI, and each pair must have identical PNG pixel dimensions.
+- The CV preview contains one page and is displayed last.
 - Report manuscript tables use the full `\linewidth` through `AcademicTable`.
 - `report/short-charter` has no table of contents by default.
 - Preview PNGs are generated with `pdftoppm -png -r 150` and are not cropped, resized, composited, sharpened, annotated, or redrawn.
-- Paired README previews are presented in two-column Markdown tables without altering the image files.
