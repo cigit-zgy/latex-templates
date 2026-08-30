@@ -14,6 +14,7 @@
 \RequirePackage{comment}
 \RequirePackage{csquotes}
 \RequirePackage{biblatex}
+\RequirePackage{unicode-math}
 \RequirePackage{hyperref}
 \raggedright
 
@@ -21,9 +22,19 @@
 \definecolor{MarkerColour}{RGB}{173,34,49}
 \definecolor{LinkColour}{RGB}{23,111,192}
 
+% Project-wide font contract.
 \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
-\setmainfont{lmroman10-regular.otf}[BoldFont=lmroman10-bold.otf,ItalicFont=lmroman10-italic.otf,BoldItalicFont=lmroman10-bolditalic.otf]
-\setsansfont{lmsans10-regular.otf}[BoldFont=lmsans10-bold.otf,ItalicFont=lmsans10-oblique.otf,BoldItalicFont=lmsans10-boldoblique.otf]
+\setmainfont{XCharter-Roman.otf}[
+  BoldFont=XCharter-Bold.otf,
+  ItalicFont=XCharter-Italic.otf,
+  BoldItalicFont=XCharter-BoldItalic.otf
+]
+\setsansfont{lmsans10-regular.otf}[
+  BoldFont=lmsans10-bold.otf,
+  ItalicFont=lmsans10-oblique.otf,
+  BoldItalicFont=lmsans10-boldoblique.otf
+]
+\setmathfont{XCharter-Math.otf}[BoldFont=XCharter-Math-Bold.otf]
 \IfFileExists{fonts/LXGWWenKaiScreen.ttf}{}{\PackageError{academic-curve-cv}{Missing LXGW WenKai Screen}{Run ./scripts/setup-fonts.sh.}}
 \setCJKmainfont{LXGWWenKaiScreen.ttf}[Path=fonts/,AutoFakeBold=1.6]
 \setCJKsansfont{LXGWWenKaiScreen.ttf}[Path=fonts/,AutoFakeBold=1.6]
