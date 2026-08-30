@@ -1,0 +1,26 @@
+% Portable font mapping for kxtbcas.
+% Chinese body text follows the Song-style serif role used by the original class.
+\makeatletter
+\renewcommand{\kxtb@applylatinfonts}{%
+  \setmainfont[
+    BoldFont=texgyretermes-bold.otf,
+    ItalicFont=texgyretermes-italic.otf,
+    BoldItalicFont=texgyretermes-bolditalic.otf
+  ]{texgyretermes-regular.otf}%
+  \setsansfont[
+    BoldFont=texgyretermes-bold.otf,
+    ItalicFont=texgyretermes-italic.otf,
+    BoldItalicFont=texgyretermes-bolditalic.otf
+  ]{texgyretermes-regular.otf}%
+}
+\renewcommand{\kxtb@applycjkfonts}{%
+  \setCJKmainfont[
+    BoldFont=FandolSong-Bold.otf,
+    ItalicFont=FandolKai-Regular.otf
+  ]{FandolSong-Regular.otf}%
+  \setCJKsansfont[
+    BoldFont=FandolHei-Bold.otf
+  ]{FandolHei-Regular.otf}%
+  \setCJKmonofont{FandolFang-Regular.otf}%
+}
+\makeatother
