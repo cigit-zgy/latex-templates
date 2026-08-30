@@ -4,7 +4,7 @@ Academic CV adapted from LianTze Lim's **A Customised CurVe CV** on Overleaf. Th
 
 Upstream: https://www.overleaf.com/latex/templates/a-customised-curve-cv/mvmbhkwsnmwv
 
-This adaptation keeps the CurVe rubric layout while applying the typography used across this repository: Latin Modern Roman for Latin prose, Latin Modern Sans for structural headings, LXGW WenKai Screen 1.522 for Chinese, and Maple Mono 5.3.0 for monospaced text. The header avatar is downloaded from the public `cigit-zgy` GitHub profile during the build. Journal articles use ordinary sequential labels (`1.`, `2.`, `3.`, `4.`) with no circled markers.
+This adaptation keeps the CurVe rubric layout while applying the repository-wide typography contract: **XCharter** for Latin serif body text, **XCharter-Math** for mathematics, Latin Modern Sans for structural headings, **LXGW WenKai Screen 1.522** for Chinese, and **Maple Mono 5.3.0** for monospaced text. The header avatar is downloaded from the public `cigit-zgy` GitHub profile during the build. Journal articles use ordinary sequential labels (`1.`, `2.`, `3.`, `4.`) with no circled markers.
 
 ## Build
 
@@ -22,7 +22,7 @@ Chinese may be used directly in any rubric. The CJK family is fixed to LXGW WenK
 
 ![Academic CurVe CV](preview/page-01.png)
 
-The preview is a direct 72-dpi render of the compiled A4 PDF after refreshing the public GitHub avatar. It is not cropped, resized, composited, sharpened, annotated, or redrawn.
+The preview is a direct **200-dpi** render of the compiled A4 PDF after refreshing the public GitHub avatar. It is not cropped, resized, composited, sharpened, annotated, or redrawn. See [`../../FONT_POLICY.md`](../../FONT_POLICY.md).
 
 ## Attribution
 
