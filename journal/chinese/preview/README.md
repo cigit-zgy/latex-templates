@@ -1,6 +1,6 @@
 # Preview
 
-The file in this directory is a direct 200-dpi PNG render of the compiled sample PDF.
+`article.png` is a direct 200-dpi PNG render of page 1 of the compiled sample PDF.
 
 ## Constraints
 

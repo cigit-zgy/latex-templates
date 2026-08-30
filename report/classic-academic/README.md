@@ -1,48 +1,46 @@
 # Classic Academic Report
 
-A self-contained XeLaTeX report template for research reports, technical reports, project reports, and modelling notes. It uses the same visual family as the thesis template while remaining an independent `article`-based template.
+## Overview
 
-## Rendered preview
+XeLaTeX `article` template for scientific reports, technical reports, project reports, and research notes. English, Chinese, and mixed-language text are supported.
 
-These PNG files are direct **200-dpi** renders of the compiled sample PDF. They are not cropped, resized, composited, sharpened, annotated, or redrawn. Markdown references them at intrinsic size without `width` or `height` overrides. The renderer appends a content-hash query parameter to the README URLs only to invalidate GitHub image caches; the PNG bytes remain untouched.
+## Files
 
-![Rendered report title page](preview/title.png?rev=7e93f78b1d8d)
+- `main.tex` — document entry point.
+- `config/` — metadata and colour configuration.
+- `style/` — typography, layout, and component definitions.
+- `sections/` — report content.
+- `bibliography/references.bib` — bibliography database.
+- `figures/` — figure assets.
+- `preview/` — rendered sample pages.
 
-![Rendered report hierarchy specimen](preview/hierarchy.png?rev=e0c037a6cff3)
+## Typography
 
-## Font and hierarchy contract
+This template follows [`../../STYLE_SPEC.md`](../../STYLE_SPEC.md).
 
-This template follows the repository-wide [`FONT_POLICY.md`](../../FONT_POLICY.md) and [`STYLE_POLICY.md`](../../STYLE_POLICY.md).
-
-- body: **XCharter**;
-- mathematics: **XCharter-Math**;
-- structural headings: **Latin Modern Sans Bold**;
-- Chinese: **LXGW WenKai Screen 1.522**;
-- code: **Maple Mono 5.3.0**.
-
-The heading hierarchy is identical to the thesis ordinary heading levels and the short report:
-
-| Level | Size / leading | Weight | Colour |
-| --- | --- | --- | --- |
-| `section` | 16 / 20 pt | Bold | `BrickRed` |
-| `subsection` | 13 / 16 pt | Bold | `RoyalBlue` |
-| `subsubsection` | 11 / 14 pt | Bold | `ForestGreen` |
-
-Heading numbers and heading text always share the complete style of their level. Paragraph indent is `1.2em`, line spread is `1.08`, caption style and table row spacing are shared with the other document templates, and running heads use muted Latin Modern Sans without a rule.
-
-## English / 中文
-
-Switch `\DocumentLanguage` in `config/metadata.tex` between `english` and `chinese`. Mixed bilingual scientific text is supported.
-
-## Mandatory full-width tables
-
-All manuscript tables use `AcademicTable`, fixed to the complete `\linewidth`. The validation script rejects raw `tabular`, `tabularx`, and `longtable` in `sections/`.
+- Body: XCharter.
+- Mathematics: XCharter-Math.
+- Structural headings: Latin Modern Sans Bold.
+- Chinese: LXGW WenKai Screen 1.522.
+- Code: Maple Mono 5.3.0.
 
 ## Build
 
 ```bash
-./scripts/setup-fonts.sh  # first build only
+./scripts/setup-fonts.sh
 ./scripts/build.sh
 ```
 
-For normal work, edit `config/`, `sections/`, `bibliography/references.bib`, and `figures/`; keep `style/` unchanged.
+## Preview
+
+![Report title page](preview/title.png?rev=7e93f78b1d8d)
+
+![Report hierarchy specimen](preview/hierarchy.png?rev=e0c037a6cff3)
+
+## Constraints
+
+- `section`: 16/20 pt Bold `BrickRed`.
+- `subsection`: 13/16 pt Bold `RoyalBlue`.
+- `subsubsection`: 11/14 pt Bold `ForestGreen`.
+- Manuscript tables use `AcademicTable` and occupy the full `\linewidth`.
+- Preview PNGs are direct 200-dpi PDF renders.

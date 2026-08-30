@@ -1,0 +1,36 @@
+\documentclass[review]{kxtbcas}
+
+\kxtbsetcjkfontpath{fonts/}
+\kxtbsetcjkfontfiles{LXGWWenKaiScreen.ttf}{LXGWWenKaiScreen.ttf}{LXGWWenKaiScreen.ttf}
+
+\title{中文科学论文示例}
+\author{第一作者，第二作者}
+\affiliation{研究机构，城市，国家}
+\entitle{A Sample Chinese Scientific Article}
+\enauthor{First Author and Second Author}
+\enaffiliation{Research Institution, City, Country}
+\cnabstract{本文档展示可独立编译的中文科学论文模板，包括中英文摘要、关键词、正文层级和参考文献。}
+\cnkeywords{科学论文；LaTeX；中文排版}
+\enabstract{This document demonstrates a directly compilable Chinese scientific manuscript template.}
+\enkeywords{scientific manuscript; LaTeX; Chinese typesetting}
+\firstauthorcn{第一作者，author@example.com}
+\corrauthorcn{第二作者，corresponding@example.com}
+\firstauthoren{First Author, author@example.com}
+\corrauthoren{Second Author, corresponding@example.com}
+
+\begin{document}
+\maketitle
+
+\section{引言}
+该目录包含独立的中文科学论文模板。参考文献示例见文献~\cite{sample2026}。
+
+\section{方法}
+模板使用 \texttt{kxtbcas} 文档类定义中文稿件的页面、标题、摘要和正文格式。
+
+\section{结果与讨论}
+正文可直接加入公式、图、表、引用及其他标准科研内容。
+
+\bibliographystyle{kxtbcas-numeric}
+\bibliography{references}
+\makeenglishsummary
+\end{document}

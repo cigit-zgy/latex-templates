@@ -1,11 +1,5 @@
 #!/usr/bin/env python3
-"""Attach content hashes to README preview URLs.
-
-GitHub may cache rendered README images when a PNG is replaced at the same path.
-This script keeps the PNG bytes untouched and changes only the Markdown URL query
-parameter. The query value is derived from the current PNG content, so every
-visual change receives a new cache key automatically.
-"""
+"""Attach PNG content hashes to README preview URLs."""
 
 from __future__ import annotations
 
@@ -20,6 +14,10 @@ READMES = [
     ROOT / "report/classic-academic/README.md",
     ROOT / "report/short-charter/README.md",
     ROOT / "cv/curve-academic/README.md",
+    ROOT / "journal/nature/README.md",
+    ROOT / "journal/elsevier/README.md",
+    ROOT / "journal/acs/README.md",
+    ROOT / "journal/chinese/README.md",
 ]
 
 IMAGE = re.compile(
@@ -45,10 +43,7 @@ for readme in READMES:
         image = (readme.parent / relative).resolve()
         if not image.is_file():
             raise SystemExit(f"README preview target does not exist: {image}")
-        return (
-            f'{match.group("prefix")}{relative}?rev={digest(image)}'
-            f'{match.group("suffix")}'
-        )
+        return f'{match.group("prefix")}{relative}?rev={digest(image)}{match.group("suffix")}'
 
     updated = IMAGE.sub(replace, text)
     readme.write_text(updated, encoding="utf-8")

@@ -1,71 +1,54 @@
 # LaTeX Templates
 
-A curated collection of reusable LaTeX templates for academic writing. Templates are organized by document type and every template is directly usable from its own directory.
+A collection of reusable LaTeX templates for academic writing, journal manuscripts, grant applications, reports, theses, and CVs. Each template is directly usable from its own directory.
 
 ## Templates
 
-| Type | Template | Engine | Structure | Languages |
-| --- | --- | --- | --- | --- |
-| Thesis | [`classic-academic`](thesis/classic-academic/) | XeLaTeX | Book / dissertation | English + 中文 |
-| Report | [`classic-academic`](report/classic-academic/) | XeLaTeX | Full scientific / technical report | English + 中文 |
-| Short report | [`short-charter`](report/short-charter/) | XeLaTeX | Compact ~10-page section-based report, no TOC by default | English + 中文 |
-| CV | [`curve-academic`](cv/curve-academic/) | XeLaTeX | Academic CV / publication list | English + 中文 |
-| NSFC General Program | [`nsfc-general`](nsfc-general/) | XeLaTeX | 2026 面上项目 | 中文 |
-| NSFC Youth (C) | [`nsfc-young`](nsfc-young/) | XeLaTeX | 2026 青年科学基金项目（C类） | 中文 |
+| Category | Template | Engine | Purpose |
+| --- | --- | --- | --- |
+| Thesis | [`thesis/classic-academic`](thesis/classic-academic/) | XeLaTeX | Dissertation / monograph |
+| Report | [`report/classic-academic`](report/classic-academic/) | XeLaTeX | Full scientific / technical report |
+| Report | [`report/short-charter`](report/short-charter/) | XeLaTeX | Compact 8–12 page report; no TOC by default |
+| CV | [`cv/curve-academic`](cv/curve-academic/) | XeLaTeX | Academic CV |
+| Journal | [`journal/nature`](journal/nature/) | pdfLaTeX | Springer Nature `sn-jnl`, Nature reference style |
+| Journal | [`journal/elsevier`](journal/elsevier/) | pdfLaTeX | Elsevier `elsarticle` |
+| Journal | [`journal/acs`](journal/acs/) | pdfLaTeX | ACS `achemso` |
+| Journal | [`journal/chinese`](journal/chinese/) | XeLaTeX | Chinese scientific manuscript, `kxtbcas` |
+| NSFC | [`nsfc-general`](nsfc-general/) | XeLaTeX | 2026 面上项目 |
+| NSFC | [`nsfc-young`](nsfc-young/) | XeLaTeX | 2026 青年科学基金项目（C类） |
 
-## Project-wide typography rule
+## Style specification
 
-The thesis, both report templates, and CV use one font contract. Layout may differ by document type; font roles do not.
+[`STYLE_SPEC.md`](STYLE_SPEC.md) defines the shared typography, heading hierarchy, colours, spacing, table rules, and preview rules for the self-owned thesis, report, and CV templates.
 
-- Latin serif body text: **XCharter**.
-- Mathematics: **XCharter-Math** with matching bold math.
-- Structural sans-serif text: **Latin Modern Sans**.
-- Chinese: **LXGW WenKai Screen 1.522**.
-- Code / monospaced text: **Maple Mono 5.3.0**.
+The shared font roles are:
 
-All display-oriented sans-serif roles are bold: cover/document titles, document-type labels, thesis chapter titles, and ordinary section headings. Running heads remain regular/muted. The two fixed NSFC templates are excluded from this typography contract. See [`FONT_POLICY.md`](FONT_POLICY.md) and [`STYLE_POLICY.md`](STYLE_POLICY.md).
+| Role | Typeface |
+| --- | --- |
+| Latin serif body | XCharter |
+| Mathematics | XCharter-Math |
+| Structural sans-serif | Latin Modern Sans |
+| Chinese | LXGW WenKai Screen 1.522 |
+| Monospace / code | Maple Mono 5.3.0 |
 
-## Unified document hierarchy
+Journal publisher templates and NSFC templates retain their class-defined typography and layout.
 
-The thesis and both report templates implement exactly the same three ordinary heading levels. Heading numbers and heading text always share the same font, weight, size, and colour.
+## Journal templates
 
-| Level | LaTeX | Size / leading | Weight | Colour |
-| --- | --- | --- | --- | --- |
-| 1 | `section` | 16 / 20 pt | Bold | `BrickRed` |
-| 2 | `subsection` | 13 / 16 pt | Bold | `RoyalBlue` |
-| 3 | `subsubsection` | 11 / 14 pt | Bold | `ForestGreen` |
+The journal templates are standalone copies of the public resources previously maintained in `cigit-zgy/sci-manuscript-skill` at commit `69adcab3e0d40e4e0eb42038f685cc6125050cc6`.
 
-All three levels use Latin Modern Sans Bold. The thesis adds a document-specific chapter opening at 22 / 28 pt in `BrickRed`, with a 62 pt chapter numeral. Paragraph indentation, line spacing, heading spacing, caption styling, table row spacing, and running-head styling are also shared across the three document templates. See [`STYLE_POLICY.md`](STYLE_POLICY.md).
+| Directory | Class | Reference style | Source |
+| --- | --- | --- | --- |
+| `journal/nature` | `sn-jnl.cls` | `sn-nature.bst` | Springer Nature resource |
+| `journal/elsevier` | `elsarticle.cls` | `elsarticle-num.bst` | Elsevier resource |
+| `journal/acs` | `achemso.cls` | class-managed ACS style | CTAN `achemso` |
+| `journal/chinese` | `kxtbcas.cls` | `kxtbcas-numeric.bst` | Project-maintained MIT resource |
 
-## NSFC fixed templates
-
-The two NSFC templates are independent top-level directories. There is no parent wrapper, submodule, symlink, shared class file, or cross-template path:
-
-```text
-nsfc-general/
-├── main.tex
-├── nsfc.cls
-├── references.bib
-├── sections/
-├── figures/
-└── fonts/
-
-nsfc-young/
-├── main.tex
-├── nsfc.cls
-├── references.bib
-├── sections/
-├── figures/
-└── fonts/
-```
-
-Each directory can be copied and maintained independently. Both preserve the referenced NSFC typography and project-specific page geometry. The ZhongYi font binaries are not redistributed; each template documents the exact local filenames required.
+Each journal directory contains a directly compilable `main.tex`, bibliography sample, source information, and rendered preview.
 
 ## Rendered previews
 
-Every image below is a direct 200-dpi render of the compiled PDF. Preview files are committed exactly as produced by `pdftoppm`: no crop, collage, scaling, sharpening, annotation, or manual reconstruction is applied. Markdown does not set `width` or `height`.
-
-The workflow uses semantic preview filenames (`title.png`, `hierarchy.png`, `cv.png`) and appends a `?rev=<content-hash>` query to every README image URL after rendering. The query is only a GitHub cache key; it never changes the PNG bytes.
+All committed preview PNGs are direct 200-dpi renders of compiled PDFs.
 
 ### Thesis · Classic Academic
 
@@ -81,23 +64,47 @@ The workflow uses semantic preview filenames (`title.png`, `hierarchy.png`, `cv.
 
 ### Report · Short Charter
 
-![Short Charter report title page](report/short-charter/preview/title.png?rev=f212a23fb8e7)
+![Short report title page](report/short-charter/preview/title.png?rev=f212a23fb8e7)
 
-![Short Charter report hierarchy specimen](report/short-charter/preview/hierarchy.png?rev=9437a0384a22)
+![Short report hierarchy specimen](report/short-charter/preview/hierarchy.png?rev=9437a0384a22)
 
 ### CV · Academic CurVe
 
 ![Academic CurVe CV](cv/curve-academic/preview/cv.png?rev=7446cde3df34)
 
-## Repository contract
+### Journal · Springer Nature
 
-- One template directory = one complete reusable template.
-- Self-owned templates do not import implementation files from sibling templates.
-- `config/` contains project-specific metadata/theme values where applicable.
-- `style/` contains stable template infrastructure where applicable.
-- Long-form thesis content lives in `chapters/`; report content lives in `sections/`; CV content lives in `rubrics/`.
-- Report manuscript tables use `AcademicTable`, fixed to the complete `\linewidth`.
-- English, Chinese, and mixed-language scientific writing are supported under XeLaTeX.
-- Generated LaTeX build artifacts are excluded. Only deliberate direct-render preview PNGs are committed under `preview/`.
-- Preview PNGs are generated at 200 dpi only. Current intrinsic sizes are 1700 × 2200 px for Letter and approximately 1654 × 2339 px for A4. README display code must not rescale them explicitly.
-- `nsfc-general/` and `nsfc-young/` retain their fixed typography/layout and remain fully independent.
+![Springer Nature article](journal/nature/preview/article.png?rev=000000000000)
+
+### Journal · Elsevier
+
+![Elsevier article](journal/elsevier/preview/article.png?rev=000000000000)
+
+### Journal · ACS
+
+![ACS article](journal/acs/preview/article.png?rev=000000000000)
+
+### Journal · Chinese
+
+![Chinese journal article](journal/chinese/preview/article.png?rev=000000000000)
+
+## Sources
+
+- Springer Nature `sn-jnl`: https://www.springernature.com/gp/authors/campaigns/latex-author-support
+- Elsevier LaTeX instructions: https://www.elsevier.com/researcher/author/policies-and-guidelines/latex-instructions
+- ACS `achemso`: https://ctan.org/pkg/achemso
+- Chinese `kxtbcas`: https://github.com/cigit-zgy/sci-manuscript-skill
+- NSFC reference: https://github.com/andy123t/nsfc-latex
+- CurVe CV reference: https://www.overleaf.com/latex/templates/a-customised-curve-cv/mvmbhkwsnmwv
+
+## Constraints
+
+- One template directory contains one directly usable template.
+- Self-owned thesis, report, and CV templates follow `STYLE_SPEC.md`.
+- Publisher class and bibliography files under `journal/nature`, `journal/elsevier`, and `journal/acs` are retained as source resources and are not restyled.
+- `journal/chinese` retains the `kxtbcas` class specification.
+- `nsfc-general` and `nsfc-young` retain their NSFC typography and page geometry.
+- Report manuscript tables use the full `\linewidth` through `AcademicTable`.
+- `report/short-charter` has no table of contents by default.
+- Preview PNGs are generated with `pdftoppm -png -r 200` and are not cropped, resized, composited, sharpened, annotated, or redrawn.
+- README image markup does not set explicit width or height.
