@@ -38,8 +38,8 @@ jobs:
 
       - name: Install TeX and render dependencies
         run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends \
+          sudo apt-get update -qq
+          sudo apt-get install -qq -y --no-install-recommends \
             texlive-xetex texlive-latex-extra texlive-fonts-recommended \
             texlive-fonts-extra texlive-fonts-extra-links \
             texlive-lang-chinese texlive-bibtex-extra \
@@ -137,10 +137,38 @@ jobs:
         working-directory: journal/chinese
         run: |
           bash scripts/setup-fonts.sh
-          latexmk -xelatex -interaction=nonstopmode -halt-on-error main.tex
+          if ! latexmk -xelatex -interaction=nonstopmode -halt-on-error main.tex; then
+            echo "--- Chinese journal LaTeX error context ---"
+            grep -n -B 4 -A 12 '^!' main.log || tail -n 120 main.log
+            exit 1
+          fi
           mkdir -p preview
           rm -f preview/*.png
           pdftoppm -f 1 -singlefile -png -r 200 main.pdf preview/article
+
+      - name: Verify journal preview files
+        run: |
+          python3 - <<'PY'
+          import struct
+          from pathlib import Path
+
+          paths = [
+              Path("journal/nature/preview/article.png"),
+              Path("journal/elsevier/preview/article.png"),
+              Path("journal/acs/preview/article.png"),
+              Path("journal/chinese/preview/article.png"),
+          ]
+          for path in paths:
+              if not path.is_file() or path.stat().st_size == 0:
+                  raise SystemExit(f"missing journal preview: {path}")
+              data = path.read_bytes()
+              if data[:8] != b"\x89PNG\r\n\x1a\n":
+                  raise SystemExit(f"not a PNG: {path}")
+              width, height = struct.unpack(">II", data[16:24])
+              if width < 1000 or height < 1000:
+                  raise SystemExit(f"unexpected journal preview size {width}x{height}: {path}")
+              print(f"verified {path}: {width}x{height}")
+          PY
 
       - name: Verify existing preview dimensions
         run: |
