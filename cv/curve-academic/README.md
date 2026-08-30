@@ -20,9 +20,9 @@ Chinese may be used directly in any rubric. The CJK family is fixed to LXGW WenK
 
 ## Rendered preview
 
-![Academic CurVe CV](preview/page-01.png)
+![Academic CurVe CV](preview/cv.png)
 
-The preview is a direct **200-dpi** render of the compiled A4 PDF after refreshing the public GitHub avatar. It is not cropped, resized, composited, sharpened, annotated, or redrawn. See [`../../FONT_POLICY.md`](../../FONT_POLICY.md).
+The preview is a direct **200-dpi** render of the compiled A4 PDF after refreshing the public GitHub avatar. It is not cropped, resized, composited, sharpened, annotated, or redrawn. The renderer appends a content-hash query parameter to the README URL only to invalidate GitHub image caches; the PNG bytes remain untouched. See [`../../FONT_POLICY.md`](../../FONT_POLICY.md).
 
 ## Attribution
 
