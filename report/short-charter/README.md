@@ -31,9 +31,9 @@ This template follows [`../../STYLE_SPEC.md`](../../STYLE_SPEC.md).
 
 ## Preview
 
-![Short report title page](preview/title.png?rev=28f1192173fe)
-
-![Short report hierarchy specimen](preview/hierarchy.png?rev=867b222a93ff)
+| Title page | Hierarchy specimen |
+| --- | --- |
+| ![Short report title page](preview/title.png?rev=28f1192173fe) | ![Short report hierarchy specimen](preview/hierarchy.png?rev=867b222a93ff) |
 
 ## Constraints
 
@@ -42,4 +42,4 @@ This template follows [`../../STYLE_SPEC.md`](../../STYLE_SPEC.md).
 - `subsection`: 13/16 pt Bold `RoyalBlue`.
 - `subsubsection`: 11/14 pt Bold `ForestGreen`.
 - Manuscript tables use `AcademicTable` and occupy the full `\linewidth`.
-- Preview PNGs are direct 100-dpi PDF renders.
+- Preview PNGs are direct 150-dpi PDF renders.
