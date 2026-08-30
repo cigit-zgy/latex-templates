@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 cd "$(dirname "$0")/.."
-./scripts/setup-fonts.sh
+bash scripts/setup-fonts.sh
 xelatex -interaction=nonstopmode -halt-on-error main.tex
 if grep -Fq '\citation' main.aux; then bibtex main; fi
 xelatex -interaction=nonstopmode -halt-on-error main.tex
