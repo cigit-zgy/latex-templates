@@ -219,10 +219,7 @@ jobs:
           print(f"single CV preview: {cv} == {cv_size}")
           PY
 
-      - name: Refresh README preview hashes
-        run: python3 scripts/update-preview-revisions.py
-
-      - name: Commit 150 DPI previews and README hashes
+      - name: Commit 150 DPI previews
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -236,7 +233,7 @@ jobs:
             nsfc-young/README.md nsfc-young/preview \
             cv/curve-academic/README.md cv/curve-academic/preview
           if git diff --cached --quiet; then
-            echo "All 150 DPI previews and README references are current."
+            echo "All 150 DPI previews are current."
           else
             git commit -m "chore: refresh equal-size 150 dpi previews [skip ci]"
             git push origin master
