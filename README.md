@@ -19,32 +19,20 @@ A collection of reusable LaTeX templates for academic writing, journal manuscrip
 
 ## Style specification
 
-[`STYLE_SPEC.md`](STYLE_SPEC.md) defines the shared typography, heading hierarchy, colours, spacing, table rules, and preview rules for the self-owned thesis, report, and CV templates.
+[`STYLE_SPEC.md`](STYLE_SPEC.md) is a design reference for the self-owned thesis, report, and CV templates. It is not a runtime font layer. Every template keeps its own font declarations, font staging directory, and build script inside that template directory; one template never loads another template's font files or font configuration.
 
-The shared font roles are:
-
-| Role | Typeface |
-| --- | --- |
-| Latin serif body | XCharter |
-| Mathematics | XCharter-Math |
-| Structural sans-serif | Latin Modern Sans |
-| Chinese | LXGW WenKai Screen 1.522 |
-| Monospace / code | Maple Mono 5.3.0 |
-
-Journal publisher templates and NSFC templates retain their class-defined typography and layout.
+The self-owned templates currently use the same design roles where applicable—XCharter, XCharter-Math, Latin Modern Sans, LXGW WenKai Screen, and Maple Mono—but each template resolves its own runtime resources independently. Publisher and NSFC templates retain their own class-defined typography.
 
 ## Journal templates
-
-The journal templates are standalone copies of the public resources previously maintained in `cigit-zgy/sci-manuscript-skill` at commit `69adcab3e0d40e4e0eb42038f685cc6125050cc6`.
 
 | Directory | Class | Reference style | Source |
 | --- | --- | --- | --- |
 | `journal/nature` | `sn-jnl.cls` | `sn-nature.bst` | Springer Nature resource |
 | `journal/elsevier` | `elsarticle.cls` | `elsarticle-num.bst` | Elsevier resource |
 | `journal/acs` | `achemso.cls` | class-managed ACS style | CTAN `achemso` |
-| `journal/kxtbcas` | `kxtbcas.cls` | `kxtbcas-numeric.bst` | Project-maintained MIT resource |
+| `journal/kxtbcas` | `kxtbcas.cls` | `kxtbcas-numeric.bst` | KXTB-CAS / 科学通报 project resource |
 
-Each journal directory contains a directly compilable `main.tex`, bibliography sample, source information, and rendered preview.
+The KXTB-CAS template follows the font contract of the `structure-object-perspective` reference class: Times New Roman for Latin text and SimSun for Chinese text, with the class display roles mapped to the same serif files. Its local `scripts/setup-fonts.sh` stages legally installed exact fonts into `journal/kxtbcas/fonts/`; missing exact files stop the build rather than selecting a substitute.
 
 ## Rendered previews
 
@@ -86,23 +74,24 @@ All committed preview PNGs are direct 100-dpi renders of compiled PDFs.
 
 ### Journal · KXTB-CAS
 
-![KXTB-CAS article](journal/kxtbcas/preview/article.png?rev=c90de7219212)
+The previous KXTB-CAS preview was removed because it was rendered with substitute fonts. A valid preview must be generated from an exact Times New Roman + SimSun build and rendered at 100 DPI.
 
 ## Sources
 
 - Springer Nature `sn-jnl`: https://www.springernature.com/gp/authors/campaigns/latex-author-support
 - Elsevier LaTeX instructions: https://www.elsevier.com/researcher/author/policies-and-guidelines/latex-instructions
 - ACS `achemso`: https://ctan.org/pkg/achemso
-- KXTB-CAS `kxtbcas`: https://github.com/cigit-zgy/sci-manuscript-skill
+- KXTB-CAS reference: https://github.com/cigit-zgy/structure-object-perspective
+- KXTB-CAS manuscript workflow: https://github.com/cigit-zgy/sci-manuscript-skill
 - NSFC reference: https://github.com/andy123t/nsfc-latex
 - CurVe CV reference: https://www.overleaf.com/latex/templates/a-customised-curve-cv/mvmbhkwsnmwv
 
 ## Constraints
 
-- One template directory contains one directly usable template.
-- Self-owned thesis, report, and CV templates follow `STYLE_SPEC.md`.
-- Publisher class and bibliography files under `journal/nature`, `journal/elsevier`, and `journal/acs` are retained as source resources and are not restyled.
-- `journal/kxtbcas` retains the `kxtbcas` class specification.
+- One template directory contains one directly usable template and owns its own runtime font resolution.
+- `STYLE_SPEC.md` is descriptive; it is not a shared runtime font configuration.
+- Publisher class and bibliography files under `journal/nature`, `journal/elsevier`, and `journal/acs` retain publisher-defined typography and are not restyled.
+- `journal/kxtbcas` retains KXTB-CAS layout rules and requires exact Times New Roman + SimSun font files.
 - `nsfc-general` and `nsfc-young` retain their NSFC typography and page geometry.
 - Report manuscript tables use the full `\linewidth` through `AcademicTable`.
 - `report/short-charter` has no table of contents by default.
