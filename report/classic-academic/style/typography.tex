@@ -1,6 +1,10 @@
-% Deterministic bilingual font contract for XeLaTeX.
-% Latin scientific prose uses the TeX-distributed Latin Modern family.
-% scripts/validate.sh verifies TeX font availability with kpsewhich.
+% Unified scientific typography for XeLaTeX.
+% Project-wide contract:
+% - Latin serif prose: XCharter
+% - Mathematics: XCharter-Math
+% - Structural sans-serif: Latin Modern Sans
+% - Chinese: LXGW WenKai Screen 1.522
+% - Code: Maple Mono 5.3.0
 
 \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
 
@@ -14,17 +18,17 @@
   \PackageError{classic-academic}{Missing LXGW WenKai Screen font}{Run ./scripts/setup-fonts.sh before compiling. Font fallback is disabled.}
 }
 
-\setmainfont{lmroman10-regular.otf}[
-  BoldFont=lmroman10-bold.otf,
-  ItalicFont=lmroman10-italic.otf,
-  BoldItalicFont=lmroman10-bolditalic.otf
+\setmainfont{XCharter-Roman.otf}[
+  BoldFont=XCharter-Bold.otf,
+  ItalicFont=XCharter-Italic.otf,
+  BoldItalicFont=XCharter-BoldItalic.otf
 ]
 \setsansfont{lmsans10-regular.otf}[
   BoldFont=lmsans10-bold.otf,
   ItalicFont=lmsans10-oblique.otf,
   BoldItalicFont=lmsans10-boldoblique.otf
 ]
-\setmathfont{latinmodern-math.otf}
+\setmathfont{XCharter-Math.otf}[BoldFont=XCharter-Math-Bold.otf]
 
 \setmonofont{maple-mono-latin-400-normal.ttf}[
   Path=fonts/,
@@ -37,14 +41,16 @@
 \setCJKmonofont{LXGWWenKaiScreen.ttf}[Path=fonts/]
 \xeCJKsetup{CJKmath=true,AutoFakeSlant=false}
 
-\newfontfamily\AcademicHeadingFont{lmroman10-regular.otf}[
-  BoldFont=lmroman10-bold.otf,
+\newfontfamily\AcademicHeadingFont{lmsans10-regular.otf}[
+  BoldFont=lmsans10-bold.otf,
+  ItalicFont=lmsans10-oblique.otf,
   LetterSpace=7,
   Scale=MatchLowercase
 ]
 
-\newfontfamily\AcademicHeaderFont{lmroman10-regular.otf}[
-  BoldFont=lmroman10-bold.otf,
+\newfontfamily\AcademicHeaderFont{lmsans10-regular.otf}[
+  BoldFont=lmsans10-bold.otf,
+  ItalicFont=lmsans10-oblique.otf,
   LetterSpace=4,
   Scale=MatchLowercase
 ]
