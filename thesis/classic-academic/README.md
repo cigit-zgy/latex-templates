@@ -34,9 +34,9 @@ This template follows [`../../STYLE_SPEC.md`](../../STYLE_SPEC.md).
 
 ## Preview
 
-![Thesis title page](preview/title.png?rev=5b9ff3ef9517)
-
-![Thesis hierarchy specimen](preview/hierarchy.png?rev=f051345934f5)
+| Title page | Hierarchy specimen |
+| --- | --- |
+| ![Thesis title page](preview/title.png?rev=5b9ff3ef9517) | ![Thesis hierarchy specimen](preview/hierarchy.png?rev=f051345934f5) |
 
 ## Constraints
 
@@ -45,4 +45,4 @@ This template follows [`../../STYLE_SPEC.md`](../../STYLE_SPEC.md).
 - `subsubsection`: 11/14 pt Bold `ForestGreen`.
 - Chapter title: 22/28 pt Bold `BrickRed`; chapter numeral: 62 pt Bold `BrickRed`.
 - Manuscript tables use `AcademicTable` and occupy the full `\linewidth`.
-- Preview PNGs are direct 100-dpi PDF renders.
+- Preview PNGs are direct 150-dpi PDF renders.
