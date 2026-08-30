@@ -146,6 +146,18 @@ jobs:
           rm -f preview/*.png
           pdftoppm -f 1 -singlefile -png -r 200 main.pdf preview/article
 
+      - name: Upload Chinese build diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: chinese-journal-build-log
+          path: |
+            journal/chinese/main.log
+            journal/chinese/main.tex
+            journal/chinese/kxtbcas.cls
+          if-no-files-found: ignore
+          retention-days: 1
+
       - name: Verify journal preview files
         run: |
           python3 - <<'PY'
