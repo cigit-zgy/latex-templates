@@ -4,7 +4,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 mkdir -p fonts
 
-# Latin Modern Roman / Sans / Math are supplied by the TeX distribution.
+# XCharter, XCharter-Math, and Latin Modern Sans are supplied by the TeX distribution.
 # Only non-TeX font assets are prepared locally here.
 MAPLE_VERSION="5.3.0"
 LXGW_VERSION="1.522"
@@ -32,7 +32,6 @@ if ! command -v woff2_decompress >/dev/null 2>&1; then
   exit 1
 fi
 
-# Maple Mono: exact version declared by the template contract.
 download "https://cdn.jsdelivr.net/npm/@fontsource/maple-mono@${MAPLE_VERSION}/files/maple-mono-latin-400-normal.woff2" "$MAPLE_NORMAL_WOFF2"
 download "https://cdn.jsdelivr.net/npm/@fontsource/maple-mono@${MAPLE_VERSION}/files/maple-mono-latin-400-italic.woff2" "$MAPLE_ITALIC_WOFF2"
 
@@ -43,7 +42,6 @@ for webfont in "$MAPLE_NORMAL_WOFF2" "$MAPLE_ITALIC_WOFF2"; do
   fi
 done
 
-# Chinese family: exact pinned release.
 download "https://github.com/lxgw/LxgwWenKai-Screen/releases/download/v${LXGW_VERSION}/LXGWWenKaiScreen.ttf" "$LXGW_SCREEN"
 
 for font in \
@@ -56,4 +54,4 @@ for font in \
   fi
 done
 
-printf 'Pinned non-TeX font assets are ready. Latin Modern is provided by TeX.\n'
+printf 'Pinned non-TeX font assets are ready. XCharter, XCharter-Math, and Latin Modern Sans are provided by TeX.\n'
