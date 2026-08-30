@@ -20,4 +20,4 @@ jobs:
       - name: Vendor exact template fonts, compile current templates, and render previews
         run: chmod +x scripts/vendor-fonts-once-v3.sh && scripts/vendor-fonts-once-v3.sh
 
-# rerun after NSFC section-boundary repair
+# exact-font vendoring run: Times New Roman, Arial, SimSun, KaiTi, FangSong, STIX Two Math
