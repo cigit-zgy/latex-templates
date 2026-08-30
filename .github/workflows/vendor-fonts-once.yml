@@ -17,5 +17,7 @@ jobs:
         with:
           ref: master
           fetch-depth: 0
-      - name: Vendor fonts, compile current templates, and render previews
+      - name: Vendor exact template fonts, compile current templates, and render previews
         run: chmod +x scripts/vendor-fonts-once-v3.sh && scripts/vendor-fonts-once-v3.sh
+
+# rerun after NSFC section-boundary repair
