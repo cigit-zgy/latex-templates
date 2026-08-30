@@ -4,7 +4,7 @@ A self-contained XeLaTeX thesis template based on a `book` document model and a 
 
 ## Rendered preview
 
-These PNG files are direct 72-dpi renders of the compiled sample PDF. They are not cropped, resized, composited, sharpened, annotated, or redrawn. Markdown references them at their intrinsic size without `width` or `height` overrides.
+These PNG files are direct **200-dpi** renders of the compiled sample PDF. They are not cropped, resized, composited, sharpened, annotated, or redrawn. Markdown references them at their intrinsic size without `width` or `height` overrides.
 
 ![Rendered thesis title page](preview/page-01.png)
 
@@ -20,7 +20,7 @@ classic-academic/
 │   ├── metadata.tex       # language + thesis metadata
 │   └── theme.tex          # colour tokens only
 ├── style/
-│   ├── typography.tex     # exact font contract
+│   ├── typography.tex     # exact project-wide font contract
 │   ├── layout.tex         # book geometry, chapters, running heads
 │   └── components.tex     # captions, tables, code, links, localization
 ├── fonts/                 # local cache; binaries are gitignored
@@ -37,13 +37,15 @@ classic-academic/
 
 ## Font contract
 
-- Latin scientific prose, headings, and running heads: **Latin Modern Roman**;
-- explicitly sans-serif structural elements, including the large chapter numeral: **Latin Modern Sans**;
-- Chinese prose and headings: **LXGW WenKai Screen 1.522**;
-- code: **Maple Mono**, matching `@fontsource/maple-mono@5.3.0`;
-- mathematics: **Latin Modern Math**.
+This template follows the repository-wide font rule:
 
-Latin Modern Roman, Sans, and Math are supplied by the TeX distribution. `scripts/setup-fonts.sh` prepares only the pinned non-TeX assets (LXGW WenKai Screen and Maple Mono). Font fallback is disabled.
+- Latin serif body text: **XCharter**;
+- mathematics: **XCharter-Math**;
+- structural sans-serif elements: **Latin Modern Sans**;
+- Chinese: **LXGW WenKai Screen 1.522**;
+- code: **Maple Mono 5.3.0**.
+
+XCharter, XCharter-Math, and Latin Modern Sans are supplied by the TeX distribution. `scripts/setup-fonts.sh` prepares only the pinned non-TeX assets. Font fallback is disabled. See [`../../FONT_POLICY.md`](../../FONT_POLICY.md).
 
 Before the first build:
 
@@ -66,22 +68,6 @@ Generated labels switch language accordingly. English and Chinese may also be mi
 ## Mandatory full-width tables
 
 All manuscript tables must use `AcademicTable`; raw `tabular`, `tabularx`, and `longtable` are rejected by `scripts/validate.sh`. `AcademicTable` always occupies the complete `\linewidth`.
-
-```latex
-\begin{table}[tb]
-  \centering
-  \caption{Example table.}
-  \begin{AcademicTable}{LLR}
-    \toprule
-    Item & Description & Value \\
-    \midrule
-    A & Example & 1.0 \\
-    \bottomrule
-  \end{AcademicTable}
-\end{table}
-```
-
-Use `L`, `C`, and `R` for flexible left-, centre-, and right-aligned columns.
 
 ## Build
 
