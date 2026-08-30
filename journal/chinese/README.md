@@ -2,31 +2,26 @@
 
 ## Overview
 
-Standalone XeLaTeX Chinese scientific manuscript using the project-maintained `kxtbcas.cls` and `kxtbcas-numeric.bst` bibliography style.
+Standalone XeLaTeX Chinese scientific manuscript using the pinned project-maintained `kxtbcas.cls` and `kxtbcas-numeric.bst` resources from `cigit-zgy/sci-manuscript-skill`.
+
+The standalone sample does not redefine typography or page layout. Font selection, title alignment, title and section styling, spacing, geometry, captions, and front matter are controlled by `kxtbcas.cls` itself.
 
 ## Files
 
 - `main.tex` — directly compilable sample manuscript.
-- `fonts.tex` — portable font mapping for the sample build.
-- `kxtbcas.cls` — manuscript class.
-- `kxtbcas-numeric.bst` — numeric bibliography style.
+- `kxtbcas.cls` — pinned manuscript class; kept unchanged from the source repository.
+- `kxtbcas-numeric.bst` — pinned numeric bibliography style.
 - `references.bib` — sample bibliography.
 - `LICENSE.md` — class license information.
 - `preview/article.png` — rendered sample first page.
 
-## Typography
+## Typography and layout
 
-| Role | Typeface |
-| --- | --- |
-| Chinese body | FandolSong Regular / Bold |
-| Chinese italic role | FandolKai Regular |
-| Chinese sans-serif title and section roles | FandolHei Regular / Bold |
-| Chinese monospaced role | FandolFang Regular |
-| Latin serif text | Latin Modern Roman |
-| Latin sans-serif text | Latin Modern Sans |
-| Mathematics | STIX Two Math when available |
+No local `fontspec`, `xeCJK`, `titlesec`, `geometry`, or title-format override is applied by `main.tex`.
 
-The Chinese body is Song-style serif text. `kxtbcas.cls` uses the sans-serif role for display elements explicitly marked with `\sffamily`, including the Chinese article title and section headings.
+The source class defines Times New Roman and SimSun as its local-file defaults, with its own system-font fallback chain. The article title is centered by the source class inside `\kxtb@frontmatter`; the standalone template does not duplicate or alter that rule.
+
+This directory intentionally does not carry a separate font-mapping file. In particular, it does not remap the source class to Latin Modern Sans or FandolHei for title and section roles.
 
 ## Build
 
@@ -34,7 +29,7 @@ The Chinese body is Song-style serif text. `kxtbcas.cls` uses the sans-serif rol
 latexmk -xelatex -interaction=nonstopmode -halt-on-error main.tex
 ```
 
-The required Fandol and Latin Modern fonts are supplied by the TeX Live XeLaTeX/Chinese toolchain.
+The source class requires XeLaTeX and suitable fonts in the build environment. Font availability is an environment requirement and is not compensated for by changing the template typography.
 
 ## Preview
 
@@ -50,8 +45,6 @@ The required Fandol and Latin Modern fonts are supplied by the TeX Live XeLaTeX/
 ## Constraints
 
 - XeLaTeX is required.
-- Chinese body text uses a Song-style serif family.
-- Display roles explicitly defined with `\sffamily` use FandolHei.
-- The portable sample mapping follows the same Song/Hei role separation used by the source class.
+- `kxtbcas.cls` is the single source of truth for typography and layout.
+- Do not add local font-family substitutions or title/section layout overrides to the standalone sample.
 - Target-journal requirements remain authoritative.
-- Preview PNGs are direct 200-dpi PDF renders.
