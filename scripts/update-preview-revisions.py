@@ -17,7 +17,7 @@ READMES = [
     ROOT / "journal/nature/README.md",
     ROOT / "journal/elsevier/README.md",
     ROOT / "journal/acs/README.md",
-    ROOT / "journal/chinese/README.md",
+    ROOT / "journal/kxtbcas/README.md",
 ]
 
 IMAGE = re.compile(

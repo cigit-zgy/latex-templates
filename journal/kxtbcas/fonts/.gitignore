@@ -1,0 +1,5 @@
+*.ttf
+*.ttc
+*.otf
+!.gitignore
+!README.md

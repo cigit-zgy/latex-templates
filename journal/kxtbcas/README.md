@@ -1,4 +1,4 @@
-# Chinese Journal Template
+# KXTB-CAS Template
 
 ## Overview
 
@@ -19,7 +19,7 @@ The standalone sample does not redefine typography or page layout. Font selectio
 
 No local `fontspec`, `xeCJK`, `titlesec`, `geometry`, or title-format override is applied by `main.tex`.
 
-The class keeps the original Times/SimSun serif roles and resolves portable fallbacks to TeX Gyre Termes and Song-style serif Chinese families. Both body and display-family roles are serif. The article title remains centered inside `\kxtb@frontmatter`; its size, weight, spacing, and alignment are unchanged.
+The template uses the exact Times New Roman and SimSun files defined by the reference KXTB-CAS class. Roman and display-family roles resolve to those same serif files, and silent substitution is disabled. The article title remains centered inside `\kxtb@frontmatter`; its size, weight, spacing, and alignment are unchanged.
 
 This directory intentionally does not carry a separate font-mapping file. In particular, it does not remap the source class to Latin Modern Sans or FandolHei for title and section roles.
 
@@ -29,11 +29,11 @@ This directory intentionally does not carry a separate font-mapping file. In par
 latexmk -xelatex -interaction=nonstopmode -halt-on-error main.tex
 ```
 
-The class requires XeLaTeX. Portable fallback fonts preserve the same serif typography without introducing a sans-serif Chinese display family.
+Run `./scripts/build.sh`. Its template-local setup copies the required Times New Roman and SimSun files into `fonts/` before XeLaTeX runs.
 
 ## Preview
 
-![Chinese journal article](preview/article.png?rev=c90de7219212)
+![KXTB-CAS article](preview/article.png?rev=c90de7219212)
 
 ## Source
 

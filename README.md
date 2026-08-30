@@ -13,7 +13,7 @@ A collection of reusable LaTeX templates for academic writing, journal manuscrip
 | Journal | [`journal/nature`](journal/nature/) | pdfLaTeX | Springer Nature `sn-jnl`, Nature reference style |
 | Journal | [`journal/elsevier`](journal/elsevier/) | pdfLaTeX | Elsevier `elsarticle` |
 | Journal | [`journal/acs`](journal/acs/) | pdfLaTeX | ACS `achemso` |
-| Journal | [`journal/chinese`](journal/chinese/) | XeLaTeX | Chinese scientific manuscript, `kxtbcas` |
+| Journal | [`journal/kxtbcas`](journal/kxtbcas/) | XeLaTeX | KXTB-CAS / 科学通报 manuscript |
 | NSFC | [`nsfc-general`](nsfc-general/) | XeLaTeX | 2026 面上项目 |
 | NSFC | [`nsfc-young`](nsfc-young/) | XeLaTeX | 2026 青年科学基金项目（C类） |
 
@@ -42,7 +42,7 @@ The journal templates are standalone copies of the public resources previously m
 | `journal/nature` | `sn-jnl.cls` | `sn-nature.bst` | Springer Nature resource |
 | `journal/elsevier` | `elsarticle.cls` | `elsarticle-num.bst` | Elsevier resource |
 | `journal/acs` | `achemso.cls` | class-managed ACS style | CTAN `achemso` |
-| `journal/chinese` | `kxtbcas.cls` | `kxtbcas-numeric.bst` | Project-maintained MIT resource |
+| `journal/kxtbcas` | `kxtbcas.cls` | `kxtbcas-numeric.bst` | Project-maintained MIT resource |
 
 Each journal directory contains a directly compilable `main.tex`, bibliography sample, source information, and rendered preview.
 
@@ -84,16 +84,16 @@ All committed preview PNGs are direct 100-dpi renders of compiled PDFs.
 
 ![ACS article](journal/acs/preview/article.png?rev=bf89486f57fd)
 
-### Journal · Chinese
+### Journal · KXTB-CAS
 
-![Chinese journal article](journal/chinese/preview/article.png?rev=c90de7219212)
+![KXTB-CAS article](journal/kxtbcas/preview/article.png?rev=c90de7219212)
 
 ## Sources
 
 - Springer Nature `sn-jnl`: https://www.springernature.com/gp/authors/campaigns/latex-author-support
 - Elsevier LaTeX instructions: https://www.elsevier.com/researcher/author/policies-and-guidelines/latex-instructions
 - ACS `achemso`: https://ctan.org/pkg/achemso
-- Chinese `kxtbcas`: https://github.com/cigit-zgy/sci-manuscript-skill
+- KXTB-CAS `kxtbcas`: https://github.com/cigit-zgy/sci-manuscript-skill
 - NSFC reference: https://github.com/andy123t/nsfc-latex
 - CurVe CV reference: https://www.overleaf.com/latex/templates/a-customised-curve-cv/mvmbhkwsnmwv
 
@@ -102,7 +102,7 @@ All committed preview PNGs are direct 100-dpi renders of compiled PDFs.
 - One template directory contains one directly usable template.
 - Self-owned thesis, report, and CV templates follow `STYLE_SPEC.md`.
 - Publisher class and bibliography files under `journal/nature`, `journal/elsevier`, and `journal/acs` are retained as source resources and are not restyled.
-- `journal/chinese` retains the `kxtbcas` class specification.
+- `journal/kxtbcas` retains the `kxtbcas` class specification.
 - `nsfc-general` and `nsfc-young` retain their NSFC typography and page geometry.
 - Report manuscript tables use the full `\linewidth` through `AcademicTable`.
 - `report/short-charter` has no table of contents by default.

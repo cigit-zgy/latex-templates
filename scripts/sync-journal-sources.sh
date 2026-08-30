@@ -46,6 +46,5 @@ sync_file "acs/achemso.cls" "journal/acs/achemso.cls" "a581b532ccdfaa93d331bf110
 sync_file "acs/achemso.dtx" "journal/acs/achemso.dtx" "0dd136d89ee123e614e4fd9b4c3d9457e3db6964"
 sync_file "acs/LICENSE.md" "journal/acs/LICENSE.md" "861b528777b905484583344f7c0363538ef8b5c9"
 
-sync_file "chinese/kxtbcas-numeric.bst" "journal/chinese/kxtbcas-numeric.bst" "86dd8fac6a1ea1f71a53ca2386856d35b569e68a"
 
 echo "Journal source files verified at sci-manuscript-skill commit ${SOURCE_COMMIT}."
