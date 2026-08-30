@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Attach PNG content hashes to README preview URLs."""
+"""Attach PNG content hashes to README preview URLs rendered in CI."""
 
 from __future__ import annotations
 
@@ -17,7 +17,6 @@ READMES = [
     ROOT / "journal/nature/README.md",
     ROOT / "journal/elsevier/README.md",
     ROOT / "journal/acs/README.md",
-    ROOT / "journal/kxtbcas/README.md",
 ]
 
 IMAGE = re.compile(
@@ -50,4 +49,4 @@ for readme in READMES:
     state = "updated" if updated != text else "already current"
     print(f"{readme.relative_to(ROOT)}: {len(matches)} preview reference(s), {state}.")
 
-print("README preview cache keys verified against PNG content hashes.")
+print("CI-rendered README preview cache keys verified against PNG content hashes.")
