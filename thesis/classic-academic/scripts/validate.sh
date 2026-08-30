@@ -14,13 +14,16 @@ command -v kpsewhich >/dev/null 2>&1 || {
 }
 
 for tex_font in \
-  lmroman10-regular.otf \
-  lmroman10-bold.otf \
-  lmroman10-italic.otf \
-  lmroman10-bolditalic.otf \
+  XCharter-Roman.otf \
+  XCharter-Bold.otf \
+  XCharter-Italic.otf \
+  XCharter-BoldItalic.otf \
+  XCharter-Math.otf \
+  XCharter-Math-Bold.otf \
   lmsans10-regular.otf \
   lmsans10-bold.otf \
-  latinmodern-math.otf; do
+  lmsans10-oblique.otf \
+  lmsans10-boldoblique.otf; do
   if ! kpsewhich "$tex_font" >/dev/null 2>&1; then
     echo "ERROR: required TeX font missing: $tex_font" >&2
     exit 1
