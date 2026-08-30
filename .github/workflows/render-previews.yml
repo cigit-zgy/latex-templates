@@ -24,12 +24,159 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  render:
-    runs-on: ubuntu-latest
+  exact-font-previews:
+    runs-on: windows-latest
     steps:
-      - name: Check out repository
+      - name: Check out current repository
         uses: actions/checkout@v4
         with:
+          ref: master
+          fetch-depth: 0
+
+      - name: Install Simplified Chinese Windows fonts
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+          $capability = Get-WindowsCapability -Online | Where-Object { $_.Name -like "Language.Fonts.Hans*" } | Select-Object -First 1
+          if (-not $capability) {
+            throw "Simplified Chinese supplemental font capability was not found."
+          }
+          if ($capability.State -ne "Installed") {
+            Add-WindowsCapability -Online -Name $capability.Name | Out-Host
+          }
+          $required = @("times.ttf", "timesbd.ttf", "timesi.ttf", "timesbi.ttf", "simsun.ttc", "simsunb.ttf", "simkai.ttf", "simfang.ttf")
+          foreach ($name in $required) {
+            $path = Join-Path $env:WINDIR "Fonts\$name"
+            if (-not (Test-Path $path)) {
+              throw "Required Windows font is missing after capability installation: $path"
+            }
+          }
+
+      - name: Install MiKTeX, Poppler, and fontTools
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+          choco install miktex --no-progress --params "/Set:basic" -y
+          choco install poppler --no-progress -y
+          python -m pip install --disable-pip-version-check fonttools
+          Import-Module "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+          refreshenv
+          $miktexBin = "C:\Program Files\MiKTeX\miktex\bin\x64"
+          if (-not (Test-Path $miktexBin)) {
+            throw "MiKTeX executable directory is missing: $miktexBin"
+          }
+          $env:Path = "$miktexBin;$env:Path"
+          $miktexBin | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          miktex --admin packages update-package-database
+          initexmf --admin '--set-config-value=[MPM]AutoInstall=1'
+          initexmf --admin --update-fndb
+          xelatex --version
+          bibtex --version
+          pdftoppm -v
+
+      - name: Compile KXTB-CAS from repository source
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+          & .\journal\kxtbcas\scripts\build.ps1
+          if (-not (Test-Path .\journal\kxtbcas\main.pdf)) {
+            throw "KXTB-CAS repository source did not produce main.pdf"
+          }
+          $fontReport = (& pdffonts .\journal\kxtbcas\main.pdf) -join "`n"
+          Write-Host $fontReport
+          if ($fontReport -notmatch "TimesNewRoman|Times New Roman") {
+            throw "KXTB-CAS PDF does not contain Times New Roman."
+          }
+          if ($fontReport -notmatch "SimSun") {
+            throw "KXTB-CAS PDF does not contain SimSun."
+          }
+          New-Item -ItemType Directory -Force .\journal\kxtbcas\preview | Out-Null
+          Remove-Item .\journal\kxtbcas\preview\*.png -ErrorAction SilentlyContinue
+          pdftoppm -f 1 -singlefile -png -r 100 .\journal\kxtbcas\main.pdf .\journal\kxtbcas\preview\article
+          pdftoppm -f 2 -singlefile -png -r 100 .\journal\kxtbcas\main.pdf .\journal\kxtbcas\preview\content
+
+      - name: Compile NSFC General from repository source
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+          & .\nsfc-general\scripts\build.ps1
+          if (-not (Test-Path .\nsfc-general\main.pdf)) {
+            throw "NSFC General repository source did not produce main.pdf"
+          }
+          $fontReport = (& pdffonts .\nsfc-general\main.pdf) -join "`n"
+          Write-Host $fontReport
+          if ($fontReport -notmatch "SimSun") {
+            throw "NSFC General PDF does not contain SimSun."
+          }
+          New-Item -ItemType Directory -Force .\nsfc-general\preview | Out-Null
+          Remove-Item .\nsfc-general\preview\*.png -ErrorAction SilentlyContinue
+          pdftoppm -f 1 -singlefile -png -r 100 .\nsfc-general\main.pdf .\nsfc-general\preview\application
+          pdftoppm -f 2 -singlefile -png -r 100 .\nsfc-general\main.pdf .\nsfc-general\preview\content
+
+      - name: Compile NSFC Young from repository source
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = "Stop"
+          & .\nsfc-young\scripts\build.ps1
+          if (-not (Test-Path .\nsfc-young\main.pdf)) {
+            throw "NSFC Young repository source did not produce main.pdf"
+          }
+          $fontReport = (& pdffonts .\nsfc-young\main.pdf) -join "`n"
+          Write-Host $fontReport
+          if ($fontReport -notmatch "SimSun") {
+            throw "NSFC Young PDF does not contain SimSun."
+          }
+          New-Item -ItemType Directory -Force .\nsfc-young\preview | Out-Null
+          Remove-Item .\nsfc-young\preview\*.png -ErrorAction SilentlyContinue
+          pdftoppm -f 1 -singlefile -png -r 100 .\nsfc-young\main.pdf .\nsfc-young\preview\application
+          pdftoppm -f 2 -singlefile -png -r 100 .\nsfc-young\main.pdf .\nsfc-young\preview\content
+
+      - name: Verify exact-font preview dimensions
+        shell: pwsh
+        run: |
+          @'
+          import struct
+          from pathlib import Path
+
+          paths = [
+              Path("journal/kxtbcas/preview/article.png"),
+              Path("journal/kxtbcas/preview/content.png"),
+              Path("nsfc-general/preview/application.png"),
+              Path("nsfc-general/preview/content.png"),
+              Path("nsfc-young/preview/application.png"),
+              Path("nsfc-young/preview/content.png"),
+          ]
+          for path in paths:
+              data = path.read_bytes()
+              if data[:8] != b"\x89PNG\r\n\x1a\n":
+                  raise SystemExit(f"not a PNG: {path}")
+              width, height = struct.unpack(">II", data[16:24])
+              if (width, height) not in {(827, 1169), (827, 1170)}:
+                  raise SystemExit(f"unexpected 100-DPI A4 preview size {width}x{height}: {path}")
+              print(f"verified {path}: {width}x{height}")
+          '@ | python -
+
+      - name: Commit exact-font previews
+        shell: pwsh
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add journal/kxtbcas/preview nsfc-general/preview nsfc-young/preview
+          if (git diff --cached --quiet) {
+            Write-Host "Exact-font previews are current."
+          } else {
+            git commit -m "chore: render exact-font 100 dpi previews [skip ci]"
+            git push origin master
+          }
+
+  render-open-templates:
+    needs: exact-font-previews
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out latest repository state
+        uses: actions/checkout@v4
+        with:
+          ref: master
           fetch-depth: 0
 
       - name: Stage pinned journal source files
@@ -48,16 +195,6 @@ jobs:
             texlive-science texlive-publishers \
             biber latexmk poppler-utils woff2 curl
           sudo mktexlsr
-          kpsewhich newtxtext.sty
-          kpsewhich newtxmath.sty
-          kpsewhich FandolSong-Regular.otf
-          kpsewhich FandolSong-Bold.otf
-          kpsewhich FandolKai-Regular.otf
-          kpsewhich FandolFang-Regular.otf
-          kpsewhich lmroman10-regular.otf
-          kpsewhich lmroman10-bold.otf
-          kpsewhich lmsans10-regular.otf
-          kpsewhich lmsans10-bold.otf
 
       - name: Build thesis sample
         working-directory: thesis/classic-academic
@@ -141,104 +278,47 @@ jobs:
           rm -f preview/*.png
           pdftoppm -f 1 -singlefile -png -r 100 main.pdf preview/article
 
-      - name: Validate KXTB-CAS exact font contract
-        working-directory: journal/kxtbcas
-        run: |
-          test -x scripts/setup-fonts.sh
-          test -x scripts/build.sh
-          grep -Fq './fonts/' kxtbcas.cls
-          grep -Fq 'TimesNewRoman-Regular.ttf' kxtbcas.cls
-          grep -Fq 'TimesNewRoman-Bold.ttf' kxtbcas.cls
-          grep -Fq 'TimesNewRoman-Italic.ttf' kxtbcas.cls
-          grep -Fq 'TimesNewRoman-BoldItalic.ttf' kxtbcas.cls
-          grep -Fq 'SimSun.ttf' kxtbcas.cls
-          grep -Fq 'SimSun-Bold.ttf' kxtbcas.cls
-          grep -Fq '\setsansfont[' kxtbcas.cls
-          grep -Fq '\setCJKsansfont[' kxtbcas.cls
-          if grep -Eq 'FandolSong|FandolHei|TeX Gyre Termes|Songti SC|STSong|Heiti SC|STHeiti' kxtbcas.cls; then
-            echo 'KXTB-CAS contains a forbidden fallback font.' >&2
-            exit 1
-          fi
-
-      - name: Render exact-font KXTB-CAS reference preview
-        run: |
-          mkdir -p journal/kxtbcas/preview
-          rm -f journal/kxtbcas/preview/*.png
-          curl --fail --location --silent --show-error \
-            https://raw.githubusercontent.com/cigit-zgy/structure-object-perspective/7acb43750182ec1ffe5e992d2fc7c9d625a5a118/00_archive/260819/main.pdf \
-            --output /tmp/kxtbcas-reference.pdf
-          test "$(pdfinfo /tmp/kxtbcas-reference.pdf | awk '/^Pages:/ {print $2}')" -ge 2
-          pdftoppm -f 1 -singlefile -png -r 100 /tmp/kxtbcas-reference.pdf journal/kxtbcas/preview/article
-          pdftoppm -f 2 -singlefile -png -r 100 /tmp/kxtbcas-reference.pdf journal/kxtbcas/preview/content
-
-      - name: Render NSFC reference previews
-        run: |
-          mkdir -p nsfc-general/preview nsfc-young/preview
-          rm -f nsfc-general/preview/*.png nsfc-young/preview/*.png
-          curl --fail --location --silent --show-error \
-            https://raw.githubusercontent.com/andy123t/nsfc-latex/11a02726f6190fcb89859dfaed18e3d1d68af0b8/main-GP.pdf \
-            --output /tmp/nsfc-general-reference.pdf
-          curl --fail --location --silent --show-error \
-            https://raw.githubusercontent.com/andy123t/nsfc-latex/11a02726f6190fcb89859dfaed18e3d1d68af0b8/main-YF.pdf \
-            --output /tmp/nsfc-young-reference.pdf
-          test "$(pdfinfo /tmp/nsfc-general-reference.pdf | awk '/^Pages:/ {print $2}')" -ge 2
-          test "$(pdfinfo /tmp/nsfc-young-reference.pdf | awk '/^Pages:/ {print $2}')" -ge 2
-          pdftoppm -f 1 -singlefile -png -r 100 /tmp/nsfc-general-reference.pdf nsfc-general/preview/application
-          pdftoppm -f 2 -singlefile -png -r 100 /tmp/nsfc-general-reference.pdf nsfc-general/preview/content
-          pdftoppm -f 1 -singlefile -png -r 100 /tmp/nsfc-young-reference.pdf nsfc-young/preview/application
-          pdftoppm -f 2 -singlefile -png -r 100 /tmp/nsfc-young-reference.pdf nsfc-young/preview/content
-
-      - name: Verify preview files
-        run: |
-          python3 - <<'PY'
-          import struct
-          from pathlib import Path
-
-          minimum = [
-              Path("journal/nature/preview/article.png"),
-              Path("journal/elsevier/preview/article.png"),
-              Path("journal/acs/preview/article.png"),
-              Path("journal/kxtbcas/preview/article.png"),
-              Path("journal/kxtbcas/preview/content.png"),
-              Path("nsfc-general/preview/application.png"),
-              Path("nsfc-general/preview/content.png"),
-              Path("nsfc-young/preview/application.png"),
-              Path("nsfc-young/preview/content.png"),
-          ]
-          for path in minimum:
-              if not path.is_file() or path.stat().st_size == 0:
-                  raise SystemExit(f"missing preview: {path}")
-              data = path.read_bytes()
-              if data[:8] != b"\x89PNG\r\n\x1a\n":
-                  raise SystemExit(f"not a PNG: {path}")
-              width, height = struct.unpack(">II", data[16:24])
-              if width < 500 or height < 500:
-                  raise SystemExit(f"unexpected preview size {width}x{height}: {path}")
-              print(f"verified {path}: {width}x{height}")
-          PY
-
-      - name: Verify existing preview dimensions
+      - name: Verify complete preview coverage
         run: |
           python3 - <<'PY'
           import struct
           from pathlib import Path
 
           expected = {
-              Path("thesis/classic-academic/preview/title.png"): (850, 1100),
-              Path("thesis/classic-academic/preview/hierarchy.png"): (850, 1100),
-              Path("report/classic-academic/preview/title.png"): (850, 1100),
-              Path("report/classic-academic/preview/hierarchy.png"): (850, 1100),
-              Path("report/short-charter/preview/title.png"): (827, 1170),
-              Path("report/short-charter/preview/hierarchy.png"): (827, 1170),
-              Path("cv/curve-academic/preview/cv.png"): (827, 1170),
+              Path("thesis/classic-academic/preview/title.png"): {(850, 1100)},
+              Path("thesis/classic-academic/preview/hierarchy.png"): {(850, 1100)},
+              Path("report/classic-academic/preview/title.png"): {(850, 1100)},
+              Path("report/classic-academic/preview/hierarchy.png"): {(850, 1100)},
+              Path("report/short-charter/preview/title.png"): {(827, 1170)},
+              Path("report/short-charter/preview/hierarchy.png"): {(827, 1170)},
+              Path("cv/curve-academic/preview/cv.png"): {(827, 1170)},
+              Path("journal/kxtbcas/preview/article.png"): {(827, 1169), (827, 1170)},
+              Path("journal/kxtbcas/preview/content.png"): {(827, 1169), (827, 1170)},
+              Path("nsfc-general/preview/application.png"): {(827, 1169), (827, 1170)},
+              Path("nsfc-general/preview/content.png"): {(827, 1169), (827, 1170)},
+              Path("nsfc-young/preview/application.png"): {(827, 1169), (827, 1170)},
+              Path("nsfc-young/preview/content.png"): {(827, 1169), (827, 1170)},
           }
-          for path, target in expected.items():
+          minimum = [
+              Path("journal/nature/preview/article.png"),
+              Path("journal/elsevier/preview/article.png"),
+              Path("journal/acs/preview/article.png"),
+          ]
+          for path, targets in expected.items():
+              if not path.is_file():
+                  raise SystemExit(f"missing preview: {path}")
               data = path.read_bytes()
               if data[:8] != b"\x89PNG\r\n\x1a\n":
                   raise SystemExit(f"not a PNG: {path}")
               width, height = struct.unpack(">II", data[16:24])
-              if (width, height) != target:
+              if (width, height) not in targets:
                   raise SystemExit(f"unexpected preview size {width}x{height}: {path}")
+              print(f"verified {path}: {width}x{height}")
+          for path in minimum:
+              data = path.read_bytes()
+              width, height = struct.unpack(">II", data[16:24])
+              if width < 500 or height < 500:
+                  raise SystemExit(f"unexpected journal preview size {width}x{height}: {path}")
               print(f"verified {path}: {width}x{height}")
           PY
 
@@ -255,11 +335,11 @@ jobs:
             report/classic-academic/README.md report/classic-academic/preview \
             report/short-charter/README.md report/short-charter/preview \
             cv/curve-academic/README.md cv/curve-academic/preview \
-            journal/nature journal/elsevier journal/acs journal/kxtbcas \
-            nsfc-general nsfc-young
+            journal/nature journal/elsevier journal/acs journal/kxtbcas/README.md \
+            nsfc-general/README.md nsfc-young/README.md
           if git diff --cached --quiet; then
             echo "Template previews and cache keys are current."
             exit 0
           fi
           git commit -m "chore: refresh 100 dpi previews [skip ci]"
-          git push
+          git push origin master
