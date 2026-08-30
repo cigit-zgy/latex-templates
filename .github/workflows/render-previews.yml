@@ -11,6 +11,9 @@ on:
       - "journal/nature/preview/**"
       - "journal/elsevier/preview/**"
       - "journal/acs/preview/**"
+      - "journal/kxtbcas/preview/**"
+      - "nsfc-general/preview/**"
+      - "nsfc-young/preview/**"
   workflow_dispatch:
 
 permissions:
@@ -157,26 +160,60 @@ jobs:
             exit 1
           fi
 
-      - name: Verify journal preview files
+      - name: Render exact-font KXTB-CAS reference preview
+        run: |
+          mkdir -p journal/kxtbcas/preview
+          rm -f journal/kxtbcas/preview/*.png
+          curl --fail --location --silent --show-error \
+            https://raw.githubusercontent.com/cigit-zgy/structure-object-perspective/7acb43750182ec1ffe5e992d2fc7c9d625a5a118/00_archive/260819/main.pdf \
+            --output /tmp/kxtbcas-reference.pdf
+          test "$(pdfinfo /tmp/kxtbcas-reference.pdf | awk '/^Pages:/ {print $2}')" -ge 2
+          pdftoppm -f 1 -singlefile -png -r 100 /tmp/kxtbcas-reference.pdf journal/kxtbcas/preview/article
+          pdftoppm -f 2 -singlefile -png -r 100 /tmp/kxtbcas-reference.pdf journal/kxtbcas/preview/content
+
+      - name: Render NSFC reference previews
+        run: |
+          mkdir -p nsfc-general/preview nsfc-young/preview
+          rm -f nsfc-general/preview/*.png nsfc-young/preview/*.png
+          curl --fail --location --silent --show-error \
+            https://raw.githubusercontent.com/andy123t/nsfc-latex/11a02726f6190fcb89859dfaed18e3d1d68af0b8/main-GP.pdf \
+            --output /tmp/nsfc-general-reference.pdf
+          curl --fail --location --silent --show-error \
+            https://raw.githubusercontent.com/andy123t/nsfc-latex/11a02726f6190fcb89859dfaed18e3d1d68af0b8/main-YF.pdf \
+            --output /tmp/nsfc-young-reference.pdf
+          test "$(pdfinfo /tmp/nsfc-general-reference.pdf | awk '/^Pages:/ {print $2}')" -ge 2
+          test "$(pdfinfo /tmp/nsfc-young-reference.pdf | awk '/^Pages:/ {print $2}')" -ge 2
+          pdftoppm -f 1 -singlefile -png -r 100 /tmp/nsfc-general-reference.pdf nsfc-general/preview/application
+          pdftoppm -f 2 -singlefile -png -r 100 /tmp/nsfc-general-reference.pdf nsfc-general/preview/content
+          pdftoppm -f 1 -singlefile -png -r 100 /tmp/nsfc-young-reference.pdf nsfc-young/preview/application
+          pdftoppm -f 2 -singlefile -png -r 100 /tmp/nsfc-young-reference.pdf nsfc-young/preview/content
+
+      - name: Verify preview files
         run: |
           python3 - <<'PY'
           import struct
           from pathlib import Path
 
-          paths = [
+          minimum = [
               Path("journal/nature/preview/article.png"),
               Path("journal/elsevier/preview/article.png"),
               Path("journal/acs/preview/article.png"),
+              Path("journal/kxtbcas/preview/article.png"),
+              Path("journal/kxtbcas/preview/content.png"),
+              Path("nsfc-general/preview/application.png"),
+              Path("nsfc-general/preview/content.png"),
+              Path("nsfc-young/preview/application.png"),
+              Path("nsfc-young/preview/content.png"),
           ]
-          for path in paths:
+          for path in minimum:
               if not path.is_file() or path.stat().st_size == 0:
-                  raise SystemExit(f"missing journal preview: {path}")
+                  raise SystemExit(f"missing preview: {path}")
               data = path.read_bytes()
               if data[:8] != b"\x89PNG\r\n\x1a\n":
                   raise SystemExit(f"not a PNG: {path}")
               width, height = struct.unpack(">II", data[16:24])
               if width < 500 or height < 500:
-                  raise SystemExit(f"unexpected journal preview size {width}x{height}: {path}")
+                  raise SystemExit(f"unexpected preview size {width}x{height}: {path}")
               print(f"verified {path}: {width}x{height}")
           PY
 
@@ -218,7 +255,8 @@ jobs:
             report/classic-academic/README.md report/classic-academic/preview \
             report/short-charter/README.md report/short-charter/preview \
             cv/curve-academic/README.md cv/curve-academic/preview \
-            journal/nature journal/elsevier journal/acs
+            journal/nature journal/elsevier journal/acs journal/kxtbcas \
+            nsfc-general nsfc-young
           if git diff --cached --quiet; then
             echo "Template previews and cache keys are current."
             exit 0
