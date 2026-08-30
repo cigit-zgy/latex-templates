@@ -4,11 +4,11 @@ A self-contained XeLaTeX report template for research reports, technical reports
 
 ## Rendered preview
 
-These PNG files are direct **200-dpi** renders of the compiled sample PDF. They are not cropped, resized, composited, sharpened, annotated, or redrawn. Markdown references them at intrinsic size without `width` or `height` overrides.
+These PNG files are direct **200-dpi** renders of the compiled sample PDF. They are not cropped, resized, composited, sharpened, annotated, or redrawn. Markdown references them at intrinsic size without `width` or `height` overrides. The renderer appends a content-hash query parameter to the README URLs only to invalidate GitHub image caches; the PNG bytes remain untouched.
 
-![Rendered report title page](preview/page-01.png)
+![Rendered report title page](preview/title.png)
 
-![Rendered report content page](preview/page-04.png)
+![Rendered report hierarchy specimen](preview/hierarchy.png)
 
 ## Font and hierarchy contract
 
