@@ -54,7 +54,10 @@ jobs:
           kpsewhich FandolHei-Bold.otf
           kpsewhich FandolKai-Regular.otf
           kpsewhich FandolFang-Regular.otf
-          kpsewhich texgyretermes-regular.otf
+          kpsewhich lmroman10-regular.otf
+          kpsewhich lmroman10-bold.otf
+          kpsewhich lmsans10-regular.otf
+          kpsewhich lmsans10-bold.otf
 
       - name: Build thesis sample
         working-directory: thesis/classic-academic
