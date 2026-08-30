@@ -4,66 +4,37 @@ A self-contained XeLaTeX thesis template based on a `book` document model and a 
 
 ## Rendered preview
 
-These PNG files are direct **200-dpi** renders of the compiled sample PDF. They are not cropped, resized, composited, sharpened, annotated, or redrawn. Markdown references them at their intrinsic size without `width` or `height` overrides.
+These PNG files are direct **200-dpi** renders of the compiled sample PDF. They are not cropped, resized, composited, sharpened, annotated, or redrawn. Markdown references them at intrinsic size without `width` or `height` overrides.
 
 ![Rendered thesis title page](preview/page-01.png)
 
 ![Rendered thesis chapter page](preview/page-15.png)
 
-## Architecture
+## Font and hierarchy contract
 
-```text
-classic-academic/
-├── main.tex
-├── latexmkrc
-├── config/
-│   ├── metadata.tex       # language + thesis metadata
-│   └── theme.tex          # colour tokens only
-├── style/
-│   ├── typography.tex     # exact project-wide font contract
-│   ├── layout.tex         # book geometry, chapters, running heads
-│   └── components.tex     # captions, tables, code, links, localization
-├── fonts/                 # local cache; binaries are gitignored
-├── frontmatter/
-├── chapters/
-├── bibliography/
-├── figures/
-├── scripts/
-│   ├── setup-fonts.sh
-│   ├── validate.sh
-│   └── build.sh
-└── preview/               # direct PDF renders only
-```
+This template follows the repository-wide [`FONT_POLICY.md`](../../FONT_POLICY.md) and [`STYLE_POLICY.md`](../../STYLE_POLICY.md).
 
-## Font contract
-
-This template follows the repository-wide font rule:
-
-- Latin serif body text: **XCharter**;
+- body: **XCharter**;
 - mathematics: **XCharter-Math**;
-- structural sans-serif elements: **Latin Modern Sans**;
+- structural headings: **Latin Modern Sans Bold**;
 - Chinese: **LXGW WenKai Screen 1.522**;
 - code: **Maple Mono 5.3.0**.
 
-XCharter, XCharter-Math, and Latin Modern Sans are supplied by the TeX distribution. `scripts/setup-fonts.sh` prepares only the pinned non-TeX assets. Font fallback is disabled. See [`../../FONT_POLICY.md`](../../FONT_POLICY.md).
+The ordinary heading hierarchy is identical to both report templates:
 
-Before the first build:
+| Level | Size / leading | Weight | Colour |
+| --- | --- | --- | --- |
+| `section` | 16 / 20 pt | Bold | `BrickRed` |
+| `subsection` | 13 / 16 pt | Bold | `RoyalBlue` |
+| `subsubsection` | 11 / 14 pt | Bold | `ForestGreen` |
 
-```bash
-./scripts/setup-fonts.sh
-```
+Heading numbers and heading text always share the complete style of their level. Thesis chapters add a 22 / 28 pt bold `BrickRed` opening with a 62 pt bold `BrickRed` numeral.
+
+Paragraph indent is `1.2em`, line spread is `1.08`, caption style and table row spacing are shared with both reports, and running heads use muted Latin Modern Sans without a rule.
 
 ## English / 中文
 
-Set one value in `config/metadata.tex`:
-
-```latex
-\newcommand{\DocumentLanguage}{english}
-% or
-\newcommand{\DocumentLanguage}{chinese}
-```
-
-Generated labels switch language accordingly. English and Chinese may also be mixed in the same manuscript.
+Set `\DocumentLanguage` in `config/metadata.tex` to `english` or `chinese`. Mixed bilingual scientific text is also supported.
 
 ## Mandatory full-width tables
 
