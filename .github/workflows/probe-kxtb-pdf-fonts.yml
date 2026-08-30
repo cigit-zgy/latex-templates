@@ -15,6 +15,6 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -qq -y poppler-utils
           curl --fail --location --silent --show-error \
-            https://raw.githubusercontent.com/cigit-zgy/structure-object-perspective/7acb43750182ec1ffe5e992d2fc7c9d625a5a118/00_archive/260819/main.pdf \
+            https://raw.githubusercontent.com/cigit-zgy/structure-object-perspective/3c2549120ebbc07104effdf8c7cbda390185c459/manuscript/initial_submission/output/manuscript.pdf \
             -o /tmp/kxtb.pdf
           pdffonts /tmp/kxtb.pdf
