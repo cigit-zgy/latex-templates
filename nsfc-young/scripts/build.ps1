@@ -6,7 +6,9 @@ Set-Location $root
 & (Join-Path $PSScriptRoot "setup-fonts.ps1")
 
 xelatex -interaction=nonstopmode -halt-on-error main.tex
-bibtex main
+if (Select-String -Path "main.aux" -Pattern "\\citation" -Quiet) {
+    bibtex main
+}
 xelatex -interaction=nonstopmode -halt-on-error main.tex
 xelatex -interaction=nonstopmode -halt-on-error main.tex
 
