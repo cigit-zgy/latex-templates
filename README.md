@@ -1,6 +1,6 @@
 # LaTeX Templates
 
-A curated collection of reusable LaTeX templates for academic writing. Templates are organized by **document type first**, then by **visual family**. Every template is directly usable from its own directory.
+A curated collection of reusable LaTeX templates for academic writing. Every template is directly usable from its own directory.
 
 ## Templates
 
@@ -10,8 +10,8 @@ A curated collection of reusable LaTeX templates for academic writing. Templates
 | Report | [`classic-academic`](report/classic-academic/) | XeLaTeX | Full scientific / technical report | English + 中文 |
 | Short report | [`short-charter`](report/short-charter/) | XeLaTeX | Compact ~10-page section-based report, no TOC by default | English + 中文 |
 | CV | [`curve-academic`](cv/curve-academic/) | XeLaTeX | Academic CV / publication list | English + 中文 |
-| NSFC Youth (C) | [`youth-c`](nsfc/youth-c/) | XeLaTeX | 2026 青年科学基金项目（C类） | 中文 |
-| NSFC General Program | [`general`](nsfc/general/) | XeLaTeX | 2026 面上项目 | 中文 |
+| NSFC General Program | [`nsfc-general`](nsfc-general/) | XeLaTeX | 2026 面上项目 | 中文 |
+| NSFC Youth (C) | [`nsfc-young`](nsfc-young/) | XeLaTeX | 2026 青年科学基金项目（C类） | 中文 |
 
 ## Project-wide typography rule
 
@@ -39,27 +39,29 @@ All three levels use Latin Modern Sans Bold. The thesis adds a document-specific
 
 ## NSFC fixed templates
 
-[`nsfc/`](nsfc/) contains two **direct, independent templates**. There is no submodule, symlink, or shared upstream directory:
+[`nsfc-general/`](nsfc-general/) and [`nsfc-young/`](nsfc-young/) are two top-level, fully independent local template projects:
 
 ```text
-nsfc/
-├── youth-c/
-│   ├── main.tex
-│   ├── nsfc.cls
-│   ├── reference.bib
-│   ├── README.md
-│   └── fonts/README.md
-└── general/
-    ├── main.tex
-    ├── nsfc.cls
-    ├── reference.bib
-    ├── README.md
-    └── fonts/README.md
+nsfc-general/
+├── main.tex
+├── nsfc.cls
+├── reference.bib
+├── README.md
+└── fonts/README.md
+
+nsfc-young/
+├── main.tex
+├── nsfc.cls
+├── reference.bib
+├── README.md
+└── fonts/README.md
 ```
 
-The two templates remain outside the repository-wide XCharter/colour policy. They keep the referenced NSFC typography and page geometry: SimSun (宋体), KaiTi (楷体), FangSong (仿宋), Arial, and the program-specific A4 margins. The ZhongYi font binaries are not redistributed; each template documents the exact filenames required in its local `fonts/` directory.
+There is no shared `nsfc/` parent directory, submodule, symlink, virtual mapping, or runtime copy step. Each template carries its own class, bibliography, font instructions, application outline, and build instructions.
 
-Both directories record the public source reference `andy123t/nsfc-latex` and the pinned reference commit `11a02726f6190fcb89859dfaed18e3d1d68af0b8`, while remaining normal repository directories rather than linked Git objects.
+The NSFC templates remain outside the repository-wide XCharter/colour policy. They retain the referenced fixed typography and program-specific page geometry: SimSun (宋体), KaiTi (楷体), FangSong (仿宋), Arial, and the corresponding A4 margins. The ZhongYi font binaries are not redistributed; each template documents the exact filenames required in its own `fonts/` directory.
+
+Both directories record the public source reference `andy123t/nsfc-latex` and pinned reference commit `11a02726f6190fcb89859dfaed18e3d1d68af0b8`, while remaining ordinary local repository directories.
 
 ## Rendered previews
 
@@ -100,4 +102,4 @@ The workflow uses semantic preview filenames (`title.png`, `hierarchy.png`, `cv.
 - English, Chinese, and mixed-language scientific writing are supported under XeLaTeX.
 - Generated LaTeX build artifacts are excluded. Only deliberate direct-render preview PNGs are committed under `preview/`.
 - Preview PNGs are generated at **200 dpi** only. Current intrinsic sizes are 1700 × 2200 px for Letter and approximately 1654 × 2339 px for A4. README display code must not rescale them explicitly.
-- NSFC templates retain their fixed typography/layout and are maintained as two ordinary independent directories.
+- The two NSFC templates retain their fixed typography/layout and are maintained as independent top-level directories.

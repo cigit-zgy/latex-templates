@@ -1,6 +1,6 @@
 # Project Font and Preview Policy
 
-All templates in this repository use one shared typography contract.
+The thesis, report, and CV templates use one shared typography contract. The fixed-layout `nsfc-general/` and `nsfc-young/` templates retain their own source-defined font contracts and are excluded from the rules below.
 
 - Latin serif body text: **XCharter** (`XCharter-Roman`, Bold, Italic, BoldItalic)
 - Mathematics: **XCharter-Math** with its matching bold math font
@@ -8,7 +8,7 @@ All templates in this repository use one shared typography contract.
 - Chinese text: **LXGW WenKai Screen 1.522**
 - Monospaced/code text: **Maple Mono 5.3.0**
 
-No template may substitute another serif or mathematics family. Template-specific layout may vary, but font roles do not.
+No template governed by this shared contract may substitute another serif or mathematics family. Template-specific layout may vary, but font roles do not.
 
 ## Preview rule
 

@@ -1,6 +1,6 @@
 # Project-wide document style policy
 
-The thesis and both report templates share one visual system. Document structure may differ, but equivalent typographic roles must render identically. External fixed-layout templates such as `nsfc/` are explicitly excluded.
+The thesis and both report templates share one visual system. Document structure may differ, but equivalent typographic roles must render identically. The fixed-layout templates `nsfc-general/` and `nsfc-young/` are explicitly excluded.
 
 ## Font roles
 
