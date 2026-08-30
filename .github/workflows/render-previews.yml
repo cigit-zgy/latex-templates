@@ -11,7 +11,6 @@ on:
       - "journal/nature/preview/**"
       - "journal/elsevier/preview/**"
       - "journal/acs/preview/**"
-      - "journal/chinese/preview/**"
   workflow_dispatch:
 
 permissions:
@@ -60,7 +59,6 @@ jobs:
       - name: Build thesis sample
         working-directory: thesis/classic-academic
         run: |
-          ./scripts/setup-fonts.sh
           ./scripts/build.sh
           rm -f preview/*.png
           pdftoppm -f 1 -singlefile -png -r 100 main.pdf preview/title
@@ -78,7 +76,6 @@ jobs:
       - name: Build classic report sample
         working-directory: report/classic-academic
         run: |
-          ./scripts/setup-fonts.sh
           ./scripts/build.sh
           rm -f preview/*.png
           pdftoppm -f 1 -singlefile -png -r 100 main.pdf preview/title
@@ -141,29 +138,24 @@ jobs:
           rm -f preview/*.png
           pdftoppm -f 1 -singlefile -png -r 100 main.pdf preview/article
 
-      - name: Build Chinese journal sample
-        working-directory: journal/chinese
+      - name: Validate KXTB-CAS exact font contract
+        working-directory: journal/kxtbcas
         run: |
-          if ! latexmk -xelatex -interaction=nonstopmode -halt-on-error main.tex; then
-            echo "--- Chinese journal LaTeX error context ---"
-            grep -n -B 4 -A 12 '^!' main.log || tail -n 120 main.log
+          test -x scripts/setup-fonts.sh
+          test -x scripts/build.sh
+          grep -Fq './fonts/' kxtbcas.cls
+          grep -Fq 'TimesNewRoman-Regular.ttf' kxtbcas.cls
+          grep -Fq 'TimesNewRoman-Bold.ttf' kxtbcas.cls
+          grep -Fq 'TimesNewRoman-Italic.ttf' kxtbcas.cls
+          grep -Fq 'TimesNewRoman-BoldItalic.ttf' kxtbcas.cls
+          grep -Fq 'SimSun.ttf' kxtbcas.cls
+          grep -Fq 'SimSun-Bold.ttf' kxtbcas.cls
+          grep -Fq '\setsansfont[' kxtbcas.cls
+          grep -Fq '\setCJKsansfont[' kxtbcas.cls
+          if grep -Eq 'FandolSong|FandolHei|TeX Gyre Termes|Songti SC|STSong|Heiti SC|STHeiti' kxtbcas.cls; then
+            echo 'KXTB-CAS contains a forbidden fallback font.' >&2
             exit 1
           fi
-          mkdir -p preview
-          rm -f preview/*.png
-          pdftoppm -f 1 -singlefile -png -r 100 main.pdf preview/article
-
-      - name: Upload Chinese build diagnostics
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: chinese-journal-build-log
-          path: |
-            journal/chinese/main.log
-            journal/chinese/main.tex
-            journal/chinese/kxtbcas.cls
-          if-no-files-found: ignore
-          retention-days: 1
 
       - name: Verify journal preview files
         run: |
@@ -175,7 +167,6 @@ jobs:
               Path("journal/nature/preview/article.png"),
               Path("journal/elsevier/preview/article.png"),
               Path("journal/acs/preview/article.png"),
-              Path("journal/chinese/preview/article.png"),
           ]
           for path in paths:
               if not path.is_file() or path.stat().st_size == 0:
@@ -217,7 +208,7 @@ jobs:
       - name: Refresh README preview cache keys
         run: python3 scripts/update-preview-revisions.py
 
-      - name: Commit source and renderer output
+      - name: Commit renderer output
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -227,10 +218,10 @@ jobs:
             report/classic-academic/README.md report/classic-academic/preview \
             report/short-charter/README.md report/short-charter/preview \
             cv/curve-academic/README.md cv/curve-academic/preview \
-            journal
+            journal/nature journal/elsevier journal/acs
           if git diff --cached --quiet; then
-            echo "Template sources, previews, and cache keys are current."
+            echo "Template previews and cache keys are current."
             exit 0
           fi
-          git commit -m "chore: synchronize journal sources and previews [skip ci]"
+          git commit -m "chore: refresh 100 dpi previews [skip ci]"
           git push
