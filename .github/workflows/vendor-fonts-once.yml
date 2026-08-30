@@ -17,4 +17,4 @@ jobs:
         with:
           ref: master
           fetch-depth: 0
-      - run: chmod +x scripts/vendor-fonts-once.sh && scripts/vendor-fonts-once.sh
+      - run: chmod +x scripts/vendor-fonts-once-v2.sh && scripts/vendor-fonts-once-v2.sh
