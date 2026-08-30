@@ -25,7 +25,13 @@
 \newfontfamily{\ensong}[Path=fonts/,AutoFakeSlant=0.3,AutoFakeBold=3]{SimSun.ttf}
 \providecommand\songti{\CJKfamily{zhsong}}
 \providecommand\kaishu{\CJKfamily{zhkai}}
-\setsansfont[Scale=0.98]{Arial}
+\setsansfont[
+  Path=fonts/,
+  BoldFont=Arial-Bold.ttf,
+  ItalicFont=Arial-Italic.ttf,
+  BoldItalicFont=Arial-BoldItalic.ttf,
+  Scale=0.98
+]{Arial-Regular.ttf}
 
 \RequirePackage{fontspec}
 \RequirePackage{geometry}

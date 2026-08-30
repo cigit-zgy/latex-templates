@@ -74,9 +74,9 @@
 \def\kxtb@latinfont@italic{TimesNewRoman-Italic.ttf}
 \def\kxtb@latinfont@bolditalic{TimesNewRoman-BoldItalic.ttf}
 \def\kxtb@cjkfont@upright{SimSun.ttf}
-\def\kxtb@cjkfont@bold{SimSun-Bold.ttf}
+\def\kxtb@cjkfont@bold{SimSun.ttf}
 \def\kxtb@cjkfont@italic{SimSun.ttf}
-\def\kxtb@mathfont{STIX Two Math}
+\def\kxtb@mathfont{STIXTwoMath-Regular.otf}
 
 \newcommand{\kxtbsetfontroot}[1]{%
   \gdef\kxtb@latinfontpath{#1}%
@@ -101,20 +101,18 @@
   \IfFileExists{\kxtb@latinfontpath\kxtb@latinfont@upright}{%
     \setmainfont[
       Path=\kxtb@latinfontpath,
-      UprightFont=\kxtb@latinfont@upright,
       BoldFont=\kxtb@latinfont@bold,
       ItalicFont=\kxtb@latinfont@italic,
       BoldItalicFont=\kxtb@latinfont@bolditalic
     ]{\kxtb@latinfont@upright}%
     \setsansfont[
       Path=\kxtb@latinfontpath,
-      UprightFont=\kxtb@latinfont@upright,
       BoldFont=\kxtb@latinfont@bold,
       ItalicFont=\kxtb@latinfont@italic,
       BoldItalicFont=\kxtb@latinfont@bolditalic
     ]{\kxtb@latinfont@upright}%
   }{%
-    \ClassError{kxtbcas}{Required Times New Roman files are missing}{Run ./scripts/setup-fonts.sh before compiling this template.}%
+    \ClassError{kxtbcas}{Required Times New Roman files are missing}{Restore the template-local fonts/ directory from the repository.}%
   }%
 }
 
@@ -122,24 +120,26 @@
   \IfFileExists{\kxtb@cjkfontpath\kxtb@cjkfont@upright}{%
     \setCJKmainfont[
       Path=\kxtb@cjkfontpath,
-      UprightFont=\kxtb@cjkfont@upright,
-      BoldFont=\kxtb@cjkfont@bold,
+      AutoFakeBold=3,
       ItalicFont=\kxtb@cjkfont@italic
     ]{\kxtb@cjkfont@upright}%
     \setCJKsansfont[
       Path=\kxtb@cjkfontpath,
-      UprightFont=\kxtb@cjkfont@upright,
-      BoldFont=\kxtb@cjkfont@bold,
+      AutoFakeBold=3,
       ItalicFont=\kxtb@cjkfont@italic
     ]{\kxtb@cjkfont@upright}%
   }{%
-    \ClassError{kxtbcas}{Required SimSun files are missing}{Run ./scripts/setup-fonts.sh before compiling this template.}%
+    \ClassError{kxtbcas}{Required SimSun files are missing}{Restore the template-local fonts/ directory from the repository.}%
   }%
 }
 
 \newcommand{\kxtb@applymathfont}{%
   \ifstrempty{\kxtb@mathfont}{}{%
-    \IfFontExistsTF{\kxtb@mathfont}{\setmathfont{\kxtb@mathfont}}{}%
+    \IfFileExists{\kxtb@latinfontpath\kxtb@mathfont}{%
+      \setmathfont[Path=\kxtb@latinfontpath]{\kxtb@mathfont}%
+    }{%
+      \ClassError{kxtbcas}{Required STIX Two Math file is missing}{Restore the template-local fonts/ directory from the repository.}%
+    }%
   }%
 }
 

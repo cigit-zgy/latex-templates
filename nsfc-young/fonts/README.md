@@ -1,11 +1,3 @@
-# Required NSFC fonts
+# Template-local fonts
 
-Place licensed copies of the following files in this directory before compiling:
-
-```text
-SimSun.ttf
-KaiTi.ttf
-FangSong.ttf
-```
-
-The template deliberately has no substitute-font fallback. These are the font families used by the referenced fixed NSFC template. The upstream font note identifies them as Beijing ZhongYi fonts; their binaries are not redistributed by this repository.
+This NSFC template uses only the files in this directory: Arial Regular/Bold/Italic/BoldItalic, SimSun, KaiTi, and FangSong. No system-font lookup or cross-template font sharing is required.
