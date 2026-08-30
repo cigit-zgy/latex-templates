@@ -6,12 +6,12 @@ Standalone Springer Nature journal manuscript using `sn-jnl.cls` with the `sn-na
 
 ## Files
 
-- `main.tex` — directly compilable sample manuscript.
+- `main.tex` — directly compilable two-page-or-longer sample manuscript.
 - `sn-jnl.cls` — Springer Nature class resource.
 - `sn-nature.bst` — Nature reference style.
 - `references.bib` — sample bibliography.
 - `NOTICE.md` — source and license information.
-- `preview/article.png` — rendered sample first page.
+- `preview/article.png` / `preview/content.png` — first and second preview pages.
 
 ## Build
 
@@ -21,7 +21,12 @@ latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
 
 ## Preview
 
-![Springer Nature article](preview/article.png?rev=835f465eafde)
+<table>
+<tr><th width="50%">First page</th><th width="50%">Content page</th></tr>
+<tr><td width="50%"><img src="preview/article.png" width="100%" alt="Springer Nature first page"></td><td width="50%"><img src="preview/content.png" width="100%" alt="Springer Nature content page"></td></tr>
+</table>
+
+Both PNGs are direct 150-DPI renders from the current repository PDF and must have identical pixel dimensions.
 
 ## Source
 
@@ -36,4 +41,5 @@ latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
 - `sn-jnl.cls` and `sn-nature.bst` are retained as source resources without style changes.
 - This directory represents the Springer Nature `sn-jnl` template with Nature reference style; it is not a universal class for every Nature Portfolio journal.
 - Target-journal submission requirements remain authoritative.
-- Preview PNGs are direct 200-dpi PDF renders.
+- The sample manuscript contains at least two pages solely to exercise both opening-page and body-page preview behavior.
+- Preview PNGs are direct 150-DPI PDF renders with equal dimensions.
