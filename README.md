@@ -1,6 +1,6 @@
 # LaTeX Templates
 
-A curated collection of reusable LaTeX templates for academic writing. Every template is directly usable from its own directory.
+A curated collection of reusable LaTeX templates for academic writing. Templates are organized by document type and every template is directly usable from its own directory.
 
 ## Templates
 
@@ -23,7 +23,7 @@ The thesis, both report templates, and CV use one font contract. Layout may diff
 - Chinese: **LXGW WenKai Screen 1.522**.
 - Code / monospaced text: **Maple Mono 5.3.0**.
 
-All display-oriented sans-serif roles are bold: cover/document titles, document-type labels, thesis chapter titles, and ordinary section headings. Running heads remain regular/muted. No self-owned template may substitute another serif or mathematics family. See [`FONT_POLICY.md`](FONT_POLICY.md) and [`STYLE_POLICY.md`](STYLE_POLICY.md).
+All display-oriented sans-serif roles are bold: cover/document titles, document-type labels, thesis chapter titles, and ordinary section headings. Running heads remain regular/muted. The two fixed NSFC templates are excluded from this typography contract. See [`FONT_POLICY.md`](FONT_POLICY.md) and [`STYLE_POLICY.md`](STYLE_POLICY.md).
 
 ## Unified document hierarchy
 
@@ -39,33 +39,31 @@ All three levels use Latin Modern Sans Bold. The thesis adds a document-specific
 
 ## NSFC fixed templates
 
-[`nsfc-general/`](nsfc-general/) and [`nsfc-young/`](nsfc-young/) are two top-level, fully independent local template projects:
+The two NSFC templates are independent top-level directories. There is no parent wrapper, submodule, symlink, shared class file, or cross-template path:
 
 ```text
 nsfc-general/
 ├── main.tex
 ├── nsfc.cls
-├── reference.bib
-├── README.md
-└── fonts/README.md
+├── references.bib
+├── sections/
+├── figures/
+└── fonts/
 
 nsfc-young/
 ├── main.tex
 ├── nsfc.cls
-├── reference.bib
-├── README.md
-└── fonts/README.md
+├── references.bib
+├── sections/
+├── figures/
+└── fonts/
 ```
 
-There is no shared `nsfc/` parent directory, submodule, symlink, virtual mapping, or runtime copy step. Each template carries its own class, bibliography, font instructions, application outline, and build instructions.
-
-The NSFC templates remain outside the repository-wide XCharter/colour policy. They retain the referenced fixed typography and program-specific page geometry: SimSun (宋体), KaiTi (楷体), FangSong (仿宋), Arial, and the corresponding A4 margins. The ZhongYi font binaries are not redistributed; each template documents the exact filenames required in its own `fonts/` directory.
-
-Both directories record the public source reference `andy123t/nsfc-latex` and pinned reference commit `11a02726f6190fcb89859dfaed18e3d1d68af0b8`, while remaining ordinary local repository directories.
+Each directory can be copied and maintained independently. Both preserve the referenced NSFC typography and project-specific page geometry. The ZhongYi font binaries are not redistributed; each template documents the exact local filenames required.
 
 ## Rendered previews
 
-Every image below is a **direct 200-dpi render of the compiled PDF**. Preview files are committed exactly as produced by `pdftoppm`: no crop, collage, scaling, sharpening, annotation, or manual reconstruction is applied. Markdown does not set `width` or `height`.
+Every image below is a direct 200-dpi render of the compiled PDF. Preview files are committed exactly as produced by `pdftoppm`: no crop, collage, scaling, sharpening, annotation, or manual reconstruction is applied. Markdown does not set `width` or `height`.
 
 The workflow uses semantic preview filenames (`title.png`, `hierarchy.png`, `cv.png`) and appends a `?rev=<content-hash>` query to every README image URL after rendering. The query is only a GitHub cache key; it never changes the PNG bytes.
 
@@ -101,5 +99,5 @@ The workflow uses semantic preview filenames (`title.png`, `hierarchy.png`, `cv.
 - Report manuscript tables use `AcademicTable`, fixed to the complete `\linewidth`.
 - English, Chinese, and mixed-language scientific writing are supported under XeLaTeX.
 - Generated LaTeX build artifacts are excluded. Only deliberate direct-render preview PNGs are committed under `preview/`.
-- Preview PNGs are generated at **200 dpi** only. Current intrinsic sizes are 1700 × 2200 px for Letter and approximately 1654 × 2339 px for A4. README display code must not rescale them explicitly.
-- The two NSFC templates retain their fixed typography/layout and are maintained as independent top-level directories.
+- Preview PNGs are generated at 200 dpi only. Current intrinsic sizes are 1700 × 2200 px for Letter and approximately 1654 × 2339 px for A4. README display code must not rescale them explicitly.
+- `nsfc-general/` and `nsfc-young/` retain their fixed typography/layout and remain fully independent.

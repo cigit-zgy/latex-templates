@@ -1,6 +1,7 @@
 % 2026 国家自然科学基金面上项目正文
-% Layout reference: https://github.com/andy123t/nsfc-latex
-% Reference commit: 11a02726f6190fcb89859dfaed18e3d1d68af0b8
+% Layout references:
+% - https://github.com/MCG-NKU/NSFC-LaTex
+% - https://github.com/andy123t/nsfc-latex
 \documentclass[GP]{nsfc}
 
 \usepackage{listings}
@@ -32,52 +33,14 @@
 \textbf{\color{NSFCblue}请勿删除或改动下述提纲标题及括号中的文字。}\par
 \vspace{-3pt}}
 
-\chapter{\textbf{立项依据：}}
-\NSFCnote{（为什么要开展此项研究，研究的科学技术价值如何）}
-
-\msection{1.~~\textbf{研究现状及意义}}
-填写内容。
-
-\msection{2.~~\textbf{存在的问题}}
-填写内容。
-
-\chapter{\textbf{研究内容：}}
-\NSFCnote{（提纲不做限制，请按照研究工作的自身逻辑撰写。应提炼出特色与创新点、年度研究计划）}
-填写内容。
+\input{sections/01-basis}
+\input{sections/02-content}
 
 \renewcommand{\bibname}{\color{black}\normalfont\normalsize\bfseries 参考文献}
-\bibliography{reference}
+\bibliography{references}
 
 \clearpage
-\chapter{\textbf{研究基础：}}
-
-\section{\textbf{研究基础与可行性分析}（与本项目相关的研究工作积累和已取得的研究工作成绩，研究风险的应对措施等）；}
-填写内容。
-
-\section{\textbf{工作条件}（包括已具备的实验条件，尚缺少的实验条件和拟解决的途径，包括利用国家实验室、全国重点实验室和部门重点实验室等研究基地的计划与落实情况）；}
-填写内容。
-
-\section{\textbf{正在承担的与本项目相关的科研项目情况}（申请人和主要参与者正在承担的与本项目相关的科研项目情况，包括国家自然科学基金的项目和国家其他科技计划项目，要注明项目的资助机构、项目类别、批准号、项目名称、获资助金额、起止年月、与本项目的关系及负责的内容等）；}
-填写内容。
-
-\section{\textbf{完成国家自然科学基金项目情况}（对申请人负责的前一个已资助期满的科学基金项目完成情况、后续研究进展及与本申请项目的关系加以详细说明。另附该项目的研究工作总结摘要和相关成果详细目录）。}
-填写内容。
-
-\chapter{\textbf{其他需要说明的情况：}}
-
-\section{申请人同年申请不同类型的国家自然科学基金项目情况。}
-填写内容。
-
-\section{具有高级专业技术职务（职称）的申请人或者主要参与者是否存在同年申请或者参与申请国家自然科学基金项目的单位不一致的情况。}
-填写内容。
-
-\section{具有高级专业技术职务（职称）的申请人或者主要参与者是否存在与正在承担的国家自然科学基金项目的单位不一致的情况。}
-填写内容。
-
-\section{申请人和主要参与者同年以不同专业技术职务（职称）申请或参与申请科学基金项目的情况。}
-填写内容。
-
-\section{其他。}
-填写内容。
+\input{sections/03-foundation}
+\input{sections/04-other}
 
 \end{document}
