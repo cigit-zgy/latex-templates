@@ -42,6 +42,8 @@ REQUIRED_TYPOGRAPHY_TOKENS = [
     "LetterSpace=2",
 ]
 
+DEPRECATED_STYLE_TOKENS = [r"\AcademicSans"]
+
 for template in TEMPLATES:
     theme = (template / "config/theme.tex").read_text()
     if theme != EXPECTED_THEME:
@@ -66,5 +68,13 @@ for template in TEMPLATES:
         raise SystemExit(f"style contract violation: table row spacing differs in {template}")
     if r"rulecolor=\color{AcademicRule}" not in components:
         raise SystemExit(f"style contract violation: code frame colour differs in {template}")
+
+    for tex_file in template.rglob("*.tex"):
+        text = tex_file.read_text()
+        for token in DEPRECATED_STYLE_TOKENS:
+            if token in text:
+                raise SystemExit(
+                    f"style contract violation: deprecated token {token!r} in {tex_file}"
+                )
 
 print("Shared thesis/report style contract: PASS")
