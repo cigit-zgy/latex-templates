@@ -19,7 +19,7 @@ A collection of reusable LaTeX templates for academic writing, journal manuscrip
 
 ## Style specification
 
-[`STYLE_SPEC.md`](STYLE_SPEC.md) is a design reference for the self-owned thesis, report, and CV templates. It is not a runtime font layer. Every template keeps its own font declarations, font staging directory, and build script inside that template directory; one template never loads another template's font files or font configuration.
+[`STYLE_SPEC.md`](STYLE_SPEC.md) is a design reference for the self-owned thesis, report, and CV templates. It is not a runtime font layer. Every template keeps its own font declarations, font directory, and build script inside that template directory; one template never loads another template's font files or font configuration.
 
 The self-owned templates currently use the same design roles where applicable—XCharter, XCharter-Math, Latin Modern Sans, LXGW WenKai Screen, and Maple Mono—but each template resolves its own runtime resources independently. Publisher and NSFC templates retain their own class-defined typography.
 
@@ -32,29 +32,29 @@ The self-owned templates currently use the same design roles where applicable—
 | `journal/acs` | `achemso.cls` | class-managed ACS style | CTAN `achemso` |
 | `journal/kxtbcas` | `kxtbcas.cls` | `kxtbcas-numeric.bst` | KXTB-CAS / 科学通报 project resource |
 
-The KXTB-CAS template follows the font contract of the `structure-object-perspective` reference class: Times New Roman for Latin text and SimSun for Chinese text, with the class display roles mapped to the same serif files. Its own `scripts/setup-fonts.sh` / `scripts/setup-fonts.ps1` stage legally installed exact fonts into `journal/kxtbcas/fonts/`; missing exact files stop the build rather than selecting a substitute.
+The KXTB-CAS template follows the font contract of the `structure-object-perspective` reference class: Times New Roman for Latin text, SimSun for Chinese text, and STIX Two Math for mathematics. These exact font files are bundled inside `journal/kxtbcas/fonts/`; the class does not select substitute families. The NSFC templates likewise use their own bundled Arial, SimSun, KaiTi, and FangSong files.
 
 ## Rendered previews
 
-All committed preview PNGs are generated from PDFs compiled from the source files in this repository and rendered at 100 DPI. KXTB-CAS and the two NSFC templates are compiled on a Windows runner so their required Times New Roman, SimSun, KaiTi, FangSong, and Arial font families can be staged into each template's own `fonts/` directory before XeLaTeX runs. The CI also inspects the generated PDFs with `pdffonts` before accepting the previews.
+All committed preview PNGs are generated from PDFs compiled from the source files in this repository and rendered directly at 150 DPI. CI builds the templates from the repository-local runtime resources, inspects the exact-font PDFs with `pdffonts`, and then regenerates the previews.
 
 ### Thesis · Classic Academic
 
-![Thesis title page](thesis/classic-academic/preview/title.png?rev=5b9ff3ef9517)
-
-![Thesis hierarchy specimen](thesis/classic-academic/preview/hierarchy.png?rev=f051345934f5)
+| Title page | Hierarchy specimen |
+| --- | --- |
+| ![Thesis title page](thesis/classic-academic/preview/title.png?rev=5b9ff3ef9517) | ![Thesis hierarchy specimen](thesis/classic-academic/preview/hierarchy.png?rev=f051345934f5) |
 
 ### Report · Classic Academic
 
-![Classic report title page](report/classic-academic/preview/title.png?rev=13344c92e262)
-
-![Classic report hierarchy specimen](report/classic-academic/preview/hierarchy.png?rev=843c956a9f70)
+| Title page | Hierarchy specimen |
+| --- | --- |
+| ![Classic report title page](report/classic-academic/preview/title.png?rev=13344c92e262) | ![Classic report hierarchy specimen](report/classic-academic/preview/hierarchy.png?rev=843c956a9f70) |
 
 ### Report · Short Charter
 
-![Short report title page](report/short-charter/preview/title.png?rev=28f1192173fe)
-
-![Short report hierarchy specimen](report/short-charter/preview/hierarchy.png?rev=867b222a93ff)
+| Title page | Hierarchy specimen |
+| --- | --- |
+| ![Short report title page](report/short-charter/preview/title.png?rev=28f1192173fe) | ![Short report hierarchy specimen](report/short-charter/preview/hierarchy.png?rev=867b222a93ff) |
 
 ### CV · Academic CurVe
 
@@ -74,21 +74,21 @@ All committed preview PNGs are generated from PDFs compiled from the source file
 
 ### Journal · KXTB-CAS / 科学通报
 
-![KXTB-CAS first page](journal/kxtbcas/preview/article.png)
-
-![KXTB-CAS content page](journal/kxtbcas/preview/content.png)
+| First page | Content page |
+| --- | --- |
+| ![KXTB-CAS first page](journal/kxtbcas/preview/article.png) | ![KXTB-CAS content page](journal/kxtbcas/preview/content.png) |
 
 ### NSFC · 2026 面上项目
 
-![NSFC General first page](nsfc-general/preview/application.png)
-
-![NSFC General content page](nsfc-general/preview/content.png)
+| First page | Content page |
+| --- | --- |
+| ![NSFC General first page](nsfc-general/preview/application.png) | ![NSFC General content page](nsfc-general/preview/content.png) |
 
 ### NSFC · 2026 青年科学基金项目（C类）
 
-![NSFC Young first page](nsfc-young/preview/application.png)
-
-![NSFC Young content page](nsfc-young/preview/content.png)
+| First page | Content page |
+| --- | --- |
+| ![NSFC Young first page](nsfc-young/preview/application.png) | ![NSFC Young content page](nsfc-young/preview/content.png) |
 
 ## Sources
 
@@ -105,10 +105,10 @@ All committed preview PNGs are generated from PDFs compiled from the source file
 - One template directory contains one directly usable template and owns its own runtime font resolution.
 - `STYLE_SPEC.md` is descriptive; it is not a shared runtime font configuration.
 - Publisher class and bibliography files under `journal/nature`, `journal/elsevier`, and `journal/acs` retain publisher-defined typography and are not restyled.
-- `journal/kxtbcas` retains KXTB-CAS layout rules and requires exact Times New Roman + SimSun font files.
-- `nsfc-general` and `nsfc-young` retain their NSFC typography and page geometry.
+- `journal/kxtbcas` retains KXTB-CAS layout rules and uses its bundled Times New Roman + SimSun + STIX Two Math files.
+- `nsfc-general` and `nsfc-young` retain their NSFC typography and page geometry with template-local Arial, SimSun, KaiTi, and FangSong.
 - Every preview validates the current repository template by compiling that template's own `main.tex`; CI does not reuse a precompiled PDF from a reference repository.
 - Report manuscript tables use the full `\linewidth` through `AcademicTable`.
 - `report/short-charter` has no table of contents by default.
-- Preview PNGs are generated with `pdftoppm -png -r 100` and are not cropped, resized, composited, sharpened, annotated, or redrawn.
-- README image markup does not set explicit width or height.
+- Preview PNGs are generated with `pdftoppm -png -r 150` and are not cropped, resized, composited, sharpened, annotated, or redrawn.
+- Paired README previews are presented in two-column Markdown tables without altering the image files.
