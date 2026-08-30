@@ -6,12 +6,12 @@ Standalone Elsevier journal manuscript using `elsarticle.cls` and the numeric `e
 
 ## Files
 
-- `main.tex` — directly compilable sample manuscript.
+- `main.tex` — directly compilable two-page-or-longer sample manuscript.
 - `elsarticle.cls` — Elsevier article class.
 - `elsarticle-num.bst` — numeric bibliography style.
 - `references.bib` — sample bibliography.
 - `NOTICE.md` — source and license information.
-- `preview/article.png` — rendered sample first page.
+- `preview/article.png` / `preview/content.png` — first and second preview pages.
 
 ## Build
 
@@ -21,7 +21,12 @@ latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
 
 ## Preview
 
-![Elsevier article](preview/article.png?rev=7eb0e058afb7)
+<table>
+<tr><th width="50%">First page</th><th width="50%">Content page</th></tr>
+<tr><td width="50%"><img src="preview/article.png" width="100%" alt="Elsevier first page"></td><td width="50%"><img src="preview/content.png" width="100%" alt="Elsevier content page"></td></tr>
+</table>
+
+Both PNGs are direct 150-DPI renders from the current repository PDF and must have identical pixel dimensions.
 
 ## Source
 
@@ -36,4 +41,5 @@ latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
 
 - `elsarticle.cls` and `elsarticle-num.bst` are retained as source resources without style changes.
 - Target-journal Guide for Authors remains authoritative.
-- Preview PNGs are direct 200-dpi PDF renders.
+- The sample manuscript contains at least two pages solely to exercise opening-page and body-page preview behavior.
+- Preview PNGs are direct 150-DPI PDF renders with equal dimensions.
