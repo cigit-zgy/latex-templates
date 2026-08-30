@@ -1,4 +1,6 @@
 \documentclass[preprint,12pt]{elsarticle}
+\usepackage{amsmath}
+\usepackage{booktabs}
 
 \journal{Journal Name}
 
@@ -20,13 +22,47 @@ scientific manuscript \sep LaTeX \sep Elsevier
 \end{frontmatter}
 
 \section{Introduction}
-This directory contains a standalone Elsevier manuscript template. A sample citation is included here~\cite{sample2026}.
+This directory contains a standalone Elsevier manuscript template. A sample citation is included here~\cite{sample2026}. The specimen includes representative content so that both the first page and a normal manuscript page can be checked without changing the publisher class.
 
 \section{Methods}
-The document uses the class-defined preprint layout and numeric bibliography style.
+The document uses the class-defined preprint layout and numeric bibliography style. A compact equation specimen is
+\begin{equation}
+  y(t)=y_0\exp(-kt),
+\end{equation}
+where $k$ is a first-order coefficient.
 
 \section{Results and discussion}
-Figures, tables, equations, citations, and manuscript sections can be added directly to this file.
+Figures, tables, equations, citations, and manuscript sections can be added directly to this file. Table~\ref{tab:sample} exercises the class-defined table placement.
+
+\begin{table}[htbp]
+\centering
+\caption{Representative values for preview validation.}\label{tab:sample}
+\begin{tabular}{lcc}
+\toprule
+Condition & Observation & Unit \\
+\midrule
+Baseline & 1.00 & a.u. \\
+Case A & 1.24 & a.u. \\
+Case B & 0.86 & a.u. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\clearpage
+\section{Content-page specimen}
+This second page intentionally validates ordinary body typography, section hierarchy, equation spacing, paragraph flow, and bibliography behavior in the current repository template. No local geometry or typography override is introduced.
+
+Reusable manuscript templates should remain predictable when prose extends beyond the opening page. Scientific manuscripts commonly combine assumptions, definitions, observations, and quantitative comparisons. This neutral example provides enough material to exercise those structures while leaving the Elsevier class fully responsible for layout.
+
+\subsection{Representative analysis}
+Consider a simple balance equation,
+\begin{equation}
+  \frac{\mathrm{d}x}{\mathrm{d}t}=r_{\mathrm{in}}-r_{\mathrm{out}}.
+\end{equation}
+The expression exists only to verify mathematical placement and surrounding text. The example stays domain-neutral so that the directory remains a clean starting point for different submissions.
+
+\subsection{Reproducible preview contract}
+The committed preview is generated from this source file. CI requires at least two PDF pages, renders pages 1 and 2 at 150 DPI, and rejects the preview pair unless both PNG files have identical pixel dimensions.
 
 \bibliographystyle{elsarticle-num}
 \bibliography{references}
