@@ -41,9 +41,13 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
             texlive-xetex texlive-latex-extra texlive-fonts-recommended \
-            texlive-fonts-extra texlive-lang-chinese texlive-bibtex-extra \
+            texlive-fonts-extra texlive-fonts-extra-links \
+            texlive-lang-chinese texlive-bibtex-extra \
             texlive-science texlive-publishers \
             biber latexmk poppler-utils woff2 curl
+          sudo mktexlsr
+          kpsewhich newtxtext.sty
+          kpsewhich newtxmath.sty
 
       - name: Build thesis sample
         working-directory: thesis/classic-academic
