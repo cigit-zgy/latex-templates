@@ -1,4 +1,6 @@
 \documentclass[journal=esthag,manuscript=article]{achemso}
+\usepackage{amsmath}
+\usepackage{booktabs}
 
 \title{A Sample Scientific Article Using the ACS Template}
 \author{First Author}
@@ -12,13 +14,47 @@ This sample document demonstrates a directly compilable ACS manuscript using the
 \end{abstract}
 
 \section{Introduction}
-This directory contains a standalone ACS manuscript template. A sample citation is included here~\cite{sample2026}.
+This directory contains a standalone ACS manuscript template. A sample citation is included here~\cite{sample2026}. The specimen includes representative material so that both an opening page and a normal body page can be validated without changing the ACS class.
 
 \section{Methods}
-The manuscript uses the class-defined ACS article configuration.
+The manuscript uses the class-defined ACS article configuration. A compact equation specimen is
+\begin{equation}
+  y(t)=y_0\exp(-kt),
+\end{equation}
+where $k$ is a first-order coefficient.
 
 \section{Results and Discussion}
-Figures, tables, equations, citations, and manuscript sections can be added directly to this file.
+Figures, tables, equations, citations, and manuscript sections can be added directly to this file. Table~\ref{tab:sample} exercises ordinary tabular content.
+
+\begin{table}[htbp]
+\caption{Representative values for preview validation.}\label{tab:sample}
+\centering
+\begin{tabular}{lcc}
+\toprule
+Condition & Observation & Unit \\
+\midrule
+Baseline & 1.00 & a.u. \\
+Case A & 1.24 & a.u. \\
+Case B & 0.86 & a.u. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\clearpage
+\section{Content-page specimen}
+This deliberate second page validates body typography, heading hierarchy, mathematical typesetting, paragraph spacing, and bibliography handling in the current repository template. It adds no local geometry or typography override.
+
+Scientific manuscripts normally contain enough continuous prose to expose line spacing, paragraph rhythm, and page composition. This neutral sample therefore uses representative explanatory text instead of blank filler. The ACS class remains the sole owner of manuscript layout.
+
+\subsection{Representative analysis}
+For a generic balance variable $x$,
+\begin{equation}
+  \frac{\mathrm{d}x}{\mathrm{d}t}=r_{\mathrm{in}}-r_{\mathrm{out}}.
+\end{equation}
+The equation is included only to verify placement and surrounding typography. The example is intentionally domain-neutral so the template stays reusable.
+
+\subsection{Reproducible preview contract}
+CI compiles this exact source, requires at least two PDF pages, renders pages 1 and 2 at 150 DPI, and rejects the preview pair unless the two PNG files have identical pixel dimensions.
 
 \bibliography{references}
 \end{document}
