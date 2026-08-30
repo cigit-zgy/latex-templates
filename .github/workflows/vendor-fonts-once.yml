@@ -1,0 +1,20 @@
+name: Vendor fonts once
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - ".github/workflows/vendor-fonts-once.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  vendor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: master
+          fetch-depth: 0
+      - run: chmod +x scripts/vendor-fonts-once.sh && scripts/vendor-fonts-once.sh
