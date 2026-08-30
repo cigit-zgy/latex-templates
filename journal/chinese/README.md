@@ -7,20 +7,33 @@ Standalone XeLaTeX Chinese scientific manuscript using the project-maintained `k
 ## Files
 
 - `main.tex` — directly compilable sample manuscript.
+- `fonts.tex` — portable font mapping for the sample build.
 - `kxtbcas.cls` — manuscript class.
 - `kxtbcas-numeric.bst` — numeric bibliography style.
 - `references.bib` — sample bibliography.
-- `scripts/setup-fonts.sh` — reproducible CJK sample-font setup.
-- `fonts/` — local sample font directory.
 - `LICENSE.md` — class license information.
 - `preview/article.png` — rendered sample first page.
+
+## Typography
+
+| Role | Typeface |
+| --- | --- |
+| Chinese body | FandolSong Regular / Bold |
+| Chinese italic role | FandolKai Regular |
+| Chinese sans-serif title and section roles | FandolHei Regular / Bold |
+| Chinese monospaced role | FandolFang Regular |
+| Latin text | TeX Gyre Termes |
+| Mathematics | STIX Two Math when available |
+
+The Chinese body is Song-style serif text. `kxtbcas.cls` uses the sans-serif role only for display elements explicitly marked with `\sffamily`, including the Chinese article title and section headings.
 
 ## Build
 
 ```bash
-bash scripts/setup-fonts.sh
 latexmk -xelatex -interaction=nonstopmode -halt-on-error main.tex
 ```
+
+The required Fandol and TeX Gyre fonts are supplied by TeX Live packages installed with the XeLaTeX/Chinese toolchain.
 
 ## Preview
 
@@ -35,8 +48,9 @@ latexmk -xelatex -interaction=nonstopmode -halt-on-error main.tex
 
 ## Constraints
 
-- `kxtbcas.cls` and `kxtbcas-numeric.bst` retain the migrated class specification.
 - XeLaTeX is required.
-- The sample build uses LXGW WenKai Screen 1.522 through the class font-file interface.
+- Chinese body text uses a Song-style serif family.
+- Display roles explicitly defined with `\sffamily` use FandolHei.
+- The portable sample mapping follows the same Song/Hei role separation used by the source class.
 - Target-journal requirements remain authoritative.
 - Preview PNGs are direct 200-dpi PDF renders.
