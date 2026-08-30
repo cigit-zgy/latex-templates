@@ -1,0 +1,20 @@
+name: Probe KXTB PDF fonts
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - ".github/workflows/probe-kxtb-pdf-fonts.yml"
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Inspect reference PDF fonts
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -qq -y poppler-utils
+          curl --fail --location --silent --show-error \
+            https://raw.githubusercontent.com/cigit-zgy/structure-object-perspective/7acb43750182ec1ffe5e992d2fc7c9d625a5a118/00_archive/260819/main.pdf \
+            -o /tmp/kxtb.pdf
+          pdffonts /tmp/kxtb.pdf
