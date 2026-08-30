@@ -36,6 +36,6 @@ All manuscript tables use the full line width through `AcademicTable`.
 
 ![Short report title page](preview/title.png?rev=f212a23fb8e7)
 
-![Short report hierarchy specimen](preview/hierarchy.png?rev=213ede755db9)
+![Short report hierarchy specimen](preview/hierarchy.png?rev=9437a0384a22)
 
 Preview images are direct **200-dpi** renders of the compiled PDF. They must not be cropped, resized, composited, sharpened, annotated, or redrawn.

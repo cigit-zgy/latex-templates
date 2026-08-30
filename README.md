@@ -56,13 +56,13 @@ The workflow uses semantic preview filenames (`title.png`, `hierarchy.png`, `cv.
 
 ### Thesis · Classic Academic
 
-![Thesis title page](thesis/classic-academic/preview/title.png?rev=c548ccd53a43)
+![Thesis title page](thesis/classic-academic/preview/title.png?rev=ced154624288)
 
 ![Thesis hierarchy specimen](thesis/classic-academic/preview/hierarchy.png?rev=3662e53d0e42)
 
 ### Report · Classic Academic
 
-![Classic report title page](report/classic-academic/preview/title.png?rev=a14f4f986958)
+![Classic report title page](report/classic-academic/preview/title.png?rev=7e93f78b1d8d)
 
 ![Classic report hierarchy specimen](report/classic-academic/preview/hierarchy.png?rev=e0c037a6cff3)
 
@@ -70,7 +70,7 @@ The workflow uses semantic preview filenames (`title.png`, `hierarchy.png`, `cv.
 
 ![Short Charter report title page](report/short-charter/preview/title.png?rev=f212a23fb8e7)
 
-![Short Charter report hierarchy specimen](report/short-charter/preview/hierarchy.png?rev=213ede755db9)
+![Short Charter report hierarchy specimen](report/short-charter/preview/hierarchy.png?rev=9437a0384a22)
 
 ### CV · Academic CurVe
 
