@@ -37,29 +37,31 @@ All three levels use Latin Modern Sans Bold. The thesis adds a document-specific
 
 ## Rendered previews
 
-Every image below is a **direct 200-dpi render of the compiled PDF**. Preview files are committed exactly as produced by `pdftoppm`: no crop, collage, scaling, sharpening, annotation, or manual reconstruction is applied. Markdown references the files directly and does not set `width` or `height`.
+Every image below is a **direct 200-dpi render of the compiled PDF**. Preview files are committed exactly as produced by `pdftoppm`: no crop, collage, scaling, sharpening, annotation, or manual reconstruction is applied. Markdown does not set `width` or `height`.
+
+The workflow uses semantic preview filenames (`title.png`, `hierarchy.png`, `cv.png`) and appends a `?rev=<content-hash>` query to every README image URL after rendering. The query is only a GitHub cache key; it never changes the PNG bytes. Therefore a new renderer output cannot remain visually hidden behind an older README image cache.
 
 ### Thesis · Classic Academic
 
-![Thesis title page](thesis/classic-academic/preview/page-01.png)
+![Thesis title page](thesis/classic-academic/preview/title.png)
 
-![Thesis chapter page](thesis/classic-academic/preview/page-15.png)
+![Thesis hierarchy specimen](thesis/classic-academic/preview/hierarchy.png)
 
 ### Report · Classic Academic
 
-![Classic report title page](report/classic-academic/preview/page-01.png)
+![Classic report title page](report/classic-academic/preview/title.png)
 
-![Classic report content page](report/classic-academic/preview/page-04.png)
+![Classic report hierarchy specimen](report/classic-academic/preview/hierarchy.png)
 
 ### Report · Short Charter
 
-![Short Charter report title page](report/short-charter/preview/page-01.png)
+![Short Charter report title page](report/short-charter/preview/title.png)
 
-![Short Charter report section page](report/short-charter/preview/page-03.png)
+![Short Charter report hierarchy specimen](report/short-charter/preview/hierarchy.png)
 
 ### CV · Academic CurVe
 
-![Academic CurVe CV](cv/curve-academic/preview/page-01.png)
+![Academic CurVe CV](cv/curve-academic/preview/cv.png)
 
 ## Repository contract
 
