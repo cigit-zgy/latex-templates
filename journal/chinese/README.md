@@ -38,7 +38,7 @@ The required Fandol and Latin Modern fonts are supplied by the TeX Live XeLaTeX/
 
 ## Preview
 
-![Chinese journal article](preview/article.png?rev=ecc8e57d6d1e)
+![Chinese journal article](preview/article.png?rev=c90de7219212)
 
 ## Source
 

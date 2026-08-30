@@ -86,7 +86,7 @@ All committed preview PNGs are direct 200-dpi renders of compiled PDFs.
 
 ### Journal · Chinese
 
-![Chinese journal article](journal/chinese/preview/article.png?rev=ecc8e57d6d1e)
+![Chinese journal article](journal/chinese/preview/article.png?rev=c90de7219212)
 
 ## Sources
 
