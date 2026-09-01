@@ -1,10 +1,12 @@
 % Single-sided report geometry plus project-wide heading and running-head tokens.
+% Body-text geometry follows conservative book-typography guidance: a moderate
+% measure and leading near 138% of the nominal 11 pt body size.
 \geometry{
   letterpaper,
-  left=31mm,
-  right=31mm,
-  top=25mm,
-  bottom=28mm,
+  left=32mm,
+  right=32mm,
+  top=26mm,
+  bottom=29mm,
   headheight=14pt,
   headsep=8mm,
   footskip=12mm
@@ -12,7 +14,9 @@
 
 \setlength{\parindent}{1.2em}
 \setlength{\parskip}{0pt}
-\linespread{1.08}
+% 11 pt article has a 13.6 pt nominal baseline; 1.12 gives about 15.2 pt,
+% i.e. roughly 138% of body point size, inside the 120--145% reading range.
+\linespread{1.12}
 \raggedbottom
 \setcounter{tocdepth}{2}
 \setcounter{secnumdepth}{3}
@@ -21,17 +25,17 @@
 \titleformat{\section}
   {\normalfont\AcademicHeadingFont\bfseries\fontsize{16}{20}\selectfont\color{AcademicLevelOne}}
   {\thesection}{0.75em}{}
-\titlespacing*{\section}{0pt}{3.0ex plus .8ex minus .2ex}{1.1ex}
+\titlespacing*{\section}{0pt}{3.2ex plus .8ex minus .2ex}{1.25ex}
 
 \titleformat{\subsection}
   {\normalfont\AcademicHeadingFont\bfseries\fontsize{13}{16}\selectfont\color{AcademicLevelTwo}}
   {\thesubsection}{0.70em}{}
-\titlespacing*{\subsection}{0pt}{2.4ex plus .6ex minus .2ex}{0.8ex}
+\titlespacing*{\subsection}{0pt}{2.6ex plus .6ex minus .2ex}{0.95ex}
 
 \titleformat{\subsubsection}
   {\normalfont\AcademicHeadingFont\bfseries\fontsize{11}{14}\selectfont\color{AcademicLevelThree}}
   {\thesubsubsection}{0.65em}{}
-\titlespacing*{\subsubsection}{0pt}{2.0ex plus .5ex minus .2ex}{0.6ex}
+\titlespacing*{\subsubsection}{0pt}{2.2ex plus .5ex minus .2ex}{0.75ex}
 
 % Shared running-head treatment: muted, sans-serif, no rule.
 \pagestyle{fancy}
