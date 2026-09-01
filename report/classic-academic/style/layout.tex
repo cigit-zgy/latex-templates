@@ -1,6 +1,6 @@
 % Single-sided report geometry plus project-wide heading and running-head tokens.
 % Body-text geometry follows conservative book-typography guidance: a moderate
-% measure and leading near 138% of the nominal 11 pt body size.
+% measure and leading near 142% of the nominal 11 pt body size.
 \geometry{
   letterpaper,
   left=32mm,
@@ -14,9 +14,10 @@
 
 \setlength{\parindent}{1.2em}
 \setlength{\parskip}{0pt}
-% 11 pt article has a 13.6 pt nominal baseline; 1.12 gives about 15.2 pt,
-% i.e. roughly 138% of body point size, inside the 120--145% reading range.
-\linespread{1.12}
+% 11 pt article has a 13.6 pt nominal baseline; 1.15 gives about 15.6 pt,
+% i.e. roughly 142% of body point size, near the upper end of the common
+% 120--145% book-reading range and intentionally less dense for technical prose.
+\linespread{1.15}
 \raggedbottom
 \setcounter{tocdepth}{2}
 \setcounter{secnumdepth}{3}
