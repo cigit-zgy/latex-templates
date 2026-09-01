@@ -27,12 +27,12 @@
 \setCJKmainfont{LXGWWenKaiScreen.ttf}[Path=fonts/,AutoFakeBold=1.6]
 \setCJKsansfont{LXGWWenKaiScreen.ttf}[Path=fonts/,AutoFakeBold=1.6]
 \setCJKmonofont{LXGWWenKaiScreen.ttf}[Path=fonts/]
-% A very small natural CJK inter-character glue reduces the visually compressed
-% appearance of dense technical prose while retaining elastic justification.
+% Give dense CJK technical prose a small elastic optical gap. Latin lowercase
+% remains untracked; inter-letter spacing is reserved for structural display text.
 \xeCJKsetup{
   CJKmath=true,
   AutoFakeSlant=false,
-  CJKglue={\hskip 0.02em plus 0.05em minus 0.01em}
+  CJKglue={\hskip 0.03em plus 0.06em minus 0.015em}
 }
 
 % All document headings use this same structural family.
