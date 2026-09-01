@@ -27,7 +27,13 @@
 \setCJKmainfont{LXGWWenKaiScreen.ttf}[Path=fonts/,AutoFakeBold=1.6]
 \setCJKsansfont{LXGWWenKaiScreen.ttf}[Path=fonts/,AutoFakeBold=1.6]
 \setCJKmonofont{LXGWWenKaiScreen.ttf}[Path=fonts/]
-\xeCJKsetup{CJKmath=true,AutoFakeSlant=false}
+% A very small natural CJK inter-character glue reduces the visually compressed
+% appearance of dense technical prose while retaining elastic justification.
+\xeCJKsetup{
+  CJKmath=true,
+  AutoFakeSlant=false,
+  CJKglue={\hskip 0.02em plus 0.05em minus 0.01em}
+}
 
 % All document headings use this same structural family.
 \newfontfamily\AcademicHeadingFont{lmsans10-regular.otf}[
